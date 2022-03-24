@@ -1,0 +1,145 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
+
+.signupcard {
+  background-color: white;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  padding: 20px;
+}
+
+.signupcard .signupcardinput {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.signupcard .inputdata {
+  position: relative;
+  padding: 50px;
+  width: 300px;
+}
+
+.signupcard .inputdata input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid silver;
+  outline: none;
+  font-size: 20px;
+}
+
+.signupcard .inputdata label {
+  position: absolute;
+  bottom: 55px;
+  color: gray;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+.signupcard .inputdata .underline {
+  position: relative;
+  background: red;
+  height: 2px;
+  width: 100%;
+  bottom: 2px;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+input[type="date"]:required:invalid {
+  /* Chrome/Opera/Safari */
+
+  color: transparent;
+}
+
+input[type="date"]:required:valid {
+  /* Chrome/Opera/Safari */
+
+  color: black !important;
+}
+
+input[type="date"]:required:focus {
+  /* Chrome/Opera/Safari */
+
+  color: grey !important;
+}
+
+input[type="date"]:required:focus {
+  /* Firefox 19+ */
+
+  color: black;
+}
+.signupcard button {
+  height: 50px;
+  cursor: pointer;
+  width: 30%;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  font-weight: bolder;
+  color: white;
+  font-size: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transition: all 0.2s ease;
+}
+
+.signupcard button:hover {
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 100%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
+
+.signupcard button:active {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  height: 80%;
+}
+/*---------------------EFFECTS----------------------*/
+
+.signupcard .inputdata input:focus ~ label,
+.signupcard .inputdata input:valid ~ label {
+  bottom: 80px;
+}
+
+.signupcard .inputdata input:focus ~ .underline,
+.signupcard .inputdata input:valid ~ .underline {
+  transform: scaleX(1);
+}

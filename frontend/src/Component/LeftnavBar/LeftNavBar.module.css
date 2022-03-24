@@ -1,0 +1,83 @@
+.main {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  height: 90vh;
+  background: rgb(131, 58, 180);
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.LeftNavBarItem {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.LeftNavBarContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.LeftNavBarItem .LeftNavBarContent img {
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+.LeftNavBarItem .LeftNavBarContent label {
+  position: relative;
+  font-size: 25px;
+  width: 70%;
+  cursor: pointer;
+}
+
+.LeftNavBarItem:hover {
+  background-color: rgb(170, 117, 206);
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 0px;
+  transition: all 0.5s ease;
+}
+
+.LeftNavBarItem:hover .overlay {
+  background-color: wheat;
+  opacity: 0.5;
+  width: 100%;
+}
+
+.active {
+  background-color: rgb(170, 117, 206);
+}
+
+.slider {
+  position: fixed;
+  top: 50%;
+  height: 50px;
+  width: 50px;
+  transform: scaleX(-1);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.slider:hover {
+  height: 60px;
+  width: 60px;
+}
+
+.slider:active {
+  height: 80px;
+  width: 80px;
+}

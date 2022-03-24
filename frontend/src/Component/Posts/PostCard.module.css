@@ -1,0 +1,148 @@
+.main {
+  display: flex;
+  box-sizing: border-box;
+  margin-top: 20px;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+  /*min-width: 30rem;*/
+  width: 55rem;
+  height: auto;
+  box-sizing: border-box;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.postpic_div {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 25rem;
+  height: 20rem;
+  overflow: hidden;
+  border: 2px solid silver;
+  border-radius: 20px;
+}
+
+.postpic_div img {
+  display: block;
+  height: auto;
+  width: 95%;
+  border-radius: 10px;
+}
+
+.productPic_Sliding_Name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  background-color: #008cba;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: 0.5s ease;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.postpic_div img:hover ~ .productPic_Sliding_Name {
+  width: 100%;
+}
+
+.productPic_Sliding_Name span {
+  font-size: 3rem;
+  font-weight: bolder;
+  color: white;
+}
+
+.postdescription_div {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
+  height: 20rem;
+  border: 2px solid silver;
+  border-radius: 20px;
+}
+
+.postDescription {
+  width: 100%;
+  box-sizing: border-box;
+  height: 8rem;
+  padding: 2rem;
+  overflow: hidden;
+  text-align: justify;
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+}
+
+.post_Mid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.post_Mid img {
+  margin-left: 0.8rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.post_Mid span {
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
+.post_Footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post_Footer button {
+  background-color: #008cba;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bolder;
+  height: 3rem;
+  width: 7.5rem;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.post_Footer button:hover {
+  background-color: #035b79;
+}
+
+.post_Footer button:active {
+  background-color: #a8bec5;
+  transform: scale(1.2);
+}
+
+@media only screen and (max-width: 1430px) {
+  .main {
+    flex-direction: column;
+    width: 30rem;
+  }
+
+  .postpic_div {
+    height: 20rem;
+  }
+
+  .postdescription_div {
+    height: 18rem;
+  }
+}

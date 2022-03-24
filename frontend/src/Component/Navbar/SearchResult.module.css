@@ -1,0 +1,35 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 2px solid silver;
+  height: 4rem;
+  font-size: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  flex: 0.3;
+  height: 100%;
+}
+
+.actions button {
+  width: 9rem;
+  border: none;
+  margin: 5px;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: skyblue;
+  font-weight: bolder;
+  color: white;
+}
+
+.actions button:hover {
+  transform: scale(1.1);
+}
+
+.actions button:active {
+  background-color: blue;
+}
