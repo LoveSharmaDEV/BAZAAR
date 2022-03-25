@@ -16,21 +16,21 @@ export default function PostCard(props) {
   const {user} = auth;
   const dispatch = useDispatch();
   const activeChats = useSelector((state)=>{
-    return state.activechats.activeChats
+    return state.activechats.activeChat
   })
 
   const UnFollowAction = async (e)=>{
-    const response = await makeRequest('http://localhost:8000/unfollow/store', {storeId: `${e.target.dataset.storeid}`},'POST');
+    const response = await makeRequest('http://localhost:8000/unfollow/store', {storeId: `${props.post.store}`},'POST');
     if(response.data.errCode==="SUCCESS") dispatch(fetch_post_action());
   }
 
   const initiateChat = async (e)=>{
-    setShowChatBox(true)
-    if (!activeChats.includes(`${user._id}#${e.target.dataset.storeid}`)){
-      const response = await makeRequest('http://localhost:8000/chatinit', {storeId: `${e.target.dataset.storeid}`},'POST');
-      if (response.data.errCode==='SUCCESS') {
-        dispatch(addtoActiveChat(response.data.data.conversationID));
+    const conversationID=`${user._id}#${props.post.store}`;
+    if(activeChats){
+      if(!activeChats.includes(conversationID)){
+        dispatch(addtoActiveChat(conversationID));
         dispatch(fetch_chat_action());
+        setShowChatBox(true);
       }
     }
   }
@@ -39,7 +39,8 @@ export default function PostCard(props) {
 
   return (
     <>
-    {showChatBox?<ChatBox/>:''}
+    {showChatBox?<ChatBox conversationID={`${user._id}#${props.post.store}`} setShowChatBox={setShowChatBox}/>:''}
+
     <div className={css.main}>
         <div className={css.postpic_div}>
             <img src={`http://localhost:8000/${props.post.postPic}`} alt='Img'/>
@@ -64,8 +65,8 @@ export default function PostCard(props) {
               user._id !== props.post.user
               ?
               <>              
-                <button data-storeid = {props.post.store} onClick={UnFollowAction} >UNFOLLOW</button>
-                <button data-storeid = {props.post.store} onClick={initiateChat}>CHAT</button>
+                <button onClick={UnFollowAction} >UNFOLLOW</button>
+                <button onClick={initiateChat}>CHAT</button>
               </>
               :
               null
