@@ -1,4 +1,5 @@
 const socket = require('socket.io');
+const chat_UPDATE = require('./chat_UPDATE');
 const post_UPDATE = require('./post_UPDATE');
 const activeUser={}
 
@@ -26,6 +27,7 @@ const InitConnection = (io)=>{
         
         //UPDATE POST
         post_UPDATE(socket,io,getActiveUser);
+        chat_UPDATE(socket,io,getActiveUser);
     })
 }
 

@@ -16,14 +16,12 @@ export const fetchActiveChat = ()=>{
     return async (dispatch)=>{
 
         const response = await makeRequest('http://localhost:8000/fetch/chat', {},"GET");
-        console.log(response)
         if(response.data.errCode==="SUCCESS"){
             dispatch({
                 type:FETCH_ACTIVE_CHAT,
                 payload:response.data.data
             })
         }
-        
     }
 }
 

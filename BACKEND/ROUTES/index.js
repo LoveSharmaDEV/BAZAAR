@@ -6,33 +6,35 @@ const router = express.Router();
 router.use('/login', require('./login'));
 
 // SIGN-IN ROUTE
-router.use('/signin',require('./signin'))
+router.use('/signin',require('./signin'));
 
 // REFERESH TOKEN ROUTE
 router.use('/refresh', require('./refresh'));
 
 // VERIFY TOKEN
-router.use('/verify',require('./verify'))
+router.use('/verify',require('./verify'));
 
 //UPLOAD POST
-router.use('/upload', require('./upload'))
+router.use('/upload', require('./upload'));
 
 // FETCH DATA
-router.use('/fetch', require('./fetch'))
+router.use('/fetch', require('./fetch'));
 
 
 // SEARCH DATA
-router.use('/search', require('./search'))
+router.use('/search', require('./search'));
 
 // FOLLOW
-router.use('/follow', require('./follow'))
+router.use('/follow', require('./follow'));
 
 // UNFOLLOW
-router.use('/unfollow', require('./unfollow'))
+router.use('/unfollow', require('./unfollow'));
 
 // CHAT INIT
-router.use('/chatinit', require('./chatinit'))
+router.use('/chatinit', require('./chatinit'));
 
+// MESSAGE 
+router.use('/message', require('./message'));
 
 // EXPORT ROUTER
 module.exports = router;

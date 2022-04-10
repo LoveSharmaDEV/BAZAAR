@@ -13,7 +13,7 @@ export default  async function makeRequest(api,data={},method){
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    if(method==='GET') response = await axios.get(api,{ headers: { Authorization: `Bearer ${accessToken}` }});
+    if(method==='GET') response = await axios.get(api,data,{ headers: { Authorization: `Bearer ${accessToken}` }});
     if(method==='POST') response = await axios.post(api,data,{ headers: { Authorization: `Bearer ${accessToken}`}});
     
 

@@ -11,36 +11,44 @@ import support from '../../utils/support.png'
 export const LeftNavBarData = [
     {
         title:"Home",
-        icon:home
+        icon:home,
+        path:"/posts"
 
     },
     {
         title:"Customers",
-        icon:customers
+        icon:customers,
+        path:"/customers"
     },
     {
         title:"Following",
-        icon:following
+        icon:following,
+        path:"/following"
     },
     {
         title:"Favourites",
-        icon:favourites
+        icon:favourites,
+        path:"/favourites"
     },
     {
         title:"Cart",
-        icon:cart
+        icon:cart,
+        path:"/cart"
     },
     {
         title:"Store",
-        icon:store
+        icon:store,
+        path:"/store"
     },
     {
         title:"Settings",
-        icon:settings
+        icon:settings,
+        path:"/settings"
     },
     {
         title:"Support",
-        icon:support
+        icon:support,
+        path:'/support'
     }
 
 ]

@@ -2,34 +2,40 @@ import React, {useCallback,useLayoutEffect, useState} from 'react'
 import css from './LeftNavBar.module.css'
 import { LeftNavBarData } from './LeftNavBarData'
 import door from '../../utils/door.png'
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default function LeftNavBar(props) {
   const [hide,setHide]= useState(false);
   const {optionSelected,setOptionSelected} = props;
+  const navigate = useNavigate();
 
   const activeTabs = useCallback(()=>{
     const activeElement = Array.from(document.getElementsByClassName(css.active))[0];
     if(activeElement) activeElement.classList.remove(css.active);
-    document.querySelector(`[data-title="${optionSelected}"]`).classList.add(css.active);
+    
+    document.querySelector(`[data-value="${optionSelected}"]`).classList.add(css.active);
   },[optionSelected])
+
 
   const toggleListeners = useCallback(()=>{
     const slider = Array.from(document.getElementsByClassName(css.slider))[0];
     const NavBar = Array.from(document.getElementsByClassName(css.main))[0];
 
+    function transform0px() {
+      NavBar.style.transform = 'translateX(0px)';
+    }
+
     if(hide){
       NavBar.style.transform = 'translateX(-250px)'
       NavBar.style.position = 'absolute'
-      slider.addEventListener('click', ()=>{
-        NavBar.style.transform = 'translateX(0)'
-      })
+      slider.addEventListener('click', transform0px)
     }
     else{
       NavBar.style.transform = 'translateX(0)'
       NavBar.style.position = 'static'
-      slider.replaceWith(slider.cloneNode(true));
+      slider.removeEventListener('click',transform0px);
     }
   },[hide])
 
@@ -63,12 +69,14 @@ export default function LeftNavBar(props) {
 
   const onSelect = (e)=>{
     setOptionSelected(e.target.dataset.value);
-    cookies.set('optionSelected', e.target.dataset.value,{ path: '/' });
+    cookies.set('optionSelected', e.target.dataset.value);
+    cookies.set('selectedPath', e.target.dataset.path);
     const NavBar = Array.from(document.getElementsByClassName(css.main))[0];
     activeTabs();
     if(hide){      
           NavBar.style.transform = 'translateX(-250px)'
     }    
+    navigate(e.target.dataset.path)
   }
 
 
@@ -80,8 +88,8 @@ export default function LeftNavBar(props) {
           LeftNavBarData.map((val,key)=>
           {
             return(      
-                <div data-title={val.title} className={css.LeftNavBarItem} data-value={val.title} onClick={onSelect} key={key}>
-                  <div  className={css.LeftNavBarContent}>
+                <div className={css.LeftNavBarItem} data-value={val.title} data-path={val.path} onClick={onSelect} key={key}>
+                  <div className={css.LeftNavBarContent}>
                     <img src={val.icon} alt="Home"/>
                     <label>{val.title}</label>
                     <div className={css.overlay}></div>

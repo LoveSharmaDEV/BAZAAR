@@ -60,3 +60,27 @@
   font-weight: bolder;
   font-size: 1.2rem;
 }
+
+.chats_div {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.chatItem {
+  display: flex;
+  width: 40%;
+  min-width: 40%;
+  margin: 1rem;
+  padding: 0.8rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+}
+
+.chatAlignLeft {
+  background-color: skyblue;
+}
+
+.chatAlignRight {
+  background-color: rgb(39, 122, 155);
+}

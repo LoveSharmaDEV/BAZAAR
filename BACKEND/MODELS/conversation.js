@@ -6,6 +6,10 @@ const ConversationSchema = new mongoose.Schema({
         unique:true,
         required:true
     },
+    participants:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }],
     message:[
         {
             type:mongoose.Schema.Types.ObjectId,
@@ -14,12 +18,5 @@ const ConversationSchema = new mongoose.Schema({
     ]
 },{timestamps:true})
 
-ConversationSchema.virtual('UserData').get(function(){
-    return this.conversationID.split('#')[0];
-});
-
-ConversationSchema.virtual('StoreData').get(function(){
-    return this.conversationID.split('#')[1];
-})
 
 module.exports = mongoose.model('Conversation', ConversationSchema)

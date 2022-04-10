@@ -21,7 +21,6 @@ export default function Posts() {
     socket.socket.on('post_UPDATE',()=>{
       dispatch(fetch_post_action());
     })
-
     dispatch(fetch_post_action());
   },[dispatch])
 

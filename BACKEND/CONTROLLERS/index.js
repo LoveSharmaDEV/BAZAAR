@@ -9,8 +9,11 @@ module.exports = {
     searchStoreController: require('./searchController').searchStoreController,
     followStoreController: require('./followController').followStoreController,
     unfollowStoreController: require('./unfollowController').unfollowStoreController,
-    chatInitController: require('./chatInitController').chatInitController,
-    fetchChatController: require('./fetchChatController').fetchChatController,
+    ChatInit_Controller: require('../CONTROLLERS/API LIVE/CHAT APIS/ChatInit_CONTROLLER').ChatInit_Controller,
+    fetchChatController: require('./API LIVE/CHAT APIS/FetchChatMessage_CONTROLLER').fetchChatController,
     fetchCustomerController: require('./fetchCustomerController').fetchCustomerController,
-    fetchSellerController: require('./fetchSellerController').fetchSellerController
+    fetchSellerController: require('./fetchSellerController').fetchSellerController,
+    FetchChatMessage_CONTROLLER: require('../CONTROLLERS/API LIVE/CHAT APIS/FetchChatMessage_CONTROLLER').FetchChatMessage_Controller,
+    FetchChatID_CONTROLLER: require('./API LIVE/CHAT APIS/FetchChatID_CONTROLLER').FetchChatID_CONTROLLER,
+    SaveMessage_CONTROLLER: require('./API LIVE/CHAT APIS/SaveMessage_CONTROLLER').SaveMessage_CONTROLLER
 }

@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
 import css from './PostCard.module.css'
 import likeIcon from '../../utils/heart.png'
 import { useAuth } from '../../Hooks';
 import { fetch_post_action } from '../../Redux/Reducers/fetchPost_reducer';
 import makeRequest from '../../Commons/makeRequest';
 import { useDispatch, useSelector} from 'react-redux';
-import { fetch_chat_action } from '../../Redux/Reducers/fetchChat_reducer';
 import { addtoActiveChat} from '../../Redux/Reducers/fetchActiveChats_reducer';
 import ChatBox from '../ChatBox/ChatBox';
 
 
 export default function PostCard(props) {
-  const [showChatBox, setShowChatBox]=useState(false);
+  const [showChatBox, setShowChatBox]=useState({
+    show: false,
+    conversationID:null
+  });
   const auth = useAuth(); 
   const {user} = auth;
   const dispatch = useDispatch();
+
   const activeChats = useSelector((state)=>{
     return state.activechats.activeChat
   })
@@ -25,12 +28,26 @@ export default function PostCard(props) {
   }
 
   const initiateChat = async (e)=>{
-    const conversationID=`${user._id}#${props.post.store}`;
     if(activeChats){
-      if(!activeChats.includes(conversationID)){
-        dispatch(addtoActiveChat(conversationID));
-        dispatch(fetch_chat_action());
-        setShowChatBox(true);
+      let response = await makeRequest('http://localhost:8000/fetch/chatid', {toUser: props.post.user},'POST');
+      if(response.data.errCode==='FAILURE'){
+        let response = await makeRequest('http://localhost:8000/chatinit', {toUser: props.post.user},'POST');
+        if(response.data.errCode==='SUCCESS'){
+          dispatch(addtoActiveChat(response.data.conversation.conversationID))
+          setShowChatBox({
+            show:true,
+            conversationID: response.data.conversation.conversationID
+          });
+        }
+      }
+      else{
+        if(!activeChats.includes(response.data.conversationID)){
+          dispatch(addtoActiveChat(response.data.conversationID))
+          setShowChatBox({
+            show:true,
+            conversationID: response.data.conversationID
+          });
+        }
       }
     }
   }
@@ -39,7 +56,7 @@ export default function PostCard(props) {
 
   return (
     <>
-    {showChatBox?<ChatBox conversationID={`${user._id}#${props.post.store}`} setShowChatBox={setShowChatBox}/>:''}
+    {showChatBox.show?<ChatBox conversationID={showChatBox.conversationID} toUser = {props.post.user} setShowChatBox={setShowChatBox}/>:null}
 
     <div className={css.main}>
         <div className={css.postpic_div}>
@@ -57,7 +74,12 @@ export default function PostCard(props) {
           </div>
           <div className={css.post_Mid}>
             <span>Price:{props.post.postPrice} Rs</span>
-            <img src={likeIcon} alt='like'/>
+            <div className={css.post_Mid_img_div}>
+              <img src={likeIcon} alt='like'/>
+              <span>0</span>
+            </div>
+            <button>ADD STORE</button>
+
           </div>
           <div className={css.post_Footer}>
             <button> GO TO STORE</button>

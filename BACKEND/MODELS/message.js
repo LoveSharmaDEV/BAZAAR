@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
 
 const MessageSchema = new mongoose.Schema({
-    from:{
+    From:{
         type:mongoose.Schema.Types.ObjectId,
-        refPath:'OnModel' 
+        refPath:'User' 
     },
     To:{
         type:mongoose.Schema.Types.ObjectId,
-        refPath: 'onModel'
-    },
-    onModel:{
-        type:String,
-        enum:['User','Store']
+        refPath: 'User'
     },
     message:{
         type:String,

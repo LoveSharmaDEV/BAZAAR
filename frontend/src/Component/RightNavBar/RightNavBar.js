@@ -10,9 +10,7 @@ import ChatHighlight from './ChatHighlight';
 export default function RightNavBar() {
   const [hide,setHide]= useState(false);
   const dispatch = useDispatch();
-  const chats = useSelector((state)=>{
-    return state.chats
-  }) 
+
 
 
   const toggleListeners = useCallback(()=>{
@@ -20,23 +18,27 @@ export default function RightNavBar() {
     const NavBar = Array.from(document.getElementsByClassName(css.main))[0];
     const slider_hide = Array.from(document.getElementsByClassName(css.slider_hide))[0];
 
+    function transform0px() {
+      NavBar.style.transform = 'translateX(0px)';
+    }
+
+    function transform350px(){
+      NavBar.style.transform = 'translateX(350px)';
+    }
+
     if(hide)
     {
       NavBar.style.position = 'absolute'
       NavBar.style.transform = 'translateX(350px)';
-      slider_show.addEventListener('click', ()=>{
-        NavBar.style.transform = 'translateX(0px)';
-      })
-      slider_hide?.addEventListener('click', ()=>{
-        NavBar.style.transform = 'translateX(350px)';
-      })
+      slider_show.addEventListener('click', transform0px)
+      slider_hide?.addEventListener('click', transform350px)
     }
     else
     {
       NavBar.style.position = 'static'
       NavBar.style.transform = 'translateX(0px)';
-      slider_show.replaceWith(slider_show.cloneNode(true));
-      slider_hide.replaceWith(slider_hide.cloneNode(true));
+      slider_show.removeEventListener('click', transform0px);
+      slider_hide.removeEventListener('click', transform350px);
     }
   },[hide])
 
@@ -77,9 +79,7 @@ export default function RightNavBar() {
             <img className={css.slider_hide} src={backarrow} alt='backarrow'/>
           </div>
           <div className={css.RightNavBar_footer}>
-              {chats.chats.map((chat,key)=>{
-                return <ChatHighlight chat={chat} key={key}/>
-              })}
+
           </div>
       </div>
     </>
