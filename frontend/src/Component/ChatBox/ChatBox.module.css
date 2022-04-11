@@ -69,6 +69,8 @@
 
 .chatItem {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40%;
   min-width: 40%;
   margin: 1rem;
@@ -79,8 +81,10 @@
 
 .chatAlignLeft {
   background-color: skyblue;
+  align-self: flex-start;
 }
 
 .chatAlignRight {
   background-color: rgb(39, 122, 155);
+  align-self: flex-end;
 }

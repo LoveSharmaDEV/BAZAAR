@@ -12,35 +12,35 @@ export default function ChatBox(props) {
   const dispatch = useDispatch();
   const [message, setMessage]= useState({});
   const [messages, setMessages] = useState([]);
-  const formref = useRef()
+  const formref = useRef();
   const auth = useAuth();
+  const messagesEndRef = useRef();
 
-
-  useEffect(()=>{
-    fetchMessages();
-    socket.socket.on(props.conversationID,({message})=>{
-      console.log(message)
-      setMessages([...messages, message]);
-    })
-  },[])
-
-  const fetchMessages = async ()=>{
+  const fetchMessages = async () => {
     const response = await  makeRequest('http://localhost:8000/fetch/chat',{conversationID:props.conversationID},'POST');
     if(response.data.errCode ==="SUCCESS"){
       setMessages(response.data.message)
     }
   }
 
-  const sendMessage = async (e)=>{
-    e.preventDefault();
-    if(!formref.current.checkValidity()){
-      formref.current.reportValidity()
-      return;
+
+  const sendMessage = async (e) => {
+    try{
+      e.preventDefault();
+      if(!formref.current.checkValidity()){
+        formref.current.reportValidity()
+        return;
+      }
+  
+      const response = await makeRequest('http://localhost:8000/message',{message,conversationID:props.conversationID},'POST');
+      if(response.data.errCode === "SUCCESS") {
+        socket.socket.emit('ChatChangeStream', {conversationID:props.conversationID, message});
+        setMessages([...messages, message]);
+        scrollToBottom();
+      }
     }
-    const response =   await makeRequest('http://localhost:8000/message',{message,conversationID:props.conversationID},'POST');
-    if(response.data.errCode === "SUCCESS") {
-      socket.socket.emit('ChatChangeStream', {conversationID:props.conversationID, message});
-      setMessages([...messages, message]);
+    catch(e){
+      console.log(`-----------------------ERROR OCCURED-----------------------------`)
     }
   }
 
@@ -53,7 +53,9 @@ export default function ChatBox(props) {
     })
   }
 
-
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
 
   function dragElement(elmnt) {
     const ChatBox = Array.from(document.getElementsByClassName(ChatBoxCss.main))[0];
@@ -83,10 +85,27 @@ export default function ChatBox(props) {
     dispatch(removefromActiveChat(props.conversationID));
     props.setShowChatBox(false);
   }
+  
     
   useLayoutEffect(()=>{
     const ChatHeader = Array.from(document.getElementsByClassName(ChatBoxCss.cross_div))[0];
-    dragElement(ChatHeader)
+    dragElement(ChatHeader);
+  },[])
+
+  useEffect(()=>{
+    fetchMessages();
+
+    socket.socket.on(props.conversationID,({message})=>{
+      setMessages((prev)=>{
+        return [...prev,message]
+      });
+      scrollToBottom();
+    });
+
+    return ()=>{
+      socket.socket.close();
+    }
+
   },[])
 
 
@@ -95,7 +114,7 @@ export default function ChatBox(props) {
       <div className={ChatBoxCss.cross_div}>
         <img onClick={closeChatBox} src={close} alt='Cross'/>
       </div>
-      <div className={ChatBoxCss.chats_div}>
+      <div className={ChatBoxCss.chats_div} ref={messagesEndRef}>
         {messages.map((message,key)=>{
           return <div className={`${ChatBoxCss.chatItem} ${message.From === auth.user._id?ChatBoxCss.chatAlignLeft:ChatBoxCss.chatAlignRight}`} key={key}>
             <span>{message.message}</span>
