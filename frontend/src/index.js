@@ -5,11 +5,14 @@ import App from './App';
 import { AuthProvider } from './Providers/authContext';
 import { Provider } from 'react-redux';
 import store from './Redux/storeinit';
+import { OverlayProvider } from './Providers/overlayContext';
 
 
 ReactDOM.render(
     <AuthProvider>
-      <Provider store={store.store}><App/></Provider>
+      <OverlayProvider>
+        <Provider store={store.store}><App/></Provider>
+      </OverlayProvider>
     </AuthProvider>
     ,
   document.getElementById('root')

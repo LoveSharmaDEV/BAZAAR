@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import css from './RightNavBar.module.css'
-import door from '../../utils/door.png'
-import backarrow from '../../utils/back-arrow.png'
-import {useSelector,useDispatch } from 'react-redux';
-import { fetch_chat_action } from '../../Redux/Reducers/fetchChat_reducer';
+import {useDispatch,useSelector} from 'react-redux';
 import ChatHighlight from './ChatHighlight';
-
+import { fetch_conversations } from '../../Redux/Reducers/fetchConversations_reducer';
 
 export default function RightNavBar() {
-  const [hide,setHide]= useState(false);
   const dispatch = useDispatch();
+  const [hide,setHide]= useState(false);
+  const conversations = useSelector((state) => {
+    return state.conversations.conversations
+  })
 
 
 
@@ -66,20 +66,21 @@ export default function RightNavBar() {
   },[hide, toggleListeners])
 
   useEffect(()=>{
-    dispatch(fetch_chat_action())
+    dispatch(fetch_conversations())
   },[dispatch])
-
 
   return (
     <>
-      <img className={css.slider_show} src={door} alt="PULL"/>
+      <img className={css.slider_show} src='http://localhost:8000/door.png' alt="PULL"/>
       <div className={css.main}>
           <div className={css.RightNavBar_header}>
             <span>CHATS</span>
-            <img className={css.slider_hide} src={backarrow} alt='backarrow'/>
+            <img className={css.slider_hide} src='http://localhost:8000/back-arrow.png' alt='backarrow'/>
           </div>
           <div className={css.RightNavBar_footer}>
-
+              {conversations.map((conversation,key)=>{
+                return <ChatHighlight  conversation={conversation}  key={key}/>
+              })}
           </div>
       </div>
     </>

@@ -1,29 +1,32 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
   box-sizing: border-box;
   flex: auto;
 }
 
 .createPost_div {
   display: flex;
-  min-height: 5rem;
-  height: 5rem;
   justify-content: flex-end;
+  align-items: center;
+  min-height: 3rem;
+  width: 100%;
   padding: 10px;
 }
 
+.createPost_div img{
+  height: 3rem;
+  width: 3rem;
+ 
+}
+
 .createPost_btn {
-  width: 12rem;
+  width: 7rem;
   height: 100%;
-  font-size: 27px;
-  font-weight: bolder;
-  margin-right: 10px;
+  margin-right: 9rem;
   border-radius: 10px;
   border: none;
-  background-color: skyblue;
-  color: white;
+  cursor: pointer;
 }
 
 .createPost_btn:hover {
@@ -31,7 +34,7 @@
 }
 
 .createPost_btn:active {
-  background-color: blue;
+  opacity: 0.5;
 }
 
 .postsScreen_div {

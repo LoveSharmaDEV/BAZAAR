@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import CreatePostPopup from './CreatePostPopup';
+import React, { useEffect } from 'react';
 import css from './Posts.module.css';
 import {useDispatch, useSelector} from 'react-redux'
 import { fetch_post_action } from '../../Redux/Reducers/fetchPost_reducer';
 import PostCard from './PostCard';
 import socket from '../../API CHANGESTREAMS/socket';
+import { useOverlayContext } from '../../Hooks/overlay';
 
 
 
 export default function Posts() {
-  const[showPopUp, setPopUp] = useState(false);
-  
+  const overlay = useOverlayContext();
   const posts = useSelector((state)=>{
-    return state.posts
+    return state.posts.posts
   }) 
   
   const dispatch = useDispatch();
@@ -27,23 +26,18 @@ export default function Posts() {
 
 
   const showPopUpScreen = ()=>{
-    setPopUp(true);
+    overlay.setOverlay('CreatePostPopUp')
+    overlay.setShowOverlay(true);
   }
   
 
   return (
     <div className={css.main}>
-      {
-        showPopUp?
-          <CreatePostPopup setPopUp={setPopUp}/>
-          :
-          null
-      }
-      <div className={css.createPost_div}>      
-        <button className={css.createPost_btn} onClick={showPopUpScreen}>Create Post!!</button>
+      <div className={css.createPost_div}>
+        <img src={`http://localhost:8000/plus.png`} className={css.createPost_btn} onClick={showPopUpScreen} alt='createpost'/>
       </div>
       <div className={css.postsScreen_div}>
-        {posts.posts.map((post,key)=>{
+        {posts.map((post,key)=>{
             return <PostCard post={post} key={key}/>
         })}
       </div>

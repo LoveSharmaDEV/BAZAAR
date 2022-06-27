@@ -1,7 +1,6 @@
 import React, {useCallback,useLayoutEffect, useState} from 'react'
 import css from './LeftNavBar.module.css'
 import { LeftNavBarData } from './LeftNavBarData'
-import door from '../../utils/door.png'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -82,7 +81,7 @@ export default function LeftNavBar(props) {
 
   return (
   <>
-    <img className={css.slider} src={door} alt="PULL"/>
+    <img className={css.slider} src='http://localhost:8000/door.png' alt="PULL"/>
     <div className={css.main}>
       {
           LeftNavBarData.map((val,key)=>

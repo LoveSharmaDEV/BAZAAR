@@ -1,0 +1,115 @@
+.StoreManageGridElement_OuterDiv
+{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    border: 1px solid silver
+
+    
+}
+
+.StoreManageGridElement_ImagePanel_div
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: scroll;
+    margin: 0.8rem;
+    height: 20rem;
+    width: 30rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 2rem;
+   
+}
+
+.StoreManageGridElement_ImagePanel_div div{
+    display: flex;
+    height: 40%;
+    width: 40%;
+    margin: 1rem;
+}
+
+.StoreManageGridElement_ImagePanel_div div img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid black;
+}
+
+.StoreManageGridElement_ImagePanel_div input
+{
+    position: absolute;
+    left: -200px;
+    height: 100%;
+    width: 100%;
+}
+
+.StoreManageGridElement_Information_div
+{
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+    min-width: 25rem;
+    height: 20rem;
+    margin: 0.8rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.StoreManageGridElement_Information_Container1_div
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 4rem;
+    border-bottom: 1px solid silver;
+}
+
+
+.StoreManageGridElement_Information_Container2_div
+{
+    display: flex;
+    flex: auto;
+}
+
+/* Custom CSS Buttons*/
+
+/* CSS */
+.button54 {
+    width: 10rem;
+    height: 3rem;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button54:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+  }
+  
+  @media (min-width: 768px) {
+    .button54 {
+      padding: 0.25em 0.75em;
+    }
+  }

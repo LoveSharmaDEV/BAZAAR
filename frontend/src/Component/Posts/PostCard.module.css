@@ -1,5 +1,13 @@
+.PostCard
+{
+  position: relative;
+}
+
+
+
 .main {
   display: flex;
+  background-color: white;
   box-sizing: border-box;
   margin-top: 20px;
   border-radius: 10px;
@@ -10,13 +18,12 @@
   height: auto;
   box-sizing: border-box;
   padding: 5px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .postpic_div {
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: center;
   align-items: center;
@@ -34,6 +41,7 @@
   width: 95%;
   border-radius: 10px;
 }
+
 
 .productPic_Sliding_Name {
   display: flex;
@@ -60,7 +68,7 @@
   color: white;
 }
 
-.postdescription_div {
+.PostCard_Content_div {
   display: flex;
   box-sizing: border-box;
   padding: 0.8rem;
@@ -68,31 +76,35 @@
   flex-direction: column;
   align-items: center;
   width: 25rem;
-  height: 20rem;
+  height: 25rem;
   border: 2px solid silver;
   border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.postDescription {
+.PostCard_Description_div {
   width: 100%;
   box-sizing: border-box;
   height: 8rem;
-  padding: 2rem;
   overflow: hidden;
   text-align: justify;
-  font-size: 1.5rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
   word-wrap: break-word;
 }
 
-.post_Mid {
+.PostCard_Action_div1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  background-color: #000;
+  padding: 0.5rem;
+  border-radius: 2rem;
 }
 
-.post_Mid button {
+.PostCard_Action_div1 button {
   background-color: #008bba55;
   cursor: pointer;
   border: none;
@@ -104,7 +116,7 @@
   border-radius: 2rem;
 }
 
-.post_Mid_img_div {
+.PostCard_Action_div_img_div {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -120,15 +132,17 @@
   padding: 0 0.4rem 0 0.4rem;
 }
 
-.post_Mid img {
+.PostCard_Action_div1 img {
   height: 2rem;
   width: 2rem;
 }
 
-.post_Mid > span {
+
+
+.PostCard_Action_div1 > span {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   background-color: #008bba55;
   cursor: pointer;
   border: none;
@@ -136,42 +150,173 @@
   font-size: 1rem;
   font-weight: bolder;
   height: 3rem;
-  width: auto;
+  min-width: 5rem;
   border-radius: 2rem;
   padding: 0 0.4rem 0 0.4rem;
 }
 
-.post_Footer {
+.PostCard_Action_div2 {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  background-color: #000;
+  border-radius: 2rem;
 }
 
-.post_Footer button {
-  background-color: #008cba;
+.PostCard_Action_div2 button {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+  justify-content: space-around;
+  background-color: #008bba55;
   cursor: pointer;
   border: none;
   color: white;
   font-size: 1rem;
   font-weight: bolder;
   height: 3rem;
-  width: 7.5rem;
+  min-width: 6rem;
   border-radius: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.PostCard_Action_img{
+  height: 2rem;
+  width: 2rem;
+  transition: all 0.3s ease;
+
+}
+
+.PostCard_Action_img:hover{
+  transform: scale(1.4);
+}
+
+
+
+/*----------Post Card Header Start--------*/
+
+.PostCard_StoreName_div{
+  display: flex;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.PostCard_StoreName_div > span{
+  display: flex;
+  align-items: center;
+}
+
+.PostCard_StoreName_div span img{
+  height: 2rem;
+  width: 2rem;
+}
+
+.PostCard_StoreName_div .PostCard_Storename
+{
+  margin-left: 7rem;
+}
+
+/*----------Post Card Header End--------*/
+
+/*--------Comment Box Start------------*/
+
+.CommentBoxOverlay{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(7, 7, 7, 0.5);
+  z-index: 1;
+  top:0;
+  left: 0;
+  }
+
+.CommentBox{
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  max-width: 30rem;
+  width: 30rem;
+  background-color: white;
+  margin: 1rem;
+}
+
+.CommentBoxHeader{
+  display: flex;
+  align-items: center;
+  height: 2rem;
+}
+
+.CommentBoxHeader img{
+  height: 1rem;
+  width: 1rem;
+  background-color: red;
+  border-radius: 2rem;
   transition: all 0.3s ease;
 }
 
-.post_Footer button:hover {
-  background-color: #035b79;
+.CommentBoxHeader img:hover
+{
+  transform: scale(1.4);
 }
 
-.post_Footer button:active {
-  background-color: #a8bec5;
-  transform: scale(1.2);
+.CommentBoxBody
+{
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  flex: auto;
 }
+
+
+.CommentBoxFooter
+{
+  display: flex;
+  height: 2rem;
+}
+
+.CommentBoxFooter input{
+  flex: auto;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid silver;
+  margin-right: 1rem;
+}
+
+/* CSS */
+.button54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button54 {
+    padding: 0.25em 0.75em;
+  }
+}
+
+
+ /*--------Comment Box End------------*/
+
 
 @media only screen and (max-width: 1430px) {
   .main {
@@ -183,7 +328,7 @@
     height: 20rem;
   }
 
-  .postdescription_div {
-    height: 18rem;
+  .PostCard_Content_div {
+    height: 25rem;
   }
 }

@@ -5,5 +5,6 @@ module.exports = {
     Product: require('./product'),
     Post: require('./post'),
     Conversation: require('./conversation'),
-    Message: require('./message')
+    Message: require('./message'),
+    Comment: require('./comment')
 }

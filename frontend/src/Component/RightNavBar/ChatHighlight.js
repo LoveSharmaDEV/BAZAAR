@@ -1,32 +1,81 @@
 import React, { useCallback, useEffect, useState} from 'react'
-import css from './ChatHighlight.module.css'
+import ChatHighlightCSS from './ChatHighlight.module.css'
 import { useAuth } from '../../Hooks/index';
-import makeRequest from '../../Commons/makeRequest'
+import makeRequest from '../../Commons/makeRequest';
+import { useDispatch, useSelector} from 'react-redux';
+import ChatBox from '../ChatBox/ChatBox';
+import { addtoActiveChat } from '../../Redux/Reducers/fetchActiveChats_reducer';
+
+
 
 export default function ChatHighlight(props) {
-  const [chatHeader, setChatHeader]= useState('');
-  const {chat} = props;
+  const [chatHeader, setchatHeader] = useState({});
+  const [showChatBox, setShowChatBox] = useState({show: false});  
+  const dispatch = useDispatch();
   const {user} = useAuth();
+  const activeChats = useSelector((state)=>{return state.activechats.activeChat})
   
-  const fetchChatHighlight = useCallback(async ()=>{
-    if(user.role==='SELLER'){
-      const response = await makeRequest('http://localhost:8000/fetch/customer',{customer_id:chat.conversationID.split('#')[0]},'POST')
-      if(response.data.errCode==='SUCCESS')setChatHeader(response.data.data.username)
+
+  const fetchChatHighlightHeader = useCallback(async (req,res)=>{
+    const response = await makeRequest('http://localhost:8000/fetch/chatheader', 
+    {toUser:props.conversation.participants.filter((p)=> p!==user._id)[0]},'POST');
+    if(response.data.errCode==="SUCCESS") setchatHeader({
+                                                            chatHeader:response.data.data.chatHeader,
+                                                            chatHeaderImage:response.data.data.chatHeaderImage,
+                                                            toUser:response.data.data.toUser,
+                                                            toStore:response.data.data.toStore
+                                                        })
+    },[props.conversation.participants,user._id])
+
+
+    const initiateChat = async (e)=>{
+      if(activeChats){
+        let response = await makeRequest('http://localhost:8000/fetch/chatid', {toUser: chatHeader.toUser._id},'POST');
+        if(response.data.errCode==='FAILURE'){
+          let response = await makeRequest('http://localhost:8000/chatinit', {toUser: chatHeader.toUser._id},'POST');
+          if(response.data.errCode==='SUCCESS'){
+            dispatch(addtoActiveChat(response.data.conversation.conversationID))
+            setShowChatBox({
+              show:true,
+              conversationID: response.data.conversation.conversationID
+            });
+          }
+        }
+        else{
+          if(!activeChats.includes(response.data.conversationID)){
+            dispatch(addtoActiveChat(response.data.conversationID))
+            setShowChatBox({
+              show:true,
+              conversationID: response.data.conversationID
+            });
+          }
+        }
+      }
     }
-    else if(user.role==='CUSTOMER'){
-      const response = await makeRequest('http://localhost:8000/fetch/seller',{customer_id:chat.conversationID.split('#')[1]},'POST')
-      if(response.data.errCode==='SUCCESS')setChatHeader(response.data.data.storeName)      
-    }
-  },[]);
+
+
+
+
 
   useEffect(()=>{
-    fetchChatHighlight().catch(()=>{console.log('Error Occured')});
-  },[fetchChatHighlight]);
+    fetchChatHighlightHeader();
+  },[fetchChatHighlightHeader]);
 
-  
   return (
-    <div className={css.main}>
-      <span>{chatHeader}</span>
-    </div>
+    <>
+      {showChatBox.show?<ChatBox conversationID={props.conversation.conversationID} 
+      toUser = {chatHeader.toUser} 
+      toStore = {chatHeader.toStore} 
+      setShowChatBox={setShowChatBox}/>:null}
+
+      <div className={ChatHighlightCSS.main} onClick={initiateChat}>
+        <img src={chatHeader.chatHeaderImage} alt='ProfilePic'/>
+        <div className={ChatHighlightCSS.Content}>
+          <span className={ChatHighlightCSS.Header}>{chatHeader.chatHeader}</span>
+          <span>{props.conversation.message[props.conversation.message.length-1].message}</span>
+        </div>
+      </div>
+    </>
+
   )
 }

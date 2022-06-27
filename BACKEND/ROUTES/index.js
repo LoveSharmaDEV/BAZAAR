@@ -36,5 +36,11 @@ router.use('/chatinit', require('./chatinit'));
 // MESSAGE 
 router.use('/message', require('./message'));
 
+// STORE PRODUCT CRUD
+router.use('/store', require('./StoreProductCRUD_Route'));
+
+// POST ROUTE
+router.use('/post',require('./togglelike'))
+
 // EXPORT ROUTER
 module.exports = router;

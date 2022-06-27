@@ -1,0 +1,37 @@
+.StoreManageNavBar_div{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: auto;
+    flex: 0.2;
+    flex-wrap: wrap;
+}
+
+
+
+.StoreManageNavBar_Tabs_div{
+    display: flex;
+    height: 5rem;
+    min-width: 30rem;
+    flex: auto;
+
+}
+
+.StoreManageNavBar_TabsOption_div{
+    display: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1px solid silver;
+    font-size: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.StoreManageNavBar_TabsOption_div:hover{
+
+    background-color: ghostwhite;
+}

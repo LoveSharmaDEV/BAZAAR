@@ -13,6 +13,10 @@ import Cookies from 'universal-cookie';
 import LeftNavBar from './Component/LeftnavBar/LeftNavBar';
 import { useState } from 'react';
 import Posts from './Component/Posts/Posts';
+import StoreManage from './Component/StoreManagePage/StoreManage';
+import { useOverlayContext } from './Hooks/overlay';
+import Overlay from './Component/Overlays/Overlay';
+import Store from './Component/Ecommerce/Store';
 const cookies = new Cookies();
 
 /*------------------------------------------------------HELPER FUNCTIONS------------------------------------------------------------------*/
@@ -35,14 +39,21 @@ export const RestrictPath = function ({children}){
 
 function App() {
   const auth = useAuth();
+  const overlay = useOverlayContext();
+  const [rightNavBarVisibility, setrightNavBarVisibility] = useState(true);
+  const [leftNavBarVisibility, setleftNavBarVisibility] = useState(true);
   const [optionSelected, setOptionSelected] = useState(cookies.get('optionSelected')?cookies.get('optionSelected'):'Home');
-
   return (
       <Router>
+        {/*-----------------------------------------OVERLAY--------------------------------------*/}
+        
+        {overlay.showOverlay?<ToastProvider><Overlay/></ToastProvider>:null}
+
+        {/*-----------------------------------------OVERLAY--------------------------------------*/}
           <NavbarPage/>
           <div className='main_div_body'>
             {
-              auth.user
+              auth.user&&leftNavBarVisibility
               ?
                <LeftNavBar optionSelected={optionSelected} setOptionSelected={setOptionSelected}/>
               :
@@ -59,12 +70,13 @@ function App() {
               <Route exact path='following' element={<RequireAuth><ToastProvider>following</ToastProvider></RequireAuth>}/> 
               <Route exact path='favourites' element={<RequireAuth><ToastProvider>favourites</ToastProvider></RequireAuth>}/> 
               <Route exact path='cart' element={<RequireAuth><ToastProvider>cart</ToastProvider></RequireAuth>}/> 
-              <Route exact path='store' element={<RequireAuth><ToastProvider>store</ToastProvider></RequireAuth>}/> 
+              <Route exact path='store' element={<RequireAuth><ToastProvider><StoreManage/></ToastProvider></RequireAuth>}/> 
               <Route exact path='settings' element={<RequireAuth><ToastProvider>settings</ToastProvider></RequireAuth>}/> 
               <Route exact path='support' element={<RequireAuth><ToastProvider>support</ToastProvider></RequireAuth>}/>                                 
+              <Route exact path = 'store/:storename' element={<Store setrightNavBarVisibility={setrightNavBarVisibility} setleftNavBarVisibility={setleftNavBarVisibility} />}/>
             </Routes> 
             {
-              auth.user
+              auth.user&&rightNavBarVisibility
               ?
                <RightNavBar/>
               :

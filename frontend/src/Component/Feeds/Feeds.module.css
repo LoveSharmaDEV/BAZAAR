@@ -1,8 +1,0 @@
-.main {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 100vw;
-  height: 90vh;
-  overflow: hidden;
-}

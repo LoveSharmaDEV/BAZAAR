@@ -18,6 +18,10 @@ socketIO.socketIO(server);
 
 // STATIC DIRECTORIES
 app.use(express.static(path.join(__dirname, 'UTILITIES/UPLOADED_POST_PICS')));
+app.use(express.static(path.join(__dirname, 'UTILITIES/UPLOADED_PROFILE_PICS')));
+app.use(express.static(path.join(__dirname, 'UTILITIES/WEB_COMPONENTS')));
+app.use(express.static(path.join(__dirname, 'UTILITIES/UPLOADED_PRODUCT_PICS')));
+
 
 // PRE-REQUISITE MIDDLEWARES
 app.use(express.urlencoded(

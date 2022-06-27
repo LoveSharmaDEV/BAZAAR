@@ -1,0 +1,238 @@
+import React, { useState } from 'react'
+import StoreManageGridElementUpdateCss from './StoreManageGridElementUpdate.module.css'
+
+function StoreManageGridElementUpdate(props) {
+
+    const [showHashTagOverlay,setHashTagOverlay] = useState(false);
+
+
+    /*-------------------LOCAL STATE START---------------- */
+    const [FormData,setFormData] = useState({
+        ProductName:props.product.ProductName,
+        ProductPrice:props.product.ProductPrice,
+        ProductImage:props.product.ProductImage,
+        ProductColor:props.product.ProductColor,
+        ProductPublish:props.product.ProductPublish,
+        ProductQuantity:props.product.ProductQuantity,
+        ProductDescription:props.product.ProductDescription,
+        ProductDiscount:props.product.ProductDiscount,
+        ProductDiscountedPrice:props.product.ProductDiscountedPrice,
+        hashtag:props.product.hashtag
+    });
+    /*-------------------LOCAL STATE END------------------ */
+
+    /*-------------------ON CHANGE TRIGGER START----------- */
+    const onFormDataChange = (e)=>{
+        setFormData({
+            ...FormData,
+            [e.target.name]:e.target.value
+        })
+    }
+    /*-------------------ON CHANGE TRIGGER END------------- */
+
+    /*---------------CUSTOM INPUT HANDLERS START------------- */
+    const onCheckBoxDataChange = (e)=>{
+        setFormData({
+            ...FormData,
+            [e.target.name]:e.target.checked?true:false
+        })
+    }
+    /*---------------CUSTOM INPUT HANDLERS START------------- */
+
+    const toggleHashTagOverlay = (e)=>
+    {
+        showHashTagOverlay?setHashTagOverlay(false):setHashTagOverlay(true);
+    }
+
+    const OnCloseUpdateForm = (e)=>
+    {
+        props.setUpdateForm(false)
+    }
+
+    const AddHashTag = (e)=>
+    {
+        if (e.key === "Enter") 
+        {
+            setFormData({
+                ...FormData,
+                hashtag:[...FormData.hashtag,e.target.value]
+            })
+
+            setHashTagOverlay(false)
+        }
+    }
+
+    const AddColor = (e)=>
+    {
+        setFormData({
+            ...FormData,
+            ProductColor:[...FormData.ProductColor,e.target.value]
+        })
+    }
+
+    /*-----------------------STATE CHANGE HANDLERS START-------------------- */
+
+    const AddProductImage = (e)=>{
+        setFormData({
+            ...FormData,
+            ProductImage:[...FormData.ProductImage,...e.target.files]
+        })
+      }
+    
+    const OnImageDelete = (e)=>{
+        let TempImageList = FormData.ProductImage;
+        TempImageList.splice(e.target.dataset.delete,1);
+
+        setFormData({
+            ...FormData,
+            ProductImage:[...TempImageList]
+        })
+    }
+
+    const OnHashTagDelete = (e)=>{
+        setFormData({
+            ...FormData,
+            hashtag:[...FormData.hashtag.filter((hashtag)=>hashtag!==e.target.dataset.delete)]
+        })
+    }
+
+    const OnColorDelete = (e)=>{
+        setFormData({
+            ...FormData,
+            ProductColor:[...FormData.ProductColor.filter((color)=>color!==e.target.dataset.delete)]
+        })
+    }
+
+    /*-----------------------STATE CHANGE HANDLERS END-------------------- */
+
+
+
+  return (
+    <div className={StoreManageGridElementUpdateCss.OuterContainer}>
+        <img className={StoreManageGridElementUpdateCss.CloseOverlay}  
+        src='http://localhost:8000/close.png' alt='Close'  onClick={OnCloseUpdateForm}/>
+        <form className={StoreManageGridElementUpdateCss.UpdateForm}>
+
+            <div className={StoreManageGridElementUpdateCss.Container1}>
+                
+                <div className={StoreManageGridElementUpdateCss.Container1_ImageContainer}> 
+                    {FormData.ProductImage.map((image,key)=>{
+                        return (
+                        <div className={StoreManageGridElementUpdateCss.Container1_ImageContainer_img} key={key}> 
+                            <img  src='http://localhost:8000/close.png' data-delete={key}  alt='Close' onClick={OnImageDelete}/>
+                            <img src={ image instanceof File ?URL.createObjectURL(image):`http://localhost:8000/${image}`} alt='ProductImage'/>
+                        </div>
+                        )
+                    })}
+                    <img src='http://localhost:8000/upload.png' alt='UploadBtn'/>
+                    <input type='file' multiple onChange={AddProductImage}/>
+                </div>
+
+                <div className={StoreManageGridElementUpdateCss.Container1_DescriptionContainer}>
+                    <label>DESCRIPTION</label>
+                    <textarea name='ProductDescription' value={FormData.ProductDescription} onChange={onFormDataChange}></textarea>
+                </div>
+
+            </div>
+
+            <div className={StoreManageGridElementUpdateCss.Container2}>
+
+                <div className={StoreManageGridElementUpdateCss.Container2_DirectInputs}>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_InputContainer}>
+                        <label>Product Name</label>
+                        <input name='ProductName' type='text' value={FormData.ProductName} onChange={onFormDataChange}/>
+                    </div>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_InputContainer}>
+                        <label>Product Price</label>
+                        <input name='ProductPrice' type='number' value={FormData.ProductPrice} onChange={onFormDataChange}/>
+                    </div>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_InputContainer}>
+                        <label>Quantity</label>
+                        <input name='ProductQuantity' type='number' value={FormData.ProductQuantity} onChange={onFormDataChange}/>
+                    </div>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_InputContainer}>
+                        <label>Discount</label>
+                        <input name='ProductDiscount' type='number' value={FormData.ProductDiscount} onChange={onFormDataChange}/>
+                    </div>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_InputContainer}>
+                        <label>Discounted Price</label>
+                        <input name='ProductDiscountedPrice' type='number' value={FormData.ProductDiscountedPrice} onChange={onFormDataChange}/>
+                    </div>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_CheckBoxContainer}>
+                        <span>Publish</span>
+                        <label>
+                            <input name='ProductPublish' type='checkbox'  onChange={onCheckBoxDataChange}/>
+                            <div className={StoreManageGridElementUpdateCss.Container2_CheckBoxContainer_Slider}></div>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div className={StoreManageGridElementUpdateCss.Container2_StateInputs}>
+
+                    <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_HashTags}>
+
+
+
+                        <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_HashTags_Header}>
+                            <img src='http://localhost:8000/add.png' alt='AddBtn' onClick={toggleHashTagOverlay}/>
+                            <span>HASH TAGS</span>
+                        </div>
+
+                        <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_HashTags_Body}>
+                                {FormData.hashtag.map((hashtag,key)=>{
+                                    return(
+                                        <div key={key}>
+                                            <img  src='http://localhost:8000/close.png' data-delete={hashtag}  alt='Close' onClick={OnHashTagDelete} />
+                                            <span>#{hashtag}</span>
+                                        </div>
+                                    )
+                                })}
+                        </div>
+
+                        {
+                        showHashTagOverlay?
+                            <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_HashTagsOverlay}>
+                                <img src='http://localhost:8000/close.png' alt='CloseBtn' onClick={toggleHashTagOverlay}/>
+                                <input type='text' placeholder='Add your #Tags' onKeyPress={AddHashTag}/>
+                            </div>
+                        :
+                        null
+                        }
+
+                    </div>
+                    <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_Colors}>
+
+                        <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_Colors_Header}>
+                             <input type='color' onChange={AddColor}/>
+                             <img src='http://localhost:8000/add.png' alt='AddBtn'/>
+                             <span>COLOR</span>
+                        </div>
+
+                        <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_Colors_Body}>
+                            {FormData.ProductColor.map((color,key)=>
+                            {
+                                return(
+                                    <div style={{backgroundColor:color}} key={key}>
+                                        <img  src='http://localhost:8000/close.png' data-delete={color}  alt='Close' onClick={OnColorDelete} />
+                                    </div>
+                                )
+                            })
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+  )
+}
+
+export default StoreManageGridElementUpdate
