@@ -7,7 +7,7 @@ import ReactLoading from "react-loading";
 import SearchResult from './SearchResult';
 
 
-export default function NavbarPage() {
+export default function NavbarPage(props) {
   const auth = useAuth();
   const [searchStore, setSearchStore]= useState({
     loading:false,
@@ -28,6 +28,7 @@ export default function NavbarPage() {
       setSearchStore({...searchStore, loading:false, data:result.data.data})
     }
   }
+
 
   return (
     <div className={NavCss.NavBar}>

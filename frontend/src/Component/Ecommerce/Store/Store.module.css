@@ -1,0 +1,17 @@
+.Store
+{
+    position: relative;
+    display: flex;
+    flex: auto;
+    height: calc(100vh-4rem);
+
+}
+
+.StoreProductPage
+{
+    display: flex;
+    padding: 2rem;
+    flex-wrap: wrap;
+    flex: auto;
+    overflow-y:scroll ;
+}

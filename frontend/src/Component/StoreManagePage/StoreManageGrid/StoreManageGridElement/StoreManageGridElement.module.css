@@ -1,24 +1,9 @@
-.StoreManageGridElement_OuterDiv
-{
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    overflow: scroll;
-    border: 1px solid silver
 
-    
-}
-
-.StoreManageGridElement_ImagePanel_div
+.StoreManageGridElement
 {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    overflow: scroll;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0.8rem;
     height: 20rem;
     width: 30rem;
@@ -26,17 +11,40 @@
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     border-radius: 2rem;
-   
 }
 
-.StoreManageGridElement_ImagePanel_div div{
+.StoreManageGridElement_ImageCarousal
+{
     display: flex;
-    height: 40%;
-    width: 40%;
-    margin: 1rem;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.8rem;
+    height: 50%;    
 }
 
-.StoreManageGridElement_ImagePanel_div div img{
+.ProductCardBackward
+{
+    transform: scaleX(-1);
+    height: 3rem;
+    width: 3rem;
+}
+.ProductCardForward
+{
+    height: 3rem;
+    width: 3rem;
+}
+.StoreManageGridElement_ImagePanel_div
+{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: scroll;
+}
+
+
+.StoreManageGridElement_ImagePanel_div img{
     height: 100%;
     width: 100%;
     border-radius: 1rem;
@@ -51,33 +59,20 @@
     width: 100%;
 }
 
-.StoreManageGridElement_Information_div
+.StoreManageGridElement_Actions
 {
     display: flex;
-    flex-direction: column;
-    width: 50rem;
-    min-width: 25rem;
-    height: 20rem;
-    margin: 0.8rem;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    justify-content: space-around;
+    height: auto;
+    padding-bottom: 1rem;
 }
 
-.StoreManageGridElement_Information_Container1_div
+.StoreManageGridElement_ProductName
 {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 4rem;
-    border-bottom: 1px solid silver;
-}
-
-
-.StoreManageGridElement_Information_Container2_div
-{
-    display: flex;
-    flex: auto;
+    justify-content: center;
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /* Custom CSS Buttons*/

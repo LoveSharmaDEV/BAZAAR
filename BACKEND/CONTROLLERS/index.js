@@ -22,4 +22,6 @@ module.exports = {
     CommentPost_CONTROLLER: require('./API LIVE/POST APIS/CommentPost_CONTROLLER').CommentPost_CONTROLLER,
     CommentFetch_CONTROLLER: require('./API LIVE/POST APIS/CommentPost_CONTROLLER').CommentFetch_CONTROLLER,
     ToggleLikeComment_CONTROLLER:require('./API LIVE/POST APIS/ToggleLike_Comment_CONTROLLER').ToggleLikeComment_Controller,
+    FetchStockByStoreName_CONTROLLER: require('./API LIVE/ECOMM APIS/FetchStockByStoreName_CONTROLLER').FetchStockByStoreName_CONTROLLER,
+    StoreProductDelete_CONTROLLER: require('./API LIVE/STORE APIS/StoreProductCRUD_CONTROLLER').StoreProductDelete_CONTROLLER
 }

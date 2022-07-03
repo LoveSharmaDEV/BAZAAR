@@ -14,5 +14,13 @@ router.get('/fetch/stock/',
 require('../MIDDLEWARES/authenticator').authenticator,
 require('../CONTROLLERS/index').StoreProductFetch_CONTROLLER);
 
+/*-------------------FETCH STOCK BY STORENAME-----------------------*/
+router.get('/fetch/stock/:storeName', require('../CONTROLLERS/index').FetchStockByStoreName_CONTROLLER);
+
+/*--------------------DELETE PRODUCT FROM STORE--------------------- */
+router.post('/delete/stock/',
+require('../MIDDLEWARES/authenticator').authenticator,
+require('../CONTROLLERS/index').StoreProductDelete_CONTROLLER);
+
 //EXPORT ROUTER
 module.exports = router;

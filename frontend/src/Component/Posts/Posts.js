@@ -8,7 +8,7 @@ import { useOverlayContext } from '../../Hooks/overlay';
 
 
 
-export default function Posts() {
+export default function Posts(props) {
   const overlay = useOverlayContext();
   const posts = useSelector((state)=>{
     return state.posts.posts
@@ -30,6 +30,10 @@ export default function Posts() {
     overlay.setShowOverlay(true);
   }
   
+  useEffect(()=>{
+    props.setrightNavBarVisibility(true);
+    props.setleftNavBarVisibility(true);
+  },[props])
 
   return (
     <div className={css.main}>

@@ -1,31 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import AddProductCss from './AddProduct.module.css';
 import { useOverlayContext } from '../../../Hooks/overlay';
 import makeRequest from '../../../Commons/makeRequest';
-import {useToasts } from 'react-toast-notifications';
-
+import { useDispatch } from 'react-redux';
+import { ADD_TO_THE_STOCK } from '../../../Redux/Reducers/fetchAvailableStock_reducer';
 
 function AddProduct() {
 
-  const [colorList, setColorList] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [HashTags, setHashTags] = useState([]);
   const [formData, setFormData] = useState({});
-  const { addToast } = useToasts();
   const [showHashTagOverlay,setHashTagOverlay] = useState(false);
   const formref = useRef();
   const overlay = useOverlayContext();
+  const dispatch = useDispatch();
 
-
-  const AddProductColor = (e)=>{
-        setColorList([...colorList,e.target.value]);
-
-  }
-
-  const RemoveProductColor = (e) =>{
-    e.preventDefault();
-    setColorList([...colorList.filter((color)=> e.target.dataset.color!==color)])
-  }
 
   const AddProductImage = (e)=>{
     setImageList([...imageList,...e.target.files])
@@ -37,7 +26,6 @@ function AddProduct() {
       setHashTagOverlay(false)
     }
   }
-  /*------------------FORM INPUT HANDLE START-------------------- */
 
   const handleFormData = (e) =>{
       setFormData({
@@ -45,15 +33,12 @@ function AddProduct() {
         [e.target.name]:e.target.value
       });
   }
-  /*------------------FORM INPUT HANDLE END---------------------- */
-  /*-------------------FORM SUBMIT HANDLE START-----------------------*/
 
   const onFormSubmit = async (e)=>{
 
-
     e.preventDefault();
-    /* -----------------------CREATE WEB FORM DATA START------------ */
 
+    /* -----------------------CREATE WEB FORM DATA--> START------------ */
     const webFormData = new FormData();
     
     for(const key in formData)
@@ -64,34 +49,31 @@ function AddProduct() {
     imageList.forEach(image=>{
       webFormData.append('imageList',image);
     })
-    colorList.forEach(color=>{
-      webFormData.append('colorList',color);
-    })
+
     HashTags.forEach(hashtag=>{
       webFormData.append('HashTags',hashtag);
     })
 
     const response = await makeRequest('http://localhost:8000/store/product/upload', webFormData, 'POST')
     if(response.data.errCode==='SUCCESS')
+    {
+
+      dispatch(ADD_TO_THE_STOCK(webFormData));
       overlay.setShowOverlay(false);
+      
+    }
     else{
-      addToast('Upload Failed', { appearance: 'error' });
       console.log(response.data)
-      formref.current.reset()
+      //formref.current.reset()
     }    
-    /* -----------------------CREATE WEB FORM DATA END------------ */
-
-
+    /* -----------------------CREATE WEB FORM DATA--> END-------------- */
 
     if(!formref.current.checkValidity()){
       formref.current.reportValidity()
       return;
     }
-  }
 
-  /*-----------------FORM SUBMIT HANDLE END-------------------------- */
-
-  
+  }  
 
   return (
     <div className={AddProductCss.AddProduct_OuterDiv_div}>
@@ -137,7 +119,7 @@ function AddProduct() {
                           <div className={AddProductCss.AddProduct_BodyTagsPanel_ADDTAG_div}>
 
                                 <img src='http://localhost:8000/add.png' alt='Add' onClick={()=>{setHashTagOverlay(true)}}/>
-                                ADD HASH TAGS
+                                <span>ADD HASH TAGS</span>
                           
                           </div>
 
@@ -157,33 +139,23 @@ function AddProduct() {
                       <div className={AddProductCss.AddProduct_Body_Container2_Input1}>
                            
                            <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductName' type='text' onChange={handleFormData} required/>
-                                <span>Product Name</span>
-                                <div className={AddProductCss.AddProduct_Animation_div}></div>
+                                <input name='ProductName' type='text' placeholder='Name' onChange={handleFormData} required/>
                            </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductPrice' type='number' onChange={handleFormData} required/>
-                                <span>Product Price</span>
-                                <div className={AddProductCss.AddProduct_Animation_div}></div>
+                                <input name='ProductPrice' type='number' placeholder='Price' onChange={handleFormData} required/>
                             </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductQuantity' type='number' onChange={handleFormData} required/>
-                                <span>Product Quantity</span>
-                                <div className={AddProductCss.AddProduct_Animation_div}></div>
+                                <input name='ProductQuantity' type='number' placeholder='Quantity' onChange={handleFormData} required/>
                             </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductDiscount' type='number' onChange={handleFormData} required/>
-                                <span>Product Discount %</span>
-                                <div className={AddProductCss.AddProduct_Animation_div}></div>
+                                <input name='ProductDiscount' type='number' placeholder='Discount %' onChange={handleFormData} required/>
                             </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductDiscountedPrice' type='number' onChange={handleFormData} required/>
-                                <span>Product Discounted Price</span>
-                                <div className={AddProductCss.AddProduct_Animation_div}></div>
+                                <input name='ProductDiscountedPrice' type='number' placeholder='Discounted Price' onChange={handleFormData} required/>
                             </div>
 
                       </div>
@@ -192,33 +164,10 @@ function AddProduct() {
                       
                       <textarea 
                       name='ProductDescription' 
-                      placeholder='Product Description' 
+                      placeholder='Description' 
                       minlength="60" rows="20" cols="20" onChange={handleFormData}>
                       </textarea>
-                      
-                      <div className={AddProductCss.AddProduct_Body_Container2_Input2_ColorPicker}>
-
-                        <div className={AddProductCss.AddProduct_Body_Container2_Input2_ColorPicker_header}>
-
-                          <input type='color' onChange={AddProductColor}/>
-                          <img src='http://localhost:8000/add.png' alt='AddColorBtn'/>
-                          <span>Add Color</span>
-                        
-                        </div>
-                        
-                        <div className={AddProductCss.AddProduct_Body_Container2_Input2_ColorPicker_footer}>                        
-                            
-                            {
-                              colorList.map((color,key) =>
-                                <div key={key} className={AddProductCss.AddProduct_Body_Container2_Input2_ColorPicker_footer_colordiv} 
-                                  style={{backgroundColor:color}} data-color={color} onClick={RemoveProductColor}>
-                                  <img src='http://localhost:8000/close.png' alt='Remove'/>
-                                </div>
-                              )
-                            }
-
-                        </div>
-                      </div>
+  
                     </div>
                 </div>
           </div>

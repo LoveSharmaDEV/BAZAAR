@@ -7,6 +7,6 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100vw;
-  height: 90vh;
+  height:calc(100vh - 5rem);
   overflow: hidden;
 }

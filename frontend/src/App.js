@@ -11,12 +11,13 @@ import ReactLoading from "react-loading";
 import RightNavBar from './Component/RightNavBar/RightNavBar';
 import Cookies from 'universal-cookie';
 import LeftNavBar from './Component/LeftnavBar/LeftNavBar';
-import { useState } from 'react';
+import {  useState } from 'react';
 import Posts from './Component/Posts/Posts';
 import StoreManage from './Component/StoreManagePage/StoreManage';
 import { useOverlayContext } from './Hooks/overlay';
 import Overlay from './Component/Overlays/Overlay';
-import Store from './Component/Ecommerce/Store';
+import Store from './Component/Ecommerce/Store/Store';
+import EcomNavBar from './Component/Ecommerce/EcomNavBar/EcomNavBar';
 const cookies = new Cookies();
 
 /*------------------------------------------------------HELPER FUNCTIONS------------------------------------------------------------------*/
@@ -42,7 +43,14 @@ function App() {
   const overlay = useOverlayContext();
   const [rightNavBarVisibility, setrightNavBarVisibility] = useState(true);
   const [leftNavBarVisibility, setleftNavBarVisibility] = useState(true);
+  const [topNavBarVisibility, settopNavBarVisibility] = useState(true);
+  const [EcomNavBarVisibility, setEcomNavBarVisibility] = useState(false);
+
+
   const [optionSelected, setOptionSelected] = useState(cookies.get('optionSelected')?cookies.get('optionSelected'):'Home');
+  
+
+  
   return (
       <Router>
         {/*-----------------------------------------OVERLAY--------------------------------------*/}
@@ -50,39 +58,62 @@ function App() {
         {overlay.showOverlay?<ToastProvider><Overlay/></ToastProvider>:null}
 
         {/*-----------------------------------------OVERLAY--------------------------------------*/}
-          <NavbarPage/>
-          <div className='main_div_body'>
-            {
-              auth.user&&leftNavBarVisibility
-              ?
-               <LeftNavBar optionSelected={optionSelected} setOptionSelected={setOptionSelected}/>
-              :
-              null
-            }
-            <Routes>
-              <Route exact path=''  element={<LandingPage/>}/>
-              <Route exact path='home' element={<LandingPage/>}/>
-              <Route exact path='login' element={ <RestrictPath><ToastProvider><LoginPage/></ToastProvider></RestrictPath>}/>
-              <Route exact path='signupas' element={<RestrictPath><SignUpAsPage/></RestrictPath>}/>
-              <Route exact path='signup' element={<RestrictPath><ToastProvider><SignupPage/></ToastProvider></RestrictPath>}/>
-              <Route exact path='posts' element={<RequireAuth><ToastProvider><Posts/></ToastProvider></RequireAuth>}/>
-              <Route exact path='customers' element={<RequireAuth><ToastProvider>customers</ToastProvider></RequireAuth>}/>  
-              <Route exact path='following' element={<RequireAuth><ToastProvider>following</ToastProvider></RequireAuth>}/> 
-              <Route exact path='favourites' element={<RequireAuth><ToastProvider>favourites</ToastProvider></RequireAuth>}/> 
-              <Route exact path='cart' element={<RequireAuth><ToastProvider>cart</ToastProvider></RequireAuth>}/> 
-              <Route exact path='store' element={<RequireAuth><ToastProvider><StoreManage/></ToastProvider></RequireAuth>}/> 
-              <Route exact path='settings' element={<RequireAuth><ToastProvider>settings</ToastProvider></RequireAuth>}/> 
-              <Route exact path='support' element={<RequireAuth><ToastProvider>support</ToastProvider></RequireAuth>}/>                                 
-              <Route exact path = 'store/:storename' element={<Store setrightNavBarVisibility={setrightNavBarVisibility} setleftNavBarVisibility={setleftNavBarVisibility} />}/>
-            </Routes> 
-            {
-              auth.user&&rightNavBarVisibility
-              ?
-               <RightNavBar/>
-              :
-              null
-            }
-          </div>
+
+        {
+          topNavBarVisibility
+          ?
+          <NavbarPage/>:
+          null
+        }
+        {
+          EcomNavBarVisibility
+          ?
+          <EcomNavBar/>:
+          null
+        }
+        
+        <div className='main_div_body'>
+          {
+            auth.user&&leftNavBarVisibility
+            ?
+              <LeftNavBar optionSelected={optionSelected} setOptionSelected={setOptionSelected}/>
+            :
+            null
+          }
+          <Routes>
+            <Route exact path=''  element={<LandingPage/>}/>
+            <Route exact path='home' element={<LandingPage/>}/>
+            <Route exact path='login' element={ <RestrictPath><ToastProvider><LoginPage 
+                                                                    settopNavBarVisibility={settopNavBarVisibility}
+                                                                    setEcomNavBarVisibility={setEcomNavBarVisibility}/>
+                                                                </ToastProvider></RestrictPath>}/>
+            <Route exact path='signupas' element={<RestrictPath><SignUpAsPage/></RestrictPath>}/>
+            <Route exact path='signup' element={<RestrictPath><ToastProvider><SignupPage/></ToastProvider></RestrictPath>}/>
+            <Route exact path='posts' element={<RequireAuth><ToastProvider><Posts setrightNavBarVisibility={setrightNavBarVisibility} 
+                                                                                  setleftNavBarVisibility={setleftNavBarVisibility} />
+                                                              </ToastProvider></RequireAuth>}/>
+            <Route exact path='customers' element={<RequireAuth><ToastProvider>customers</ToastProvider></RequireAuth>}/>  
+            <Route exact path='following' element={<RequireAuth><ToastProvider>following</ToastProvider></RequireAuth>}/> 
+            <Route exact path='favourites' element={<RequireAuth><ToastProvider>favourites</ToastProvider></RequireAuth>}/> 
+            <Route exact path='cart' element={<RequireAuth><ToastProvider>cart</ToastProvider></RequireAuth>}/> 
+            <Route exact path='store' element={<RequireAuth><ToastProvider><StoreManage/></ToastProvider></RequireAuth>}/> 
+            <Route exact path='settings' element={<RequireAuth><ToastProvider>settings</ToastProvider></RequireAuth>}/> 
+            <Route exact path='support' element={<RequireAuth><ToastProvider>support</ToastProvider></RequireAuth>}/>                                 
+            <Route exact path = 'store/:storeName' element={<Store setrightNavBarVisibility={setrightNavBarVisibility} 
+                                                                    setleftNavBarVisibility={setleftNavBarVisibility} 
+                                                                    settopNavBarVisibility={settopNavBarVisibility}
+                                                                    setEcomNavBarVisibility={setEcomNavBarVisibility}
+                                                                    />
+                                                            }/>
+          </Routes> 
+          {
+            auth.user&&rightNavBarVisibility
+            ?
+              <RightNavBar/>
+            :
+            null
+          }
+        </div>
       </Router>
   );
 }

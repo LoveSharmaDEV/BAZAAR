@@ -19,10 +19,11 @@
 .AddProduct_form
 {
     display: flex;
+    padding: 1rem;
     flex-direction: column;
     background: white;
-    height: 75%;
-    width: 70rem;
+    height: 90%;
+    width: 60%;
     margin: 0 1rem 0 1rem;
     min-width: 25rem;
     overflow-y: scroll;
@@ -89,6 +90,7 @@ opacity: 0.5;
 {
     display: flex;
     height: 15rem; 
+    padding: 1rem;
 }
 
 .AddProduct_BodyImagePanel_div
@@ -98,8 +100,7 @@ opacity: 0.5;
     flex-wrap: wrap;
     overflow-y: scroll;
     width: 20rem;
-    border: 2px solid silver;
-
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     
 }
@@ -140,7 +141,8 @@ opacity: 0.5;
     display: flex;
     flex-direction: column;
     position: relative;
-    border: 1px solid silver; 
+    margin-left: 1rem; 
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     flex: auto;
     
 }
@@ -193,6 +195,12 @@ opacity: 0.5;
     align-items: center;
 }
 
+.AddProduct_BodyTagsPanel_ADDTAG_div span
+{
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
 .AddProduct_BodyTagsPanel_ADDTAG_div img
 {
     height: 2rem;
@@ -229,7 +237,7 @@ opacity: 0.5;
 .AddProduct_Body_Container2
 {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex: auto;
     flex-wrap: wrap;
     overflow: scroll;
@@ -250,138 +258,46 @@ opacity: 0.5;
 {
     border: 0;
     outline: 0;
-    width: 15rem;
+    padding: 1rem;
+    border: 2px solid black;
+    width: 10rem;
     background-color: transparent;
-    border-bottom: 2px solid silver;
-    font-size: 1.5rem;
-}
-
-.AddProduct_BodyInfoCollectForm_div span
-{
-    position: absolute;
-    pointer-events: none;
-    top:1rem;
-    left: 20px;
-    color: rgb(95, 95, 95);
-    transition: all 0.4s ease;
+    font-size: 1rem;
+    border-radius: 0.5rem;
 }
 
 
-.AddProduct_BodyInfoCollectForm_div input:focus + span
-{
-    top:-0.5rem;
-}
 
-.AddProduct_BodyInfoCollectForm_div input:valid + span
-{
-    top:-0.5rem;
-}
 
-.AddProduct_Animation_div
-{
-    position: absolute;
-    top:2.9rem;
-    border: 0.1px solid red;
-    height: 0.03rem;
-    transform: scaleX(0);
-    transition: all 0.4s ease;
-}
-
-.AddProduct_BodyInfoCollectForm_div input:focus ~ div
-{
-    transform: scaleX(125);
-}
 
 .AddProduct_Body_Container2_Input1
 {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    flex: 0.7;
+    flex: 0.8;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .AddProduct_Body_Container2_Input2
 {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex: 0.3;
+    min-width: 30rem;
     box-sizing: border-box;
-    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 
 .AddProduct_Body_Container2_Input2 textarea
 {
     font-size: x-large;
-    height: 10rem;
-    width: auto;
-    border: 2px solid silver;
+    height: 80%;
+    width: 80%;
     outline: none;
 }
 
-.AddProduct_Body_Container2_Input2_ColorPicker
-{
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    flex: auto;
-}
-
-.AddProduct_Body_Container2_Input2_ColorPicker_header 
-{
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex: auto;
-}
-
-.AddProduct_Body_Container2_Input2_ColorPicker_header input[type='color']
-{
-    position: absolute;
-    height: 3rem;
-    opacity: 0;
-    
-}
-
-
-.AddProduct_Body_Container2_Input2_ColorPicker_header img
-{
-    height: 2rem;
-    width: 2rem;
-    transform: scale(1);
-    pointer-events: none;
-    margin: 0.5rem 1rem 0rem 0rem;
-}
-
-.AddProduct_Body_Container2_Input2_ColorPicker_header input[type='color']:active + img
-{
-    transform: scale(1.2);
-}
-
-
-
-.AddProduct_Body_Container2_Input2_ColorPicker_footer
-{
-    display: flex;
-    flex: auto;
-    overflow: scroll;
-    flex-wrap: wrap;
-}
-
-.AddProduct_Body_Container2_Input2_ColorPicker_footer_colordiv
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2rem;
-    width: 2rem;
-    margin: 1rem;
-}
-
-.AddProduct_Body_Container2_Input2_ColorPicker_footer_colordiv img{
-    height: 1rem;
-    width: 1rem;
-    pointer-events: none;
-}
 
 /*--------------------------------AddProduct_Body_Container2----------------------------*/
 

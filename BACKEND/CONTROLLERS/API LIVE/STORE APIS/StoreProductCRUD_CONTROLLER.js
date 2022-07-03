@@ -16,14 +16,13 @@ module.exports.StoreProductUpload_CONTROLLER = async (req, res)=>{
         const product = await Product.create({
             ProductName: req.body.ProductName,
             ProductPrice:req.body.ProductPrice,
-            ProductColor: Array.isArray(req.body.colorList)?req.body.colorList:[req.body.colorList],
             ProductPublish: false,
             ProductQuantity: req.body.ProductQuantity,
             ProductDescription: req.body.ProductDescription,
             ProductDiscount: req.body.ProductDiscount,
             ProductDiscountedPrice: req.body.ProductDiscountedPrice,
             hashtag: Array.isArray(req.body.HashTags)?req.body.HashTags:[req.body.HashtTags],
-            ProductImage: req.files.map(file=>file.filename),
+            ProductImage: req.files.map(file=>{return {path:file.filename}}),
             user:req.user._id,
             store: store._id
         })
@@ -75,4 +74,28 @@ module.exports.StoreProductFetch_CONTROLLER = async (req,res)=>{
         })
     }
 
+}
+
+module.exports.StoreProductDelete_CONTROLLER = async (req,res) =>{
+    try{
+        const product = await Product.deleteOne({_id:req.body.productID});
+        if(product) return res.status(200).json({
+            message:"Product removed successfully",
+            errCode:'SUCCESS'
+        })
+
+        return res.status(200).json({
+            message:"Product removing failed",
+            errCode:'FAILURE'
+        })
+        
+    }
+    catch(e)
+    {
+        return res.status(200).json({
+            message:`INTERNAL SERVER ERROR ${e.message}`,
+            errCode:'FAILURE'
+        })
+
+    }
 }

@@ -33,10 +33,14 @@
 }
 
 .StoreManageGridList{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     width: auto;
     height: auto;
     overflow: scroll;
 }
+
 
 /* CUSTOM BUTTONS*/
 

@@ -8,16 +8,23 @@ const productSchema = new mongoose.Schema({
         required:true
     },
 
-    ProductImage:{
-        type: Array,
-        required:true
-    },
+    ProductImage:[
+        {
+            path:{
+                type:String,
+                required:true
+            },
+            color:{
+                type:String,
+                required:true,
+                default:'None'
+            }
+        }
+    ],
+
     ProductPrice:{
         type:Number,
         required: true
-    },
-    ProductColor:{
-        type:Array
     }
     ,
     ProductPublish:{
@@ -29,8 +36,7 @@ const productSchema = new mongoose.Schema({
         default:0
     },
     ProductUnit:{
-        type:String,
-        enum:["Pcs","Litre","Kg","Unit"],
+        type:String
     },
     ProductDescription:{
         type:String,

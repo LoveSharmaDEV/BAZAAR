@@ -1,0 +1,139 @@
+.ProductCard
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 26rem;
+    width: 20rem;
+    margin: 2rem;
+    padding: 1rem;
+    box-shadow: 0px 2px 9px 7px rgba(0,0,0,0.19);
+    -webkit-box-shadow: 0px 2px 9px 7px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 2px 9px 7px rgba(0,0,0,0.19);
+    border-radius: 2rem;
+
+}
+.ProductCardImageCarousal
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ProductCardBackward
+{
+    transform: scaleX(-1);
+}
+
+.ProductCardImageCarousal img[alt='changePic']
+{
+    height: 2rem;
+    width: 2rem;
+}
+
+
+
+.ProductCardImage
+{
+    display: flex;
+    height: 12rem;
+    width: 70%;
+    justify-content: center;
+    overflow: scroll;
+    flex-wrap: nowrap;
+}
+.ProductCardImage img[alt='StockImage']
+{
+    height: 100%;
+    width: 100%;
+}
+
+.ProductCardColor
+{
+    display: flex;
+    width: 100%;
+}
+
+.ProductCardColor div
+{
+    height: 2rem ;
+    width: 2rem;
+    border-radius: 50%;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.ProductCardPrice{
+    display: flex;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.ProductCardPrice img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.ProductCardPrice span
+{
+    font-size:1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+}   
+
+.ProductCardActions
+{
+    display: flex;
+    justify-content: space-around;
+    height: 3rem;
+    width: 100%;
+}
+
+.ProductCardActions button
+{
+    flex: 0.45;
+    height: 100%;
+    font-weight: bolder;
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
+}
+
+.ProductCardName span{
+    font-size: 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* CSS */
+.button9 {
+    appearance: button;
+    backface-visibility: hidden;
+    background-color: #405cf5;
+    border-radius: 6px;
+    border-width: 0;
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+    font-size: 90%;
+    height: 44px;
+    line-height: 1.15;
+    outline: none;
+    overflow: hidden;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transform: translateZ(0);
+    transition: all .2s,box-shadow .08s ease-in;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button9:disabled {
+    cursor: default;
+  }
+  
+  .button9:focus {
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+  }

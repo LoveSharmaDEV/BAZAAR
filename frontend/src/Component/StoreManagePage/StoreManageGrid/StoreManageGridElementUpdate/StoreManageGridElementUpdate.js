@@ -11,7 +11,6 @@ function StoreManageGridElementUpdate(props) {
         ProductName:props.product.ProductName,
         ProductPrice:props.product.ProductPrice,
         ProductImage:props.product.ProductImage,
-        ProductColor:props.product.ProductColor,
         ProductPublish:props.product.ProductPublish,
         ProductQuantity:props.product.ProductQuantity,
         ProductDescription:props.product.ProductDescription,
@@ -62,14 +61,6 @@ function StoreManageGridElementUpdate(props) {
         }
     }
 
-    const AddColor = (e)=>
-    {
-        setFormData({
-            ...FormData,
-            ProductColor:[...FormData.ProductColor,e.target.value]
-        })
-    }
-
     /*-----------------------STATE CHANGE HANDLERS START-------------------- */
 
     const AddProductImage = (e)=>{
@@ -96,10 +87,12 @@ function StoreManageGridElementUpdate(props) {
         })
     }
 
-    const OnColorDelete = (e)=>{
+    const AddColorToProduct = (e)=>{
+        let TempImageList = FormData.ProductImage;
+        TempImageList[e.target.dataset.addcolor].color = e.target.value;
         setFormData({
             ...FormData,
-            ProductColor:[...FormData.ProductColor.filter((color)=>color!==e.target.dataset.delete)]
+            ProductImage:[...TempImageList]
         })
     }
 
@@ -112,7 +105,6 @@ function StoreManageGridElementUpdate(props) {
         <img className={StoreManageGridElementUpdateCss.CloseOverlay}  
         src='http://localhost:8000/close.png' alt='Close'  onClick={OnCloseUpdateForm}/>
         <form className={StoreManageGridElementUpdateCss.UpdateForm}>
-
             <div className={StoreManageGridElementUpdateCss.Container1}>
                 
                 <div className={StoreManageGridElementUpdateCss.Container1_ImageContainer}> 
@@ -120,10 +112,11 @@ function StoreManageGridElementUpdate(props) {
                         return (
                         <div className={StoreManageGridElementUpdateCss.Container1_ImageContainer_img} key={key}> 
                             <img  src='http://localhost:8000/close.png' data-delete={key}  alt='Close' onClick={OnImageDelete}/>
-                            <img src={ image instanceof File ?URL.createObjectURL(image):`http://localhost:8000/${image}`} alt='ProductImage'/>
+                            <img src={ image instanceof File ?URL.createObjectURL(image):`http://localhost:8000/${image.path}`} alt='ProductImage'/>
+                            <div><input onChange={AddColorToProduct} data-addcolor={key} type='color'/></div>
                         </div>
                         )
-                    })}
+                        })}
                     <img src='http://localhost:8000/upload.png' alt='UploadBtn'/>
                     <input type='file' multiple onChange={AddProductImage}/>
                 </div>
@@ -178,8 +171,6 @@ function StoreManageGridElementUpdate(props) {
 
                     <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_HashTags}>
 
-
-
                         <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_HashTags_Header}>
                             <img src='http://localhost:8000/add.png' alt='AddBtn' onClick={toggleHashTagOverlay}/>
                             <span>HASH TAGS</span>
@@ -205,30 +196,14 @@ function StoreManageGridElementUpdate(props) {
                         :
                         null
                         }
-
                     </div>
-                    <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_Colors}>
 
-                        <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_Colors_Header}>
-                             <input type='color' onChange={AddColor}/>
-                             <img src='http://localhost:8000/add.png' alt='AddBtn'/>
-                             <span>COLOR</span>
-                        </div>
-
-                        <div className={StoreManageGridElementUpdateCss.Container2_StateInputs_Colors_Body}>
-                            {FormData.ProductColor.map((color,key)=>
-                            {
-                                return(
-                                    <div style={{backgroundColor:color}} key={key}>
-                                        <img  src='http://localhost:8000/close.png' data-delete={color}  alt='Close' onClick={OnColorDelete} />
-                                    </div>
-                                )
-                            })
-                            }
-                        </div>
-
-                    </div>
                 </div>
+
+                <div className={StoreManageGridElementUpdateCss.UpdateFormActions}>
+                    <button className={StoreManageGridElementUpdateCss.button54}>UPDATE</button>
+                </div>
+
             </div>
         </form>
     </div>

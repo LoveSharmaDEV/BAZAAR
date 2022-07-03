@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactLoading from "react-loading";
 import {useToasts } from 'react-toast-notifications';
 import logincss from './LoginPage.module.css'
 import { useAuth } from '../../Hooks/index';
 
-export default function LoginPage() {
+export default function LoginPage(props) {
   const [loginInfo, setloginInfo]= useState({});
   const { addToast } = useToasts();
   const auth = useAuth();
@@ -34,7 +34,10 @@ export default function LoginPage() {
     }
   }
 
-
+useEffect(()=>{
+  props.setEcomNavBarVisibility(false);
+  props.settopNavBarVisibility(true);
+})
 
   
   return (

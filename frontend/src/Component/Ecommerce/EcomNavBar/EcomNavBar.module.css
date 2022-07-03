@@ -1,0 +1,83 @@
+.EcomNavBar
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+}
+
+.EcomNavBar_StoreNameHeading
+{
+    font-size: 3rem;
+    color: white;
+    font-weight: bolder;    
+}
+
+.SearchBar{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 20rem;
+    border-radius: 1rem;
+}
+
+.SearchBar img{
+    height: 2rem;
+    width: 2rem;
+    margin: 0.5rem 0rem 0.5rem 0.5rem;
+}
+
+.SearchBar input{
+    height: 100%;
+    width: 100%;
+    flex: auto;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+
+}
+
+.loginBtn
+{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    width: auto;
+    font-size: x-large;
+    padding: 1rem 3rem 1rem 3rem;
+    cursor: pointer;
+    margin-right: 2rem;
+}
+
+.authorizedUser{
+    display: flex;
+    align-items: center;
+    width: auto;
+    justify-content: space-between;
+}
+
+.authorizedUser img{
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
+
+}
+
+.authorizedUser span{
+    color: white;
+}
+
+
+.ShoppingCartIcon {
+    margin-left: 4rem;
+
+}
+
+.ShoppingCartIcon img
+{
+    height: 2rem;
+    width: 2rem;
+}
