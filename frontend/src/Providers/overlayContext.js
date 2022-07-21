@@ -3,9 +3,15 @@ import { useOverlay } from "../Hooks/overlay";
 
 const initialState = {
     setOverlay : ()=>{},
+    setShowOverlay: ()=>{},
     overlay: '',
     showOverlay:false,
-    setShowOverlay: ()=>{}
+    customChatProps:{},
+    customAddProductProps:{},
+    customCreatePostPopupProps:{},
+    setCustomChatProps:()=>{},
+    setCustomAddProductProps:()=>{},
+    setCustomCreatePostPopupProps:()=>{}
 }
 
 

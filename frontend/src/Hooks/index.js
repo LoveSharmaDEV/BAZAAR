@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/authContext";
-import socket from "../API CHANGESTREAMS/socket";
 import axios from 'axios';
 
 
@@ -26,7 +25,6 @@ export const useProvideAuth=()=>{
         if(response.data.response==="SUCCESS")
         {
             setUser(response.data.user);
-            socket.socket.emit('loginUser',{user:response.data.user});
         }
         else
         {
@@ -35,7 +33,6 @@ export const useProvideAuth=()=>{
             {
                 setUser(response.data.user);
                 localStorage.setItem('accessToken',response.data.accessToken);
-                socket.socket.emit('loginUser',{user:response.data.user});
             }
         }
     },[setUser]) 
@@ -52,7 +49,6 @@ export const useProvideAuth=()=>{
         setAuthLoading(false);
         if(data.data.errCode==="TOKENSGENERATED"){
             setUser(data.data.user);
-            socket.socket.emit('loginUser',{user:data.data.user});
             localStorage.setItem("accessToken", data.data.accessToken);
             localStorage.setItem("refreshToken", data.data.refreshToken);
         }

@@ -4,6 +4,7 @@
   flex-direction: column;
   box-sizing: border-box;
   width: 350px;
+  height: 100%;
   transition: all 0.2s ease;
   z-index: 1;
   background: rgb(131, 58, 180);

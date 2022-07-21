@@ -30,7 +30,6 @@ function StoreManageGridElement(props) {
   const DeleteProduct = async()=>{
 
     const response = await makeRequest('http://localhost:8000/store/delete/stock',{productID:props.product._id},'POST');
-    console.log(response.data)
     if(response.data.errCode==='SUCCESS') dispatch(DELETE_FROM_STOCK(props.product._id));
   }
 
@@ -52,11 +51,9 @@ function StoreManageGridElement(props) {
             {
             props.product.ProductImage?
               <img src={
-                props.product.ProductImage[imageIndex].path instanceof File?
-                URL.createObjectURL(props.product.ProductImage[imageIndex].path):
-                `http://localhost:8000/${props.product.ProductImage[imageIndex].path}`
+                props.product.ProductImage.length!==0?props.product.ProductImage[imageIndex].path:null
               } 
-                alt='ProductImage' />
+                alt='' />
               :
               null
             }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductCardCss from './ProductCard.module.css'
+import { Link } from 'react-router-dom';
 
 function ProductCard(props) {
     const [imageIndex, setImageIndex] = useState(0);
@@ -22,7 +23,7 @@ function ProductCard(props) {
             <img onClick={changePicBackward} src='http://localhost:8000/right.png' className={ProductCardCss.ProductCardBackward} alt='changePic'/>
 
             <div className={ProductCardCss.ProductCardImage}>
-                <img src={`http://localhost:8000/${props.product.ProductImage[imageIndex]}`} alt='StockImage'/>
+                <img src={`${props.product.ProductImage[imageIndex].path}`} alt='StockImage'/>
             </div>
 
             <img onClick={changePicForward} src='http://localhost:8000/right.png' className={ProductCardCss.ProductCardForward} alt='changePic'/>
@@ -32,10 +33,10 @@ function ProductCard(props) {
             <span>{props.product.ProductName}</span>
         </div>
 
-        {props.product.ProductColor.length!==0?
+        {props.product.ProductImage.length!==0?
         <div className={ProductCardCss.ProductCardColor}>
-            {props.product.ProductColor.map((color,key)=>{
-                return <div style={{backgroundColor:color}} key={key}></div>
+            {props.product.ProductImage.map((Image,key)=>{
+                return <div style={{backgroundColor:Image.color}} key={key}></div>
             })}
         </div>
         :
@@ -43,12 +44,12 @@ function ProductCard(props) {
         }
 
         <div className={ProductCardCss.ProductCardPrice}>
-            <img src='http://localhost:8000/rupee.png'/>
+            <img src='http://localhost:8000/rupee.png' alt='Ruppee'/>
             <span> {props.product.ProductPrice}</span>
         </div>
 
         <div className={ProductCardCss.ProductCardActions}>
-            <button className={ProductCardCss.button9}>VIEW</button>
+            <Link to={`/product/${props.storeName}/${props.product._id}`}><button className={ProductCardCss.button9}>VIEW</button></Link>
             <button className={ProductCardCss.button9}>ADD TO CART</button>
         </div>  
 

@@ -7,18 +7,23 @@ import { ADD_TO_THE_STOCK } from '../../../Redux/Reducers/fetchAvailableStock_re
 
 function AddProduct() {
 
-  const [imageList, setImageList] = useState([]);
   const [HashTags, setHashTags] = useState([]);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    ProductName:'',
+    ProductImage:[],
+    ProductPrice:0,
+    ProductQuantity:0,
+    ProductDescription:'',
+    ProductDiscount:0,
+    ProductDiscountedPrice:0,
+  });
+
+
   const [showHashTagOverlay,setHashTagOverlay] = useState(false);
   const formref = useRef();
   const overlay = useOverlayContext();
   const dispatch = useDispatch();
 
-
-  const AddProductImage = (e)=>{
-    setImageList([...imageList,...e.target.files])
-  }
 
   const AddHashTag = (e)=>{
     if (e.key === "Enter") {
@@ -27,45 +32,57 @@ function AddProduct() {
     }
   }
 
+  const encodeImagetoBase64 = (files)=>{
+    const ImageList = [];
+    Array.from(files).forEach((file)=>{
+      const reader = new FileReader();
+      reader.onload = function () {
+        ImageList.push({path:reader.result, color:'None'});
+        if(ImageList.length === files.length)
+        {
+          setFormData({
+            ...FormData,
+            ProductImage:[...formData.ProductImage,...ImageList]
+          })
+        }
+      }
+      reader.readAsDataURL(file);
+    })
+
+  }
+
   const handleFormData = (e) =>{
-      setFormData({
+    if(e.target.files)
+    {
+      encodeImagetoBase64(e.target.files);
+    }
+    else setFormData({
         ...formData,
         [e.target.name]:e.target.value
       });
   }
+
 
   const onFormSubmit = async (e)=>{
 
     e.preventDefault();
 
     /* -----------------------CREATE WEB FORM DATA--> START------------ */
-    const webFormData = new FormData();
-    
-    for(const key in formData)
-    {
-      webFormData.append(key,formData[key])
-    }
 
-    imageList.forEach(image=>{
-      webFormData.append('imageList',image);
-    })
-
-    HashTags.forEach(hashtag=>{
-      webFormData.append('HashTags',hashtag);
-    })
-
-    const response = await makeRequest('http://localhost:8000/store/product/upload', webFormData, 'POST')
+    const response = await makeRequest('http://localhost:8000/store/product/upload', {...formData,hashtag:HashTags}, 'POST')
+    console.log({...formData,hashtag:HashTags})
     if(response.data.errCode==='SUCCESS')
     {
 
-      dispatch(ADD_TO_THE_STOCK(webFormData));
+      dispatch(ADD_TO_THE_STOCK({...formData,hashtag:HashTags}));
       overlay.setShowOverlay(false);
       
     }
     else{
       console.log(response.data)
       //formref.current.reset()
-    }    
+    }
+
     /* -----------------------CREATE WEB FORM DATA--> END-------------- */
 
     if(!formref.current.checkValidity()){
@@ -77,7 +94,7 @@ function AddProduct() {
 
   return (
     <div className={AddProductCss.AddProduct_OuterDiv_div}>
-        <form ref={formref} className={AddProductCss.AddProduct_form} encType="multipart/formdata">
+        <form ref={formref} className={AddProductCss.AddProduct_form} encType="multipart/formdata" onChange={handleFormData}>
 {/*---------------------------------------------------------------------------------------------------- */}
           <div className={AddProductCss.AddProduct_HeaderActions_div}>
 
@@ -95,26 +112,26 @@ function AddProduct() {
                       <div className={AddProductCss.AddProduct_BodyImagePanel_div}>
 
                         {
-                          imageList.map((image , key) => (
-                          <img src={URL.createObjectURL(image)} alt='ImagePreview' key={key}/>
+                          formData.ProductImage.map((image , key) => (
+                          <img src={image.path} alt='ImagePreview' key={key}/>
                           ))
                         }
 
                         <img src='http://localhost:8000/upload.png' alt='UploadTag'/>
                         
-                        <input type='file' multiple onChange={AddProductImage}/>
+                        <input name='ProductImage' type='file' multiple/>
 
                       </div>
 
                       <div className={AddProductCss.AddProduct_BodyTagsPanel_div}>
                           {
-                          showHashTagOverlay?
-                            <div className={AddProductCss.AddProduct_BodyTagsPanel_InputOverlay_div}>
-                                  <input type='text' placeholder='Add your #Tags' onKeyPress={AddHashTag}/>
-                                  <img src='http://localhost:8000/close.png' alt='Close' onClick={()=>{setHashTagOverlay(false)}} />
-                            </div>
-                            :
-                            null
+                            showHashTagOverlay?
+                              <div className={AddProductCss.AddProduct_BodyTagsPanel_InputOverlay_div}>
+                                    <input type='text' placeholder='Add your #Tags' onKeyPress={AddHashTag}/>
+                                    <img src='http://localhost:8000/close.png' alt='Close' onClick={()=>{setHashTagOverlay(false)}} />
+                              </div>
+                              :
+                              null
                           }
                           <div className={AddProductCss.AddProduct_BodyTagsPanel_ADDTAG_div}>
 
@@ -139,23 +156,23 @@ function AddProduct() {
                       <div className={AddProductCss.AddProduct_Body_Container2_Input1}>
                            
                            <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductName' type='text' placeholder='Name' onChange={handleFormData} required/>
+                                <input name='ProductName' type='text' placeholder='Name'  required/>
                            </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductPrice' type='number' placeholder='Price' onChange={handleFormData} required/>
+                                <input name='ProductPrice' type='number' placeholder='Price' required/>
                             </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductQuantity' type='number' placeholder='Quantity' onChange={handleFormData} required/>
+                                <input name='ProductQuantity' type='number' placeholder='Quantity' required/>
                             </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductDiscount' type='number' placeholder='Discount %' onChange={handleFormData} required/>
+                                <input name='ProductDiscount' type='number' placeholder='Discount %' required/>
                             </div>
 
                             <div className={AddProductCss.AddProduct_BodyInfoCollectForm_div}>
-                                <input name='ProductDiscountedPrice' type='number' placeholder='Discounted Price' onChange={handleFormData} required/>
+                                <input name='ProductDiscountedPrice' type='number' placeholder='Discounted Price' required/>
                             </div>
 
                       </div>
@@ -165,7 +182,7 @@ function AddProduct() {
                       <textarea 
                       name='ProductDescription' 
                       placeholder='Description' 
-                      minlength="60" rows="20" cols="20" onChange={handleFormData}>
+                      minlength="60" rows="20" cols="20">
                       </textarea>
   
                     </div>

@@ -1,0 +1,215 @@
+.Outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+/*--------------------------------------IMAGE PANEL-----------------------------------*/
+.Outer__ProductViewCard
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    min-width: 30rem;
+    width: 80%;
+    height: calc(100vh - 6rem);
+    overflow: scroll;
+
+}
+
+.ProductViewCard__ImagePanel
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 30rem;
+    flex: 0.5;
+}
+
+.ImagePanel__DisplayImage
+{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    height: 25rem;
+    width: 100%;
+}
+
+.ImagePanel__DisplayImage img
+{
+    height: 100%;
+    width: 100%;
+}
+
+.ImagePanel__ImageSlider
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+
+}
+.ImagePanel__ImageSlider div
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30rem;
+    height: 10rem;
+    overflow-x: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.ImageSlider__RightBtn 
+{
+    height: 2rem;
+    width: 2rem;
+    background-color: rgba(0, 0, 0, 0.222);
+    border-radius: 50%;
+}
+
+.ImageSlider__LeftBtn
+{
+    height: 2rem;
+    width: 2rem; 
+    transform: scaleX(-1);
+    background-color: rgba(0, 0, 0, 0.222);
+    border-radius: 50%;
+}
+
+.ImageSlider_Thumbnail
+{
+    height: 90%;
+    width: 20rem;
+    margin: 0rem 1rem 0rem 1rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+.ImageSlider_Thumbnail:hover
+{
+    opacity: 0.5;
+}
+
+/*--------------------------------DETAIL PANEL-----------------------------*/
+
+.ProductViewCard__DetailPanel
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 30rem;
+    flex: 0.8;
+    overflow: scroll;
+}
+
+.DetailPanel__ProductName
+{
+    display: flex;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.DetailPanel__ProductName
+{
+    font-size: 1.5rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: grey;
+}
+
+.DetailPanel__ProductDescription 
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: gray;
+}
+
+.DetailPanel__ProductDescription p{
+    word-wrap: break-word;
+    font-size: 2rem;
+    width: 90%;
+}
+
+.DetailPanel__ColorAvailable
+{
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    height: 3rem;
+
+}
+
+.DetailPanel__ColorAvailable h3
+{
+    margin: 0rem 2rem 0rem 2rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: gray;
+    font-size: 1.3rem;
+}
+
+.DetailPanel__ColorAvailable div
+{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    margin: 0rem 1rem 0rem 0rem;
+}
+
+.DetailPanel__Price
+{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+
+}
+
+.DetailPanel__Price img
+{
+    height: 2rem;
+    width: 2rem;
+    margin: 0rem 1rem 0rem 4rem;
+}
+
+.DetailPanel__Price span
+{
+    font-size: 2rem;
+    color: gray;
+}
+
+.DetailPanel__Action
+{
+    display: flex;
+    padding-left: 3rem;
+    margin-top: 2rem;
+    height: 3rem;
+}
+
+.DetailPanel__Action div
+{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    margin: 0rem 2rem 0rem 2rem;
+    background-color: skyblue;
+    color: white;
+    font-weight: bolder;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in;
+}
+
+.DetailPanel__Action div:hover
+{
+    opacity: 0.5;
+    transform: scale(1.2);
+}
+
+.DetailPanel__Action div:active
+{
+    background-color: rgb(44, 53, 56);
+}

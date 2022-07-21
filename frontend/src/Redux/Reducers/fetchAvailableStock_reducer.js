@@ -6,6 +6,16 @@ const FETCH_AVAILABLE_STOCK_SUCCESS = 'FETCH_AVAILABLE_STOCK_SUCCESS';
 const FETCH_AVAILABLE_STOCK_FAILURE = 'FETCH_AVAILABLE_STOCK_FAILURE';
 const ADD_TO_THE_AVAILABLE_STOCK = 'ADD_TO_THE_AVAILABLE_STOCK'; 
 const DELETE_FROM_AVAILABLE_STOCK = 'DELETE_FROM_AVAILABLE_STOCK';
+const UPDATE_CURRENT_STOCK = 'UPDATE_CURRENT_STOCK';
+const FILTERED_SEARCH = 'FILTERED_SEARCH'
+
+
+export const SEARCH = (input)=>{
+    return{
+        type:FILTERED_SEARCH,
+        payload:input
+    }
+}
 
 
 export const GET_UPDATED_STOCK = ()=>
@@ -30,19 +40,9 @@ export const GET_UPDATED_STOCK = ()=>
 }
 
 export const ADD_TO_THE_STOCK = (product)=>{
-    const obj = {};
-    product.forEach((value,key)=>{
-        obj[key]= value
-    })
-
-    obj['ProductImage'] = Array.isArray(obj['imageList'])?obj['imageList'].map((image)=>{
-        return {path:image,color:'None'}
-    })
-    : [{path:obj['imageList'],color:'None'}]
-
     return {
         type: ADD_TO_THE_AVAILABLE_STOCK,
-        payload:obj
+        payload:product
     }
 }
 
@@ -53,11 +53,20 @@ export const DELETE_FROM_STOCK = (id)=>{
         payload:id
     }
 }
+
+export const UPDATE_STOCK = (updatedProduct)=>{
+    return {
+        type:UPDATE_CURRENT_STOCK,
+        payload:updatedProduct
+    }
+}
+
 /* ------------------------ACTION CREATERS END-------------------------- */
 
 
 const initialState = {
     Products:[],
+    FilteredProducts:[],
     FetchStatus:{
         Loading:false,
         Status:'SUCCESS'
@@ -72,6 +81,7 @@ export const fetchAvailableStock_reducer = (state=initialState,action)=>{
             {
                 return {
                     Products:[],
+                    FilteredProducts:[],
                     FetchStatus:{
                         Loading:true,
                         Status:'FAILURE'
@@ -82,6 +92,7 @@ export const fetchAvailableStock_reducer = (state=initialState,action)=>{
             {
                 return{
                     Products:[],
+                    FilteredProducts:[],
                     FetchStatus:{
                         Loading:false,
                         Status: 'FAILURE'
@@ -92,6 +103,7 @@ export const fetchAvailableStock_reducer = (state=initialState,action)=>{
             {
                 return{
                     Products:action.payload,
+                    FilteredProducts:action.payload,
                     FetchStatus:{
                         Loading:false,
                         Status: 'SUCCESS'
@@ -102,7 +114,8 @@ export const fetchAvailableStock_reducer = (state=initialState,action)=>{
             {
                 return {
                     ...state,
-                    Products:[...state.Products,action.payload]
+                    Products:[...state.Products,action.payload],
+                    FilteredProducts:[...state.Products,action.payload]
                 }
             }
         case DELETE_FROM_AVAILABLE_STOCK:
@@ -113,7 +126,43 @@ export const fetchAvailableStock_reducer = (state=initialState,action)=>{
                 state.Products.splice(index,1)
                 return {
                     ...state,
-                    Products:[...state.Products]
+                    Products:[...state.Products],
+                    FilteredProducts:[...state.Products]
+                }
+            }
+        case UPDATE_CURRENT_STOCK:
+            {
+                const index = state.Products.findIndex((product)=>{
+                    return product._id === action.payload.ProductID
+                });
+                
+                state.Products[index] = action.payload
+                state.FilteredProducts[index] = action.payload
+
+                return{
+                    ...state,
+                    //...action.payload
+                }
+            }
+        case FILTERED_SEARCH:
+            {
+                if(action.payload)
+                {
+                    const regex = new RegExp(action.payload,'gi');
+                    state.FilteredProducts=state.Products;
+                    state.FilteredProducts = state.FilteredProducts.filter((product)=>{
+                        return regex.test(product.ProductName)
+                    })
+
+                    return{
+                        ...state
+                    }
+                }
+                else{
+                    state.FilteredProducts=state.Products;
+                    return{
+                        ...state
+                    }
                 }
             }
         default:{

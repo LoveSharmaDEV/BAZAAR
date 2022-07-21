@@ -5,8 +5,7 @@ const router = express.Router();
 
 /*-------------------UPLOAD PRODUCT-------------------*/
 router.post('/product/upload/',
-require('../MIDDLEWARES/authenticator').authenticator, 
-upload.array('imageList',12)
+require('../MIDDLEWARES/authenticator').authenticator
 ,require('../CONTROLLERS/index').StoreProductUpload_CONTROLLER);
 
 /*-------------------FETCH STOCK-----------------------*/
@@ -21,6 +20,11 @@ router.get('/fetch/stock/:storeName', require('../CONTROLLERS/index').FetchStock
 router.post('/delete/stock/',
 require('../MIDDLEWARES/authenticator').authenticator,
 require('../CONTROLLERS/index').StoreProductDelete_CONTROLLER);
+
+/*--------------------UPDATE PRODUCT FROM STORE--------------------- */
+router.post('/update/stock/',
+require('../MIDDLEWARES/authenticator').authenticator,
+require('../CONTROLLERS/index').StoreProductUpdate_CONTROLLER);
 
 //EXPORT ROUTER
 module.exports = router;

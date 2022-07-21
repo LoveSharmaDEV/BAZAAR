@@ -18,6 +18,7 @@ import { useOverlayContext } from './Hooks/overlay';
 import Overlay from './Component/Overlays/Overlay';
 import Store from './Component/Ecommerce/Store/Store';
 import EcomNavBar from './Component/Ecommerce/EcomNavBar/EcomNavBar';
+import ProductView from './Component/Ecommerce/ProductView.js/ProductView';
 const cookies = new Cookies();
 
 /*------------------------------------------------------HELPER FUNCTIONS------------------------------------------------------------------*/
@@ -55,7 +56,7 @@ function App() {
       <Router>
         {/*-----------------------------------------OVERLAY--------------------------------------*/}
         
-        {overlay.showOverlay?<ToastProvider><Overlay/></ToastProvider>:null}
+        {overlay.showOverlay?<ToastProvider><Overlay data={overlay.customChatProps}/></ToastProvider>:null}
 
         {/*-----------------------------------------OVERLAY--------------------------------------*/}
 
@@ -90,7 +91,9 @@ function App() {
             <Route exact path='signupas' element={<RestrictPath><SignUpAsPage/></RestrictPath>}/>
             <Route exact path='signup' element={<RestrictPath><ToastProvider><SignupPage/></ToastProvider></RestrictPath>}/>
             <Route exact path='posts' element={<RequireAuth><ToastProvider><Posts setrightNavBarVisibility={setrightNavBarVisibility} 
-                                                                                  setleftNavBarVisibility={setleftNavBarVisibility} />
+                                                                    setleftNavBarVisibility={setleftNavBarVisibility} 
+                                                                    settopNavBarVisibility={settopNavBarVisibility}
+                                                                    setEcomNavBarVisibility={setEcomNavBarVisibility} />
                                                               </ToastProvider></RequireAuth>}/>
             <Route exact path='customers' element={<RequireAuth><ToastProvider>customers</ToastProvider></RequireAuth>}/>  
             <Route exact path='following' element={<RequireAuth><ToastProvider>following</ToastProvider></RequireAuth>}/> 
@@ -105,6 +108,12 @@ function App() {
                                                                     setEcomNavBarVisibility={setEcomNavBarVisibility}
                                                                     />
                                                             }/>
+            <Route exact path = 'product/:storeName/:productID' element={<ProductView setrightNavBarVisibility={setrightNavBarVisibility} 
+                                                                    setleftNavBarVisibility={setleftNavBarVisibility} 
+                                                                    settopNavBarVisibility={settopNavBarVisibility}
+                                                                    setEcomNavBarVisibility={setEcomNavBarVisibility}
+                                                                    />
+                                                            } />
           </Routes> 
           {
             auth.user&&rightNavBarVisibility

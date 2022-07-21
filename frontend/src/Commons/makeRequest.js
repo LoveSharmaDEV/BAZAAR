@@ -3,11 +3,16 @@ import axios from 'axios';
 
 
 
-/* 
+/*
+
+SUMMARY!! 
+
 makeRequest()
 1. Shoots request with Bearer Token
 2. If Token invalid, refreshes it and then shoots the request again
+
 */
+
 export default  async function makeRequest(api,data={},method){
     let response;
     const accessToken = localStorage.getItem('accessToken');

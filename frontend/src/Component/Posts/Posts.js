@@ -3,13 +3,14 @@ import css from './Posts.module.css';
 import {useDispatch, useSelector} from 'react-redux'
 import { fetch_post_action } from '../../Redux/Reducers/fetchPost_reducer';
 import PostCard from './PostCard';
-import socket from '../../API CHANGESTREAMS/socket';
+import { useChatSocketContext } from '../../Hooks/chatSocket';
 import { useOverlayContext } from '../../Hooks/overlay';
 
 
 
 export default function Posts(props) {
   const overlay = useOverlayContext();
+  const chatSocket = useChatSocketContext();
   const posts = useSelector((state)=>{
     return state.posts.posts
   }) 
@@ -17,11 +18,11 @@ export default function Posts(props) {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    socket.socket.on('post_UPDATE',()=>{
+    chatSocket.socket.on('post_UPDATE',()=>{
       dispatch(fetch_post_action());
     })
     dispatch(fetch_post_action());
-  },[dispatch])
+  },[dispatch,chatSocket.socket])
 
 
 
@@ -33,6 +34,8 @@ export default function Posts(props) {
   useEffect(()=>{
     props.setrightNavBarVisibility(true);
     props.setleftNavBarVisibility(true);
+    props.settopNavBarVisibility(true);
+    props.setEcomNavBarVisibility(false);
   },[props])
 
   return (
@@ -41,9 +44,12 @@ export default function Posts(props) {
         <img src={`http://localhost:8000/plus.png`} className={css.createPost_btn} onClick={showPopUpScreen} alt='createpost'/>
       </div>
       <div className={css.postsScreen_div}>
-        {posts.map((post,key)=>{
-            return <PostCard post={post} key={key}/>
-        })}
+        {
+          posts.map((post,key)=>{
+              console.log(post)
+              return <PostCard post={post} key={key}/>
+          })
+        }
       </div>
     </div>
   )

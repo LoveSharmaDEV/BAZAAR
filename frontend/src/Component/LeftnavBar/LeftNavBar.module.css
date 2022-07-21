@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   min-width: 250px;
+  height: 100%;
   background: rgb(131, 58, 180);
   transition: all 0.2s ease;
   z-index: 1;

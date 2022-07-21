@@ -1,7 +1,8 @@
-const chat_UPDATE = async (socket,io,getActiveUser)=>{
-    socket.on('ChatChangeStream',async ({conversationID,message})=>{
+const chat_UPDATE = (socket,io,getActiveUser)=>{
+
+    socket.on('ChatChangeStream',({conversationID,message})=>{
         const clients = getActiveUser();
-        const clientSocket = Object.keys(clients).find(key => clients[key] === message.To.toString());
+        const clientSocket = Object.keys(clients).find(key => clients[key] === message.To._id.toString());
         io.to(clientSocket).emit(conversationID, {message:message});
     });
 }

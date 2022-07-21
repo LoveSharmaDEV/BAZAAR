@@ -12,7 +12,7 @@ module.exports.StoreProductUpload_CONTROLLER = async (req, res)=>{
                 errCode:'FAILURE'
             })
         }
-        
+
         const product = await Product.create({
             ProductName: req.body.ProductName,
             ProductPrice:req.body.ProductPrice,
@@ -21,8 +21,8 @@ module.exports.StoreProductUpload_CONTROLLER = async (req, res)=>{
             ProductDescription: req.body.ProductDescription,
             ProductDiscount: req.body.ProductDiscount,
             ProductDiscountedPrice: req.body.ProductDiscountedPrice,
-            hashtag: Array.isArray(req.body.HashTags)?req.body.HashTags:[req.body.HashtTags],
-            ProductImage: req.files.map(file=>{return {path:file.filename}}),
+            hashtag: req.body.hashtag,
+            ProductImage: req.body.ProductImage,
             user:req.user._id,
             store: store._id
         })
@@ -43,7 +43,7 @@ module.exports.StoreProductUpload_CONTROLLER = async (req, res)=>{
     catch(e)
     {
         return res.status(200).json({
-            message:`Product Uploading failed ${e.message}`,
+            message:`INTERNAL SERVER ERROR ${e.message}`,
             errCode:'FAILURE'
         })
     }
@@ -89,6 +89,40 @@ module.exports.StoreProductDelete_CONTROLLER = async (req,res) =>{
             errCode:'FAILURE'
         })
         
+    }
+    catch(e)
+    {
+        return res.status(200).json({
+            message:`INTERNAL SERVER ERROR ${e.message}`,
+            errCode:'FAILURE'
+        })
+
+    }
+}
+
+module.exports.StoreProductUpdate_CONTROLLER = async(req,res)=>{
+    try{
+        const product = await Product.updateOne({_id:req.body.ProductID},{
+            ProductName: req.body.ProductName,
+            ProductPrice: req.body.ProductPrice,
+            ProductQuantity:req.body.ProductQuantity,
+            ProductDiscount: req.body.ProductDiscount,
+            ProductDiscountedPrice: req.body.ProductDiscountedPrice,
+            ProductPublish: req.body.ProductPublish,
+            ProductDescription: req.body.ProductDescription,
+            ProductImage: req.body.ProductImage,
+            hashtag:req.body.hashtag
+        })
+
+        if(product) return res.status(200).json({
+            message:"Product Updated Successfully",
+            errCode:'SUCCESS'
+        })
+
+        return res.status(200).json({
+            message:"Product Updation Failed",
+            errCode:'FAILURE'
+        })
     }
     catch(e)
     {

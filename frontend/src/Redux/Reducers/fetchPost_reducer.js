@@ -75,15 +75,9 @@ export const fetchPost_reducer = (state=initState, action)=>{
                     loading:false,
                 }
         case ADD_TO_POST:
-            var object = {};
-            action.payload.forEach(function(value, key){
-                object[key] = value;
-            });
-            object.postPic = action.payload.get('image');
-
             return{
                     loading:false,
-                    posts: [object,...state.posts]
+                    posts: [action.payload,...state.posts]
                 }
             
         case REMOVE_POST:

@@ -3,8 +3,6 @@
   position: relative;
 }
 
-
-
 .main {
   display: flex;
   background-color: white;
@@ -14,11 +12,30 @@
   justify-content: space-around;
   align-items: center;
   /*min-width: 30rem;*/
-  width: 55rem;
+  width: 60rem;
   height: auto;
   box-sizing: border-box;
   padding: 5px;
+}
 
+.postpic_Outerdiv{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30rem;
+}
+
+.ProductCardBackward
+{
+  height: 2rem;
+  width: 2rem;
+  transform: scaleX(-1);
+}
+
+.ProductCardForward
+{
+  height: 2rem;
+  width: 2rem;
 }
 
 .postpic_div {
@@ -73,8 +90,8 @@
   box-sizing: border-box;
   padding: 0.8rem;
   justify-content: space-between;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   width: 25rem;
   height: 25rem;
   border: 2px solid silver;
@@ -92,6 +109,7 @@
   text-align: justify;
   font-size: 1.2rem;
   word-wrap: break-word;
+  flex: auto;
 }
 
 .PostCard_Action_div1 {
@@ -99,38 +117,38 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  background-color: #000;
+/* Created with https://www.css-gradient.com */
+background: rgb(131, 58, 180);
+background: linear-gradient(
+  90deg,
+  rgba(131, 58, 180, 1) 0%,
+  rgba(253, 29, 29, 1) 100%,
+  rgba(252, 176, 69, 1) 100%
+);
   padding: 0.5rem;
   border-radius: 2rem;
+  margin: 1rem 0rem 1rem 0rem;
 }
 
 .PostCard_Action_div1 button {
-  background-color: #008bba55;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   cursor: pointer;
   border: none;
-  color: white;
+  color: black;
   font-size: 1rem;
-  font-weight: bolder;
   height: 3rem;
   width: 7.5rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
+  background-color: white;
+  text-align: center;
 }
 
-.PostCard_Action_div_img_div {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #008bba55;
-  cursor: pointer;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  font-weight: bolder;
-  height: 3rem;
-  width: 6rem;
-  border-radius: 2rem;
-  padding: 0 0.4rem 0 0.4rem;
+.PostCard_Action_div1 button:hover {
+  opacity: 0.5;
 }
+
 
 .PostCard_Action_div1 img {
   height: 2rem;
@@ -143,24 +161,33 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #008bba55;
+  background-color: white;
   cursor: pointer;
   border: none;
-  color: white;
+  color: black;
   font-size: 1rem;
-  font-weight: bolder;
   height: 3rem;
   min-width: 5rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   padding: 0 0.4rem 0 0.4rem;
 }
 
+.PostCard_Action_div1 > span:hover
+{
+  opacity: 0.5
+}
+
 .PostCard_Action_div2 {
-  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  background-color: #000;
+  justify-content: center;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 100%,
+    rgba(252, 176, 69, 1) 100%
+  );
   border-radius: 2rem;
 }
 
@@ -169,16 +196,22 @@
   align-items: center;
   margin: 0.5rem;
   justify-content: space-around;
-  background-color: #008bba55;
   cursor: pointer;
   border: none;
-  color: white;
+  color: black;
   font-size: 1rem;
-  font-weight: bolder;
+  letter-spacing: 0.1rem;
   height: 3rem;
-  min-width: 6rem;
-  border-radius: 2rem;
+  width: 8rem;
+  border-radius: 1rem;
+  background-color: white;
 }
+
+.PostCard_Action_div2 button:hover
+{
+  opacity: 0.5;
+}
+
 
 .PostCard_Action_img{
   height: 2rem;
@@ -205,6 +238,7 @@
   display: flex;
   align-items: center;
 }
+
 
 .PostCard_StoreName_div span img{
   height: 2rem;

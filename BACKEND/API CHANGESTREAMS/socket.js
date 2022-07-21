@@ -1,6 +1,7 @@
 const socket = require('socket.io');
 const chat_UPDATE = require('./chat_UPDATE');
 const post_UPDATE = require('./post_UPDATE');
+
 const activeUser={}
 
 const getActiveUser = ()=>{
@@ -8,8 +9,8 @@ const getActiveUser = ()=>{
 }
 
 const populateActiveUser = (socket)=>{
-    socket.on('loginUser',({user})=>{
-        if(user) activeUser[socket.id]=user._id;
+    socket.on('userDetail', ({userID})=>{
+        activeUser[socket.id]=userID;
     })
 }
 
@@ -21,9 +22,11 @@ const disconnectConnection = (socket)=>{
 
 const InitConnection = (io)=>{
     io.on('connection',(socket)=>{
+        // As soon as a socket connection is made, I will store the user
         populateActiveUser(socket);
-        disconnectConnection(socket);
 
+        // Set up a disconnect listener for the same socket
+        disconnectConnection(socket);
         
         //UPDATE POST
         post_UPDATE(socket,io,getActiveUser);
@@ -34,7 +37,7 @@ const InitConnection = (io)=>{
 
 
 const socketIO = (server)=>{
-    const io = socket(server)
+    const io = socket(server) // Returns "io" i.e connection object
     InitConnection(io);    
 }
 

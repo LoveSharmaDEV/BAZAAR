@@ -1,24 +1,39 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import ChatBoxCss from './ChatBox.module.css'
 import { useSelector,useDispatch } from 'react-redux';
-import { removefromActiveChat } from '../../Redux/Reducers/fetchActiveChats_reducer';
-import makeRequest from '../../Commons/makeRequest';
-import socket from '../../API CHANGESTREAMS/socket';
-import { useAuth } from '../../Hooks';
-import { add_to_conversation } from '../../Redux/Reducers/fetchConversations_reducer';
+import { removefromActiveChat } from '../../../Redux/Reducers/fetchActiveChats_reducer';
+import makeRequest from '../../../Commons/makeRequest';
+import { useChatSocketContext } from '../../../Hooks/chatSocket';
+import { useAuth } from '../../../Hooks';
+import { add_to_conversation } from '../../../Redux/Reducers/fetchConversations_reducer';
+import { useOverlayContext } from '../../../Hooks/overlay';
 
 export default function ChatBox(props) {
-  const dispatch = useDispatch();
+
+  /* LOCAL STATE --> START */
   const [message, setMessage]= useState({});
-  const formref = useRef();
+  /* LOCAL STATE --> END */
+
+  /* CONTEXT USED --> START */
+  const chatSocket = useChatSocketContext();
   const auth = useAuth();
+  const overlay = useOverlayContext();
+  /* CONTEXT USED --> END */
+
+  /* DOM ACCESS --> START */
+  const formref = useRef();
   const messagesEndRef = useRef();
+  /* DOM ACCESS --> END */
+
+  /* REDUX --> START */
+  const dispatch = useDispatch();
   const conversations = useSelector((state)=>{
     return state.conversations.conversations
   })
+  /* REDUX --> START */
 
 
-
+  /* FORM HANDLE --> START */
   const sendMessage = async (e) => {
     try{
       e.preventDefault();
@@ -26,9 +41,11 @@ export default function ChatBox(props) {
         formref.current.reportValidity()
         return;
       }
-      const response = await makeRequest('http://localhost:8000/message',{message,conversationID:props.conversationID},'POST');
+
+      const response = await makeRequest(process.env.REACT_APP_CHAT_MESSAGE_API,{message,conversationID:props.conversationID},'POST');
       if(response.data.errCode === "SUCCESS") {
-        socket.socket.emit('ChatChangeStream', {conversationID:props.conversationID, message});
+        console.log(message)
+        chatSocket.socket.emit('ChatChangeStream', {conversationID:props.conversationID, message});
         dispatch(add_to_conversation(props.conversationID,message))
       }
     }
@@ -36,6 +53,9 @@ export default function ChatBox(props) {
       console.log(`-----------------------ERROR OCCURED-----------------------------${e.message}`)
     }
   }
+  /* FORM HANDLE --> END */
+  
+
 
   const onMessageChange = (e)=>{
     setMessage({
@@ -73,7 +93,7 @@ export default function ChatBox(props) {
 
   const closeChatBox=()=>{
     dispatch(removefromActiveChat(props.conversationID));
-    props.setShowChatBox(false);
+    overlay.setShowOverlay(false)
   }
   
     
@@ -88,36 +108,41 @@ export default function ChatBox(props) {
   })
 
   useEffect(()=>{
-    socket.socket.on(props.conversationID,({message})=>{
+    console.log(process.env)
+    chatSocket.socket.on(props.conversationID,({message})=>{
       dispatch(add_to_conversation(props.conversationID,message))
     });
 
     return ()=>{
-      socket.socket.close();
+      chatSocket.socket.close();
     }
-  },[dispatch,props.conversationID])
+  },[dispatch,props.conversationID,chatSocket.socket])
 
 
   return (
     <div className={ChatBoxCss.main}>
+
       <div className={ChatBoxCss.cross_div}>
         <img className={ChatBoxCss.crossimg} onClick={closeChatBox} src='http://localhost:8000/close.png' alt='Cross'/>
         <span className={ChatBoxCss.chatHeader}>{props?.toStore?.storeName}</span>
         <img className={ChatBoxCss.profilepic} onClick= {closeChatBox} src={props.toUser.profilepic} alt='ProfilePic'/>
       </div>
+
       <div className={ChatBoxCss.chats_div} ref={messagesEndRef}>
-      {conversations.filter((conversation)=>conversation.conversationID===props.conversationID)[0]?.message.map((message,key)=>{
-          return <div className={`${ChatBoxCss.chatItem} ${message.From === auth.user._id?ChatBoxCss.chatAlignLeft:ChatBoxCss.chatAlignRight}`} key={key}>
-            <span>{message.message}</span>
-          </div>
-        })}
+        {conversations.filter((conversation)=>conversation.conversationID===props.conversationID)[0]?.message.map((message,key)=>{
+            return <div className={`${ChatBoxCss.chatItem} ${message.From === auth.user._id?ChatBoxCss.chatAlignLeft:ChatBoxCss.chatAlignRight}`} key={key}>
+              <span>{message.message}</span>
+            </div>
+          })}
       </div>
+
       <div className={ChatBoxCss.formInput_div}>
         <form ref={formref} method='POST' onChange={onMessageChange}>
           <input type='text' name='message'/>
           <button onClick={sendMessage}>SEND</button>
         </form>
       </div>  
+
     </div>
   )
 }

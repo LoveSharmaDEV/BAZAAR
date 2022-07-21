@@ -11,11 +11,12 @@ const postSchema = new  mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Store'
     },
-    postPic:{
+    postPic:[
+        {
         type:String,
-        default:'../UTILITIES/UPLOADED_POST_PICS/default.png',
         trim:true
-    },
+        }
+    ],
     postName:{
         type:String,
         unique: true,

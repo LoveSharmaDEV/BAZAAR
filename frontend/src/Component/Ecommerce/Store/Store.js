@@ -34,12 +34,11 @@ const Store = (props) => {
       {
         stock.stock.length!==0?
         stock.stock.map((product, key)=>{
-          return <ProductCard product={product} key={key}/>
+          return <ProductCard product={product} storeName={storeName} key={key}/>
           })
         :
         null
       }
-
       </div>
     </div>
   )

@@ -9,7 +9,7 @@ module.exports.Upload_Post_Controller = async (req,res)=>{
         const post = await Post.create({
             user:req.user._id,
             store: store._id,
-            postPic: req.file.filename,
+            postPic: req.body.postPic,
             postName: req.body.postName,
             postDescription: req.body.postDescription,
             postPrice: req.body.postPrice

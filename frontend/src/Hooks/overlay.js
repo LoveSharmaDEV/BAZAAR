@@ -9,10 +9,20 @@ export const useOverlayContext = ()=>{
 export const useOverlay = ()=>{
     const [overlay,setOverlay] = useState('');
     const [showOverlay,setShowOverlay] = useState(false); 
+    const [customChatProps, setCustomChatProps] = useState({});
+    const [customAddProductProps, setCustomAddProductProps] = useState({});
+    const [customCreatePostPopupProps, setCustomCreatePostPopupProps] = useState({});
+
     return {
         overlay,
         setOverlay,
         showOverlay,
-        setShowOverlay
+        setShowOverlay,
+        customChatProps,
+        setCustomChatProps,
+        customAddProductProps,
+        setCustomAddProductProps,
+        customCreatePostPopupProps,
+        setCustomCreatePostPopupProps
     }
 }

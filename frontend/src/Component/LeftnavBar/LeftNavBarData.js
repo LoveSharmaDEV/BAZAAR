@@ -16,24 +16,9 @@ export const LeftNavBarData = [
 
     },
     {
-        title:"Customers",
-        icon:customers,
-        path:"/customers"
-    },
-    {
         title:"Following",
         icon:following,
         path:"/following"
-    },
-    {
-        title:"Favourites",
-        icon:favourites,
-        path:"/favourites"
-    },
-    {
-        title:"Cart",
-        icon:cart,
-        path:"/cart"
     },
     {
         title:"Store",

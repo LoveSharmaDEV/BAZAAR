@@ -172,6 +172,18 @@
     width: 50%;
 }
 
+.Container1_ImageContainer_img div
+{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+.Container1_ImageContainer_img input
+{
+    opacity: 0;
+}
+
 .Container2
 {
     display: flex;
