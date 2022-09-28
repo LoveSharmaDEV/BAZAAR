@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+}
+
+.main_div_body {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height:calc(100vh - 5rem);
+  overflow: hidden;
+  z-index: 1;
+}

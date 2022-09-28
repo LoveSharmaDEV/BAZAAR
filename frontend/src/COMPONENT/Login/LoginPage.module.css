@@ -1,0 +1,107 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  background-color: rgb(246, 246, 246);
+}
+
+.logincard {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  align-items: center;
+  padding: 30px;
+  width: 450px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.logincard .inputdata {
+  position: relative;
+  padding: 30px;
+}
+
+.logincard .inputdata input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid silver;
+  font-size: 20px;
+}
+
+.logincard .inputdata label {
+  position: absolute;
+  bottom: 35px;
+  color: grey;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  left: 30px;
+}
+
+.logincard .inputdata .underline {
+  position: absolute;
+  height: 2px;
+  width: 88.5%;
+  bottom: 30px;
+  left: 30px;
+}
+/* -------------------EFFECTS--------------------*/
+.logincard .inputdata input:focus ~ label,
+.logincard .inputdata input:valid ~ label {
+  bottom: 60px;
+}
+
+.logincard .inputdata .underline::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: red;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.logincard .inputdata input:focus ~ .underline::before,
+.logincard .inputdata input:valid ~ .underline::before {
+  transform: scaleX(1);
+}
+
+/* CSS */
+.button66 {
+
+  background-color: #0a6bff;
+  border-radius: 0.5rem;
+  border: 0;
+  box-shadow: rgba(1,60,136,.5) 0 -1px 3px 0 inset,rgba(0,44,97,.1) 0 3px 6px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Space Grotesk",-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  width: 50%;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  transition: all .2s cubic-bezier(.22, .61, .36, 1);
+}
+
+.button66:hover {
+  background-color: #065dd8;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .button66 {
+    padding: 16px 44px;
+    min-width: 150px;
+  }
+}

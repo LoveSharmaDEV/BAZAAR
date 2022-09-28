@@ -1,0 +1,326 @@
+.PostCard
+{
+  position: relative;
+
+}
+
+.main {
+  display: flex;
+  background-color: rgb(246, 246, 246);
+  box-sizing: border-box;
+  margin-top: 20px;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+  /*min-width: 30rem;*/
+  width: 60rem;
+  height: auto;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.postpic_Outerdiv{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30rem;
+}
+
+.ProductCardBackward
+{
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  transform: scaleX(-1);
+  background-color: rgba(0, 0, 0, 0.333);
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.ProductCardBackward:hover{
+  opacity: 0.5;
+}
+
+.ProductCardForward
+{
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.333);
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.ProductCardForward:hover
+{
+  opacity: 0.5;
+}
+
+.postpic_div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 25rem;
+  height: 20rem;
+  overflow: hidden;
+  border: 2px solid silver;
+  border-radius: 20px;
+}
+
+.postpic_div img {
+  display: block;
+  height: auto;
+  width: 95%;
+  border-radius: 10px;
+}
+
+
+.productPic_Sliding_Name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  background-color: #008cba;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: 0.5s ease;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.postpic_div img:hover ~ .productPic_Sliding_Name {
+  width: 100%;
+}
+
+.productPic_Sliding_Name span {
+  font-size: 3rem;
+  font-weight: bolder;
+  color: white;
+}
+
+.PostCard_Content_div {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 25rem;
+  height: 25rem;
+  border: 2px solid silver;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.PostCard_Description_div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  height: 50%;
+  overflow: scroll;
+  font-size: 1.2rem;
+  word-wrap: break-word;
+}
+
+.PostCard_Description_div  span{
+  word-break: break-all;
+  height: auto;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 00.2rem;
+  color: gray;
+}
+
+.PostCard_Action_div1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background: #82DDE0;
+  background: -webkit-linear-gradient(left, #82DDE0, #345BBC);
+  background: -moz-linear-gradient(left, #82DDE0, #345BBC);
+  background: linear-gradient(to right, #82DDE0, #345BBC);
+  padding: 0.5rem;
+  border-radius: 2rem;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+.PostCard_Action_div1 button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  color: black;
+  font-size: 1rem;
+  height: 3rem;
+  width: 7.5rem;
+  border-radius: 1rem;
+  background-color: white;
+  text-align: center;
+}
+
+.PostCard_Action_div1 button:hover {
+  opacity: 0.5;
+}
+
+
+.PostCard_Action_div1 img {
+  height: 2rem;
+  width: 2rem;
+}
+
+
+
+.PostCard_Action_div1 > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  color: black;
+  font-size: 1rem;
+  height: 3rem;
+  min-width: 5rem;
+  border-radius: 1rem;
+  padding: 0 0.4rem 0 0.4rem;
+}
+
+.PostCard_Action_div1 > span:hover
+{
+  opacity: 0.5
+}
+
+.PostCard_Action_div2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #82DDE0;
+  background: -webkit-linear-gradient(left, #82DDE0, #345BBC);
+  background: -moz-linear-gradient(left, #82DDE0, #345BBC);
+  background: linear-gradient(to right, #82DDE0, #345BBC);
+  border-radius: 2rem;
+}
+
+.PostCard_Action_div2 button {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+  justify-content: space-around;
+  cursor: pointer;
+  border: none;
+  color: black;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  height: 3rem;
+  width: 8rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.PostCard_Action_div2 button:hover
+{
+  opacity: 0.5;
+}
+
+
+.PostCard_Action_img{
+  height: 2rem;
+  width: 2rem;
+  transition: all 0.3s ease;
+
+}
+
+.PostCard_Action_img:hover{
+  transform: scale(1.4);
+}
+
+.PostCard_Action_img_delete
+{
+  top:0;
+  right: 0;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+/*----------Post Card Header Start--------*/
+
+.PostCard_StoreName_div{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.PostCard_StoreName_div > span{
+  display: flex;
+  align-items: center;
+  color: gray;
+}
+
+
+.PostCard_StoreName_div span img{
+  height: 2rem;
+  width: 2rem;
+}
+
+/*----------Post Card Header End--------*/
+
+/* CSS */
+.button54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button54 {
+    padding: 0.25em 0.75em;
+  }
+}
+
+
+@media only screen and (max-width: 1430px) {
+  .main {
+    flex-direction: column;
+    width: 30rem;
+  }
+
+  .postpic_div {
+    height: 20rem;
+  }
+
+  .PostCard_Content_div {
+    height: 25rem;
+  }
+}

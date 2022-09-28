@@ -1,0 +1,8 @@
+.OuterContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: calc(100vh-5rem);
+    background-color: rgb(246, 246, 246);
+}

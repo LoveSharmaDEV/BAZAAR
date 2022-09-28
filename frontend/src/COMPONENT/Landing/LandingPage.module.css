@@ -1,0 +1,234 @@
+.LandingPage__Outer
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 90vh;
+  background-color: rgb(246, 246, 246);
+  overflow: scroll;
+}
+
+.Outer__Content
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 60%;
+  min-width: 30rem;
+  background-color: white;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.Content__Info{
+  display: flex;
+  height: 35rem;
+  flex-direction: column;
+  flex: 0.5;
+  min-width: 30rem;
+}
+
+
+.Info__Details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: auto;
+}
+
+.Details__Span1
+{
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-top: 2rem;
+  letter-spacing: 0.2rem;
+  color: rgb(81, 80, 80);
+}
+
+.Details__Span2{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bolder;
+  line-height: 2rem;
+  letter-spacing: 0.2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 1rem 1rem 0rem 1rem;
+  padding: 1rem 0rem 1rem 0rem;
+  color: rgb(81, 80, 80);
+}
+
+.Details__SignUpAs
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: auto;
+  width: 100%;
+}
+
+.SignUpAs__Header{
+  display: flex;
+  font-size: 1rem;
+  margin: 1rem 0rem 0rem 0rem;
+  letter-spacing: 0.2rem;
+  font-weight: bolder;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(81, 80, 80);
+  padding: 0rem 1rem 0rem 1rem;
+  text-decoration: underline;
+}
+
+.SignUpAs__Options{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: auto;
+  width: 100%;
+}
+
+.link{
+  height: 90%;
+  width: 50%;
+}
+
+.Options__Customer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.Options__Customer img{
+  position: absolute;
+  height: 65%;
+  width: 55%;
+}
+
+.Options__Customer:hover img{
+  height: 60%;
+  width: 50%;
+  transition: all 0.3s ease;
+}
+
+.Options__Customer label{
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(81, 80, 80);
+  padding: 1rem 0rem 0rem 0rem;
+  letter-spacing: 0.2rem;
+  pointer-events: none;
+}
+
+.Options__Seller{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.Options__Seller img{
+  position: absolute;
+  height: 65%;
+  width: 55%;
+  transition: all 0.3s ease;
+}
+
+.Options__Seller:hover img{
+  height: 60%;
+  width: 50%;
+}
+
+.Options__Seller label{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(81, 80, 80);  
+  padding: 1rem 0rem 0rem 0rem;
+  letter-spacing: 0.2rem;
+  pointer-events: none;
+}
+
+
+.Content__Poster{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  flex: 0.5;
+  min-width: 30rem;
+  height: 35rem;
+}
+
+.Content__Poster img{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.Poster__Overlay{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.271);
+}
+
+.Poster__Button
+{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 15rem;
+  background-color: white;
+  z-index: 1;
+  border-radius: 2rem;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.Poster__Button_Animation{
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 0;
+  transition: all 0.3s ease-in;
+  background-color: rgba(0, 0, 255, 0.227);
+}
+
+.Poster__Button:hover .Poster__Button_Animation{
+  left: 0px;
+  width: 100%;
+}
+
+.Poster__Button span{
+  display: flex;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: rgb(81, 80, 80);
+  pointer-events: none;
+}
+
+

@@ -1,0 +1,49 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex: auto;
+  background-color: rgb(246, 246, 246);
+
+}
+
+.createPost_div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 3rem;
+  width: 100%;
+  padding: 10px;
+}
+
+.createPost_div img{
+  height: 3rem;
+  width: 3rem;
+ 
+}
+
+.createPost_btn {
+  width: 7rem;
+  height: 100%;
+  margin-right: 9rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.createPost_btn:hover {
+  transform: scale(1.1);
+}
+
+.createPost_btn:active {
+  opacity: 0.5;
+}
+
+.postsScreen_div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  flex: auto;
+  overflow-y: scroll;
+}

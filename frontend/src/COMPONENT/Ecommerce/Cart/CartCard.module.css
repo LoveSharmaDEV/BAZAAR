@@ -1,0 +1,194 @@
+.CardContainer
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95%;
+    height: 30rem;
+}
+
+.CardContainer__ImagePanel
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 20rem;
+    width: 30rem;
+    margin: 1rem;
+    height: 20rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    border-radius: 1rem;
+}
+
+.ImagePanel__image
+{
+    height: 80%;
+    width: 70%;
+}
+
+.ImagePanel__rightBtn
+{
+    height: 2rem;
+    width: 2rem;
+    transform: scaleX(-1);
+    border-radius: 50%;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+.ImagePanel__leftBtn
+{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+.CardContainer__DetailPanel
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    min-width: 20rem;
+    width: 30rem;
+    margin: 1rem;
+    height: 20rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    border-radius: 1rem;
+
+}
+
+.DetailPanel__Delete
+{
+    position: absolute;
+    top:0;
+    right: 0;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4rem;
+    margin: 0.5rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+}
+.DetailPanel__Heading
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    text-shadow: -1px 1px 0 #41ba45,
+    1px 1px 0 #c63d2b,
+   1px -1px 0 #42afac,
+  -1px -1px 0 #c6c23f;
+}
+
+.DetailPanel__Heading span
+{
+
+    font-weight: bolder;
+    font-size: 2rem;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    
+
+}
+
+.DetailPanel__Color
+{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding: 0rem 0rem 0rem 1rem;
+    
+}
+
+.DetailPanel__Color div
+{
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.DetailPanel__Size
+{
+    display: flex;
+    height: 3rem;
+    padding: 0rem 0rem 0rem 1rem;
+    
+}
+
+.DetailPanel__Size span
+{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding: 0rem 1rem 0rem 1rem;
+    font-weight: bolder;
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    text-shadow: -1px 1px 0 #41ba45,
+    1px 1px 0 #c63d2b,
+   1px -1px 0 #42afac,
+  -1px -1px 0 #c6c23f;
+}
+
+.DetailPanel__Quantity
+{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+}
+
+
+.DetailPanel__Quantity div
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 3rem;
+    font-size: 3rem;
+    font-weight: bolder;
+    border-radius: 50%;
+    margin: 0rem 1rem 0rem 1rem;
+    color: white;
+    cursor: pointer;
+    text-shadow: -1px 1px 0 #41ba45,
+    1px 1px 0 #c63d2b,
+   1px -1px 0 #42afac,
+  -1px -1px 0 #c6c23f;
+     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.DetailPanel__Quantity span
+{
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+
+.DetailPanel__Price
+{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding: 0rem 0rem 0rem 1rem;
+}
+
+.DetailPanel__Price img
+{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.DetailPanel__Price span
+{
+    font-size: 1.5rem;
+}

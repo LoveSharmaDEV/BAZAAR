@@ -1,0 +1,115 @@
+.main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 35%;
+  left: 35%;
+  height: 24rem;
+  width: 20rem;
+  background-color: white;
+  z-index: 4;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;}
+
+.cross_div {
+  display: flex;
+  justify-content: space-between;
+  height: 2rem;
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  background-color: #0a6bff;
+}
+
+.cross_div .crossimg {
+  height: 1rem;
+  width: 1rem;
+  background-color: red;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.cross_div .crossimg:hover {
+  background-color: rgb(172, 12, 12);
+  transform: scale(1.2);
+}
+
+.cross_div .profilepic {
+  height: 3rem;
+  width: 3rem;
+  padding: 0.2rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border-radius: 2rem;
+}
+
+
+.chatHeader{
+  color: white;
+  font-weight: bolder;
+  font-size: 1.4rem;
+  pointer-events: none;
+}
+
+.chats_div {
+  flex: auto;
+  overflow: hidden;
+}
+
+.formInput_div {
+  border-top: 2px solid silver;
+  height: 3rem;
+}
+
+.formInput_div form {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.formInput_div form input {
+  box-sizing: border-box;
+  height: 100%;
+  outline: none;
+}
+
+.formInput_div form button {
+  flex: auto;
+  background-color: #0a6bff;
+  color: white;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.chats_div {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.chats_div span{
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.chatItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  min-width: 40%;
+  margin: 1rem;
+  padding: 0.8rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+}
+
+.chatAlignLeft {
+  background-color: skyblue;
+  align-self: flex-start;
+}
+
+.chatAlignRight {
+  background-color: rgb(39, 122, 155);
+  align-self: flex-end;
+}

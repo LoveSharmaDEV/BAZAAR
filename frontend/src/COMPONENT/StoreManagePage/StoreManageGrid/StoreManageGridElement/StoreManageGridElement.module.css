@@ -1,0 +1,136 @@
+
+.StoreManageGridElement
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0.8rem;
+    height: 20rem;
+    width: 30rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 2rem;
+}
+
+.StoreManageGridElement_ImageCarousal
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.8rem;
+    height: 50%;    
+}
+
+.ProductCardBackward
+{
+    background-color: rgba(0, 0, 0, 0.34);
+    border-radius: 50%;
+    padding: 0.2rem;
+    transform: scaleX(-1);
+    height: 3rem;
+    width: 3rem;
+}
+
+.ProductCardBackward:hover{
+    opacity: 0.5;
+}
+
+.ProductCardForward
+{
+    height: 3rem;
+    width: 3rem;
+    background-color: rgba(0, 0, 0, 0.34);
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+
+.ProductCardForward:hover
+{
+    opacity: 0.5;
+}
+
+.StoreManageGridElement_ImagePanel_div
+{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: scroll;
+}
+
+
+.StoreManageGridElement_ImagePanel_div img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid black;
+}
+
+.StoreManageGridElement_ImagePanel_div input
+{
+    position: absolute;
+    left: -200px;
+    height: 100%;
+    width: 100%;
+}
+
+.StoreManageGridElement_Actions
+{
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+    padding-bottom: 1rem;
+}
+
+.StoreManageGridElement_ProductName
+{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Custom CSS Buttons*/
+
+/* CSS */
+/* CSS */
+.button66 {
+    background-color: #0a6bff;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: rgba(1,60,136,.5) 0 -1px 3px 0 inset,rgba(0,44,97,.1) 0 3px 6px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inherit;
+    font-family: "Space Grotesk",-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+    min-height: 56px;
+    min-width: 120px;
+    padding: 16px 20px;
+    position: relative;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    transition: all .2s cubic-bezier(.22, .61, .36, 1);
+  }
+  
+  .button66:hover {
+    background-color: #065dd8;
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 768px) {
+    .button66 {
+      padding: 16px 44px;
+      min-width: 150px;
+    }
+  }
+  

@@ -1,0 +1,66 @@
+import React, { useEffect} from 'react'
+import StoreManageGridCss from './StoreManageGrid.module.css'
+import StoreManageGridElement from './StoreManageGridElement/StoreManageGridElement'
+import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
+import { useSelector, useDispatch } from 'react-redux';
+import { GET_UPDATED_STOCK } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
+import { SEARCH } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
+
+function StoreManageGrid() {
+
+  const overlay = useOverlayContext();
+
+  /* ---------------FETCH LIVE STOCK VIA REDUX------------- */
+  const Products = useSelector((state)=>{
+    return state.stock
+  })
+  const dispatch = useDispatch();
+  /* ---------------FETCH LIVE STOCK VIA REDUX------------- */
+
+
+  const onAddProduct = ()=>{
+    overlay.setOverlay('AddProduct');
+    overlay.setShowOverlay(true);
+  }
+
+  const SearchFilter = (e)=>{
+    dispatch(SEARCH(e.target.value))
+  }
+
+  useEffect(()=>{
+    dispatch(GET_UPDATED_STOCK());
+  },[dispatch]);
+
+
+
+
+
+
+  return (
+    <div className={StoreManageGridCss.StoreManageGrid_OuterDiv}>
+      <div className={StoreManageGridCss.StoreManageGrid_Actions_div}>
+        <button className={StoreManageGridCss.button66} onClick={onAddProduct}>Add Product</button>        
+        <input  type='text' placeholder='Search' onChange={SearchFilter}/>
+      </div>
+
+      <div className={StoreManageGridCss.StoreManageGridList}>
+        {
+          
+          !Products.FilteredProducts ?
+            null
+            :
+            Products.FilteredProducts.length===0 ?
+              null
+              :
+              Products.FilteredProducts.map((product,key)=>{
+                return <StoreManageGridElement 
+                product={product} 
+                key={key}/>})
+        }
+      </div>
+      
+    </div>
+  )
+}
+
+export default StoreManageGrid

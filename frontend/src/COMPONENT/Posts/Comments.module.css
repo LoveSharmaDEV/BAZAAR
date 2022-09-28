@@ -1,0 +1,26 @@
+.CommentOuterBody{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  border: 1px solid silver;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+.CommentOuterBody h4{
+    color: darkslategrey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: underline;
+}
+
+.CommentOuterBody span{
+    font-size: 1.5rem;
+    color: darkslategrey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.CommentOuterBody img{
+    height: 2rem;
+    width: 2rem;
+    align-self: flex-end;
+}

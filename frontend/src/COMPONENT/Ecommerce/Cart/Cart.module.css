@@ -1,0 +1,49 @@
+.OuterMostContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 5rem);
+    overflow: scroll;
+}
+
+.OuterMostContainer__CartBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 85%;
+    min-width: 30rem;
+    width: 80%;
+    overflow: scroll;
+}
+
+
+/* CSS */
+.button43 {
+    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-weight: bolder;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button43:hover {
+    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+  }
+  
+  @media (min-width: 768px) {
+    .button43 {
+      padding: 1rem 2rem;
+    }
+  }
