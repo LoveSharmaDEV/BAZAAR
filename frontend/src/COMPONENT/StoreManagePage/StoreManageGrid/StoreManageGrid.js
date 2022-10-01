@@ -5,6 +5,8 @@ import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUS
 import { useSelector, useDispatch } from 'react-redux';
 import { GET_UPDATED_STOCK } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
 import { SEARCH } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
+import Button from 'react-bootstrap/Button'
+
 
 function StoreManageGrid() {
 
@@ -39,7 +41,7 @@ function StoreManageGrid() {
   return (
     <div className={StoreManageGridCss.StoreManageGrid_OuterDiv}>
       <div className={StoreManageGridCss.StoreManageGrid_Actions_div}>
-        <button className={StoreManageGridCss.button66} onClick={onAddProduct}>Add Product</button>        
+        <Button onClick={onAddProduct} variant="primary" size='lg'>ADD PRODUCT</Button>
         <input  type='text' placeholder='Search' onChange={SearchFilter}/>
       </div>
 

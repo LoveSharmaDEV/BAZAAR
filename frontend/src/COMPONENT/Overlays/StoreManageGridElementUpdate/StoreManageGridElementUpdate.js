@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { UPDATE_STOCK } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
 import { BACKEND_BASE, ECOMM_API } from '../../../MasterData/GlobalData';
 import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
+import Button from 'react-bootstrap/Button'
+import CloseButton from 'react-bootstrap/CloseButton';
 
 
 
@@ -160,12 +162,8 @@ function StoreManageGridElementUpdate(props) {
         <form  className={CSS.OuterMostContainer__ProductUploadForm} encType="multipart/FormData" >
 
             <div className={CSS.ProductUploadForm__FormHeader}>
-                <img 
-                    src={`${BACKEND_BASE}/close.png`}
-                    alt=''
-                    onClick={onClose__UpdateForm} 
-                />
-                <button className={CSS.button66} onClick={OnProductUpdate}>Update</button>
+                <CloseButton className='mx-3'  onClick={onClose__UpdateForm} />          
+                <Button onClick={OnProductUpdate} variant="primary" size='lg'>UPDATE</Button>
             </div>
 
 
@@ -177,15 +175,12 @@ function StoreManageGridElementUpdate(props) {
                 {
                   FormData.ProductImage.map((image , key) =>(
                     <div className={CSS.ImageList__ImageContainer} key={key}>
-
-                        <img 
-                        src={`${BACKEND_BASE}/close.png`} 
-                        className={CSS.ImageContainer__CloseBtn}
-                        alt='' 
-                        data-delete={key}
-                        onClick={OnDelete__ProductImage}
                         
-                        />
+                        <CloseButton  
+                        className={CSS.ImageContainer__CloseBtn} 
+                        data-delete={key}  
+                        onClick={OnDelete__ProductImage} 
+                        />          
 
                         <img 
                         src={image.path instanceof File ? URL.createObjectURL(image.path):`${BACKEND_BASE}/${image.path}`} 
@@ -242,16 +237,18 @@ function StoreManageGridElementUpdate(props) {
                 {
                   showHashTagOverlay?
                     <div className={CSS.BodyTagsPanel_InputOverlay}>
-                          <input 
+                        
+                        <input 
                             type='text' 
                             placeholder='Add your #Tags'
                             onKeyPress={OnAdd__HashTag}
                             />
-                          <img 
-                            src={`${BACKEND_BASE}/close.png`}
-                            alt=' ' 
-                            onClick={onToggle__HashTagOverlay} 
-                           />
+                            
+                        <CloseButton 
+                        className={`${CSS.InputOverlay__CloseBTN} mt-2 mr-2`} 
+                        onClick={onToggle__HashTagOverlay} 
+                        />       
+
                     </div>
                     :
                     null
@@ -271,12 +268,12 @@ function StoreManageGridElementUpdate(props) {
                       {
                         FormData.HashTags.map((hashtag,key) => 
                         <span key={key}>
-                            <img 
-                            src={`${BACKEND_BASE}/close.png`}
-                            alt='' 
-                            data-delete={key}
-                            onClick={OnDelete__HashTag}
-                            />
+                            
+                            <CloseButton className={CSS.Tags__CloseBTN} 
+                            data-delete={key}  
+                            onClick={OnDelete__HashTag} 
+                            />          
+
                             #{hashtag}
                         </span>)
                       }
@@ -291,8 +288,8 @@ function StoreManageGridElementUpdate(props) {
                 <div className={CSS.Container2__Input1}>
 
                     <div className={CSS.Container2__Header}>
-                        <button className={CSS.button66} onClick={onToggle__Page}> PRODUCT DETAILS</button>
-                        <button className={CSS.button66} onClick={onToggle__Page}>BUISNESS DETAILS</button>
+                        <Button className='mx-3' onClick={onToggle__Page} variant="primary" size='lg'>PRODUCT DETAILS</Button>
+                        <Button className='mx-3' onClick={onToggle__Page} variant="primary" size='lg'>BUISNESS DETAILS</Button>
                     </div>
 
                     {

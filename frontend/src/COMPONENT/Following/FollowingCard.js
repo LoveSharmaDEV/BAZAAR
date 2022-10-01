@@ -3,6 +3,9 @@ import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK'
 import FollowingCardCss from './FollowingCard.module.css'
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_BASE } from '../../MasterData/GlobalData';
+import Button from 'react-bootstrap/Button'
+import CloseButton from 'react-bootstrap/CloseButton';
+
 
 
 function FollowingCard(props) {
@@ -23,18 +26,15 @@ function FollowingCard(props) {
             />
         </div>
         <span className={FollowingCardCss.Card__StoreName}>{props.follower.storeName}</span>
-        <button onClick={navigateToStore} className={FollowingCardCss.button66}> GO TO STORE</button>
+        <Button onClick={navigateToStore} variant="primary" size='lg'>GO TO STORE</Button>
 
         {
             auth.user._id !== props.follower.owner?
-                <img 
-                className={FollowingCardCss.Card__DeleteFollower} 
-                src={`${BACKEND_BASE}/delete.png`} 
-                alt=''
-                />
+                <CloseButton  className={FollowingCardCss.Card__DeleteFollower}/>
                 :
                 null
         }
+        
     </div>
   )
 }

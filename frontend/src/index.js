@@ -6,7 +6,7 @@ import { OverlayProvider } from './CONTEXT API/OVERLAY_CONTEXT';
 import { AuthProvider } from './CONTEXT API/AUTH_CONTEXT';
 import { Provider } from 'react-redux';
 import store from './REDUX/STOREINIT';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
     <AuthProvider>

@@ -6,6 +6,8 @@ import { BACKEND_BASE} from '../../MasterData/GlobalData';
 import { USER_PERSONALIZATION_API } from '../../MasterData/GlobalData';
 import { ECOMM_API } from '../../MasterData/GlobalData';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button'
+
 
 export default function Settings(props) {
 
@@ -167,9 +169,9 @@ export default function Settings(props) {
             </div> 
 
             <div className={SettingsCss.ActionBtns}>
-              <button onClick={UpdateControl} className={SettingsCss.button66} type='submit'>UPDATE</button> 
-              <button onClick={callAPI_DeactivateUser} className={SettingsCss.button66} type='submit'>DEACTIVATE</button> 
-            </div>
+              <Button className='mx-3' onClick={UpdateControl} variant="primary" size='lg'>UPDATE</Button>
+              <Button className='mx-3' onClick={callAPI_DeactivateUser} variant="primary" size='lg'>DEACTIVATE</Button>
+           </div>
 
           </div>
             :

@@ -7,6 +7,7 @@ import ReactLoading from "react-loading";
 import SearchResult from './SearchResult';
 import { BACKEND_BASE} from '../../MasterData/GlobalData';
 import { ECOMM_API } from '../../MasterData/GlobalData';
+import Button from 'react-bootstrap/Button'
 
 
 export default function NavbarPage(props) {
@@ -53,16 +54,19 @@ export default function NavbarPage(props) {
       {
         !user?
         <div className={NavCss.NavBarLinkDiv}> 
+
           <Link className={NavCss.NavBarLink} to={'/login'}>
-            <button className={NavCss.button66}>Login</button>
+            <Button variant="primary" size='lg'>LOGIN</Button>
           </Link>
+
           <Link className={NavCss.NavBarLink} to={'/signupas'}>
-            <button className={NavCss.button66}>Sign Up</button>        
-          </Link>          
+            <Button variant="primary" size='lg'>SIGNUP</Button>     
+          </Link>     
+
         </div>
         :
         <div className={NavCss.NavBarLinkDiv}> 
-            <button onClick={logout} className={NavCss.button66}>Log Out</button>        
+            <Button variant="primary" size='lg'>LOGOUT</Button>       
         </div>
       }
     </div>

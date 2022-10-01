@@ -3,6 +3,7 @@ import ReactLoading from "react-loading";
 import {useToasts } from 'react-toast-notifications';
 import logincss from './LoginPage.module.css'
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
+import Button from 'react-bootstrap/esm/Button';
 
 export default function LoginPage(props) {
   const [loginInfo, setloginInfo]= useState({});
@@ -66,7 +67,7 @@ useEffect(()=>{
               <div className={logincss.underline}></div> 
               <label>Password</label>
             </div>
-            <button type='submit' className={logincss.button66} onClick={onlogin}>Login</button>
+            <Button onClick={onlogin} variant="primary" size='lg'>LOGIN</Button>
           </div>
         </form>:null
       }

@@ -6,6 +6,8 @@ import { BACKEND_BASE} from '../../../../MasterData/GlobalData';
 import { ECOMM_API } from '../../../../MasterData/GlobalData';
 import AUTHORIZED_REQ from '../../../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useOverlayContext } from '../../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
+import Button from 'react-bootstrap/Button'
+
 
 function StoreManageGridElement(props) {
   
@@ -77,8 +79,10 @@ function StoreManageGridElement(props) {
         </div>
         
         <div className={StoreManageGridElementCss.StoreManageGridElement_Actions}>
-          <button className={StoreManageGridElementCss.button66} onClick={toggleUpdateForm}>UPDATE</button>
-          <button className={StoreManageGridElementCss.button66} onClick={DeleteProduct}>DELETE</button>
+
+          <Button onClick={toggleUpdateForm} variant="primary" size='lg'>UPDATE</Button>
+          <Button onClick={DeleteProduct} variant="primary" size='lg'>DELETE</Button>
+          
         </div>
         
       </div>

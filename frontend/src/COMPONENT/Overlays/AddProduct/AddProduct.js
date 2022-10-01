@@ -5,8 +5,12 @@ import AUTHORIZED_REQ from '../../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useDispatch } from 'react-redux';
 import { ADD_TO_THE_STOCK } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
 import { BACKEND_BASE, ECOMM_API } from '../../../MasterData/GlobalData';
+import Button from 'react-bootstrap/Button'
+import CloseButton from 'react-bootstrap/CloseButton';
 
-function AddProduct(props) {
+
+
+function AddProduct() {
 
   const [formData, setFormData] = useState({
     ProductName:'',
@@ -96,10 +100,8 @@ function AddProduct(props) {
         <form ref={formref} className={AddProductCss.OuterMostContainer__ProductUploadForm} encType="multipart/formdata" onChange={handleFormData}>
 
             <div className={AddProductCss.ProductUploadForm__FormHeader}>
-
-                <img src={`${BACKEND_BASE}/close.png`} alt='Close' onClick={()=>{ overlay.setShowOverlay(false)}}/>
-                <button className={AddProductCss.button66} onClick={onFormSubmit}>SUBMIT</button>
-
+                <CloseButton onClick={()=>{ overlay.setShowOverlay(false)}}className={`${AddProductCss.FormHeader__CloseBTN} mx-2`}/>
+                <Button onClick={onFormSubmit} variant="primary" size='lg'>SUBMIT</Button>
             </div>
 
 
@@ -127,7 +129,7 @@ function AddProduct(props) {
                   showHashTagOverlay?
                     <div className={AddProductCss.BodyTagsPanel_InputOverlay}>
                           <input type='text' placeholder='Add your #Tags' onKeyPress={AddHashTag}/>
-                          <img src={`${BACKEND_BASE}/close.png`} alt='Close' onClick={()=>{setHashTagOverlay(false)}} />
+                          <CloseButton onClick={()=>{setHashTagOverlay(false)}} className={`${AddProductCss.InputOverlay__CloseBTN} mt-2`}/>
                     </div>
                     :
                     null
@@ -140,6 +142,7 @@ function AddProduct(props) {
                 </div>
 
                 <div className={AddProductCss.BodyTagsPanel_Tags}>
+
                       {
                         formData.hashtag.map((hashtag,key) => <span key={key}>#{hashtag}</span>)
                       }
