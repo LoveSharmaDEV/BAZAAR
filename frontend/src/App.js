@@ -22,6 +22,7 @@ import ProductView from './COMPONENT/Ecommerce/ProductView/ProductView';
 import Cart from './COMPONENT/Ecommerce/Cart/Cart';
 import Following from './COMPONENT/Following/Following';
 import Settings from './COMPONENT/Settings/Settings';
+import Support from './COMPONENT/Support/Support';
 const cookies = new Cookies();
 
 export const RequireAuth = function ({ children }) {
@@ -100,7 +101,7 @@ function App() {
             <Route exact path = 'following' element={<RequireAuth><ToastProvider><Following setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/> 
             <Route exact path = 'store' element={<RequireAuth><ToastProvider><StoreManage setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/> 
             <Route exact path = 'settings' element={<RequireAuth><ToastProvider><Settings setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/> 
-            <Route exact path = 'support' element={<RequireAuth><ToastProvider>support</ToastProvider></RequireAuth>}/>                                 
+            <Route exact path = 'support' element={<RequireAuth><ToastProvider><Support/></ToastProvider></RequireAuth>}/>                                 
             <Route exact path = 'store/:storeName' element={<Store setBarVisibility={setBarVisibility}/>}/>
             <Route exact path = 'product/:storeName/:productID' element={<ProductView setBarVisibility={setBarVisibility}/>}/>
             <Route exact path = 'cart' element={<ToastProvider><Cart setBarVisibility={setBarVisibility}/></ToastProvider>} />

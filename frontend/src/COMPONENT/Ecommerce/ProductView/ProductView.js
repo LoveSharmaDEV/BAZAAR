@@ -8,6 +8,9 @@ import AUTHORIZED_REQ from '../../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useAuth } from '../../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import { BACKEND_BASE, URL as API } from '../../../MasterData/GlobalData';
 import { ECOMM_API } from '../../../MasterData/GlobalData';
+import Button from 'react-bootstrap/esm/Button';
+import Image from 'react-bootstrap/Image'
+
 
 function ProductView(props) {
     const params = useParams();
@@ -126,10 +129,7 @@ function ProductView(props) {
             <div className={CSS.ProductViewCard__ImagePanel}>
 
                 <div className={CSS.ImagePanel__DisplayImage}>
-                    <img 
-                    src={`${BACKEND_BASE}/${product?.ProductImage[index].path}`} 
-                    alt=''
-                    />
+                    <Image src={`${BACKEND_BASE}/${product?.ProductImage[index].path}`} fluid/>
                 </div>
 
                 <div className={CSS.ImagePanel__ImageSlider}>
@@ -227,12 +227,13 @@ function ProductView(props) {
 
                 <div className={CSS.DetailPanel__Footer}>
 
-                    <div className={CSS.DetailPanel__Price}>
+                    <div className={CSS.Footer__Price}>
                         <img src={`${BACKEND_BASE}/rupee.png`} alt=''/>
                         <span>{product?.ProductPrice}</span>
                     </div>
 
-                    <div className={CSS.Footer__AddToCart} onClick={AddToCart}>ADD TO CART</div>
+                    <Button  onClick={AddToCart} variant="primary" size='lg'>ADD TO CART</Button>
+
                 </div>
 
             </div>

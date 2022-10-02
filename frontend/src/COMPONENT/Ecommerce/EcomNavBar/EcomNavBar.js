@@ -7,13 +7,20 @@ import { Link } from 'react-router-dom';
 import { APICALL_GETCART } from '../../../REDUX/REDUCERS/CART__REDUCER';
 import { FilterByCategories, FilterBySearches } from '../../../REDUX/REDUCERS/FETCH_STOCK_BY_STORENAME__REDUCER';
 import { BACKEND_BASE } from '../../../MasterData/GlobalData';
+import Button from 'react-bootstrap/esm/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
-const EcomNavBar = (props) => {
+const EcomNavBar = () => {
 
     const auth = useAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [Toggle_DropDown,setToggle_DropDown] = useState(false);
+    const logout = ()=>{
+      auth.logout();
+      navigate('/login');
+    }
     const cart = useSelector((state)=>{
       return state.cart
     })
@@ -51,47 +58,59 @@ const EcomNavBar = (props) => {
 
   return (
     <div className={CSS.EcomNavBar}>
+
       <div className={CSS.EcomNavBar__Heading}>
-        {
-        stock.store?
-          <img 
-            className={CSS.Heading__StoreIcon}
-            src={`${BACKEND_BASE}/${stock?.store.storePic}`}
-            alt=''
-          />
-          :
-          null
-        }
+        
         <span className={CSS.Heading__StoreName}>{stock.store?stock.store.storeName:null}</span>
+
       </div>
 
+      <div className={CSS.EcomNavBar__Actions}>
 
-      <div className={CSS.EcomNavBar__SearchBar}>
-        <div className={CSS.SearchBar}>
+        <div className={CSS.EcomNavBar__Actions__NotCollapsed}>
 
-          <img src={`${BACKEND_BASE}/search.png`} alt='Search Icon'/>
-          <input onChange={FilterBySearch} type='text'/>
-
-        </div>
-        <div className={CSS.SearchBar__DropDown}>
-          <span onClick={Toggle_DropDownList}>CATEGORIES</span>
-          <div className={CSS.DropDown__Items}>
-            {
-              stock.copystock.map((product,key)=>{return product.hashtag}).flat(1).map((hashtag,key)=>{
-                return <h3 onClick={FilterByCategory} data-tag={hashtag} >{hashtag}</h3>
-              })
-            }
+          <div className={CSS.Actions__CategoriesDropdown}> 
+            <DropdownButton  size='lg' title="CATEGORIES">
+              {
+                stock.copystock.map((product,key)=>{return product.hashtag}).flat(1).map((hashtag,key)=>{
+                  return <Dropdown.Item href="#" onClick={FilterByCategory} data-tag={hashtag} >{hashtag}</Dropdown.Item>
+                })
+              }
+            </DropdownButton>
           </div>
-        </div>
-      </div>
 
-      {
-        auth.user ?
-        <div className={CSS.authorizedUser}>
-          <img src={auth.user?`${BACKEND_BASE}${auth.user.profilepic}`:`${BACKEND_BASE}/user.png`} alt=''/>
-          <span>{auth.user.username}</span>
 
-          <Link to='/cart'>
+
+          <div className={CSS.Actions__SearchBar}>
+
+            <img src={`${BACKEND_BASE}/search.png`} alt='Search Icon'/>
+            <input onChange={FilterBySearch} type='text'/>
+
+          </div>
+
+
+
+          <div className={CSS.Actions__AuthBTN}>
+
+            <div className={CSS.AuthBTN__UserProfile}>
+              {
+                !auth.user?
+                  <Link to={'/login'}>
+                    <Button variant="primary" size='lg'>LOGIN</Button>
+                  </Link>
+                  :
+                  <>
+                    <img src={`${BACKEND_BASE}/${auth.user.profilepic}`} alt=''/>
+                    <DropdownButton title={auth.user?auth.user.username:null} size='lg'>
+                      <Dropdown.Item onClick={logout} href="#/action-1">LOGOUT</Dropdown.Item>
+                    </DropdownButton>
+                  </>
+              }
+            </div>
+
+
+            <Link to='/cart'>
+
               <div className={CSS.ShoppingCartIcon}>
                 { 
                   cart.products.length!==0?
@@ -103,13 +122,19 @@ const EcomNavBar = (props) => {
                 }
                 <img  src={`${BACKEND_BASE}/shoppingcart.png`} alt='Cart Icon'/>
               </div>
-            </Link>
-        </div>
-        
-        :
-        <button onClick={()=>{navigate('/login')}} className={CSS.loginBtn}>Login</button>
-      }
 
+            </Link>
+
+          </div>
+
+
+        </div>
+
+        <div className={CSS.EcomNavBar__Actions__Collapsed}>
+
+        </div>
+
+      </div>
     </div>
   )
 }

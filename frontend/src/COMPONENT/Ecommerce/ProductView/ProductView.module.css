@@ -2,11 +2,11 @@
 .Outer__ProductViewCard
 {
     display: flex;
+    height: calc(100vh - 6rem);
     flex-wrap: wrap;
     justify-content: center;
     min-width: 30rem;
     width: 100%;
-    height: calc(100vh - 6rem);
     overflow: scroll;
     padding:1rem ;
     background-color: rgb(246, 246, 246);
@@ -26,18 +26,6 @@
     flex: 0.5;
 }
 
-.ImagePanel__DisplayImage
-{
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    height: 25rem;
-    width: 100%;
-}
-
-.ImagePanel__DisplayImage img
-{
-    height: 100%;
-    width: 100%;
-}
 
 .ImagePanel__ImageSlider
 {
@@ -105,6 +93,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-around;
     min-width: 30rem;
     flex: 0.8;
     margin: 1rem;
@@ -114,11 +103,17 @@
 {
     display: flex;
     justify-content: center;
-    font-size: 1.5rem;
+    width: 100%;
+}
+
+.DetailPanel__ProductName h1
+{
+    font-size: 4rem;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: grey;
+    font-weight: bolder;
     border-bottom: 0.1rem solid silver;
-    width: 100%;
+    letter-spacing: 0.2rem;
 }
 
 
@@ -132,6 +127,10 @@
 .DetailPanel__ProductDescription p{
     word-wrap: break-word;
     font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.2rem;
+    line-height: 2.5rem;
     width: 90%;
 }
 
@@ -147,6 +146,7 @@
     color: gray;
     font-size: 1.5rem;
     border-bottom: 0.1rem solid silver;
+    margin: 0rem 0rem 2rem 0rem;
 }
 
 .ColorAvailable__ColorDiv
@@ -155,6 +155,7 @@
     align-items: center;
     flex-wrap: wrap;
     width: 30rem;
+    margin: 0rem 0rem 2rem 0rem;
 }
 
 .ColorAvailable__color
@@ -180,7 +181,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     margin-bottom: 1rem;
-    
 }
 
 .DetailPanel__SizeAvailable h3
@@ -189,6 +189,7 @@
     color: gray;
     font-size: 1.5rem;
     border-bottom: 0.1rem solid silver;
+    margin: 0rem 0rem 2rem 0rem;
 }
 
 .SizeAvailable__SizeDiv
@@ -196,6 +197,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 30rem;
+    margin: 0rem 0rem 2rem 0rem;
 }
 
 .SizeAvailable__size
@@ -220,25 +222,23 @@
     background-color: silver;
 }
 
-.DetailPanel__Price
-{
+.Footer__Price{
     display: flex;
     align-items: center;
     height: 3rem;
     background-color: #405bf532;
     padding: 0.2rem;
     border-radius: 1rem;
-
 }
 
-.DetailPanel__Price img
+.Footer__Price img
 {
     height: 2rem;
     width: 2rem;
     margin: 0rem 1rem 0rem 0rem;
 }
 
-.DetailPanel__Price span
+.Footer__Price span
 {
     font-size: 2rem;
     color: gray;
@@ -253,32 +253,3 @@
     width: 25rem;
 }
 
-.Footer__AddToCart
-{
-    cursor: pointer;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 10rem;
-    margin: 0rem 2rem 0rem 0rem;
-    color: white;
-    font-weight: bolder;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease-in;
-    background-color: #405cf5;
-    backface-visibility: hidden;
-    background-color: #405cf5;
-    padding: 1rem;
-    height: 2rem;
-}
-
-.Footer__AddToCart:hover
-{
-    opacity: 0.5;
-}
-
-.Footer__AddToCart:active
-{
-    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
-}

@@ -10,6 +10,7 @@ import { useAuth } from '../../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import { useToasts } from 'react-toast-notifications';
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/esm/Button';
 
 
 export default function Cart(props) {
@@ -66,7 +67,7 @@ export default function Cart(props) {
                 null
             }
         </div>
-        <button onClick={createCheckoutSession} className={CartCss.button43}>CHECKOUT</button>
+        <Button onClick={createCheckoutSession} variant="primary" size='lg'>CHECKOUT</Button>
     </div>
   )
 }

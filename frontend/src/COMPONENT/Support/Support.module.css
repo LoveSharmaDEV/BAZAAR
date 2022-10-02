@@ -1,0 +1,22 @@
+.OuterDiv{
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    background-color: rgb(246, 246, 246);
+    justify-content: center;
+    align-items: center;
+}
+
+.OuterDiv img
+{
+    height: 20%;
+    aspect-ratio: 1/1;
+    margin: 0rem 0rem 2rem 0rem;
+}
+
+.OuterDiv span{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: gray;
+    letter-spacing: 0.2rem;
+}

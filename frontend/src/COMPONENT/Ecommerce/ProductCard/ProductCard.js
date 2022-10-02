@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import CSS from './ProductCard.module.css'
 import { Link } from 'react-router-dom';
 import { BACKEND_BASE } from '../../../MasterData/GlobalData';
+import Button from 'react-bootstrap/esm/Button';
+
 
 function ProductCard(props) {
     const [imageIndex, setImageIndex] = useState(0);
-    console.log(props.product)
     const changePicForward = ()=>{
         setImageIndex((prev)=>{
             return (((prev+1)%props.product.ProductImage.length))
@@ -73,15 +74,20 @@ function ProductCard(props) {
             null
         }
         
+        <div className={CSS.ProductCard__Footer}>
 
-        <div className={CSS.ProductCardPrice}>
-            <img src={`${BACKEND_BASE}/rupee.png`} alt='Ruppee'/>
-            <span> {props.product.ProductPrice}</span>
+            <div className={CSS.Footer__PriceSection}>
+                <img src={`${BACKEND_BASE}/rupee.png`} alt='Ruppee'/>
+                <span> {props.product.ProductPrice}</span>
+            </div>
+
+            <div className={CSS.Footer__Link}>
+                <Link to={`/product/${props.storeName}/${props.product._id}`}>
+                    <Button variant="primary" size='lg'>VIEW</Button>
+                </Link>
+            </div>  
         </div>
 
-        <div className={CSS.ProductCardActions}>
-            <Link to={`/product/${props.storeName}/${props.product._id}`}><button className={CSS.button9}>VIEW</button></Link>
-        </div>  
 
     </div>
   )

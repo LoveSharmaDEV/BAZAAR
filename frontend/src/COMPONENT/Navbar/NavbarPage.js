@@ -8,6 +8,8 @@ import SearchResult from './SearchResult';
 import { BACKEND_BASE} from '../../MasterData/GlobalData';
 import { ECOMM_API } from '../../MasterData/GlobalData';
 import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 export default function NavbarPage(props) {
@@ -52,22 +54,28 @@ export default function NavbarPage(props) {
         </div>
       </div>
       {
-        !user?
+        
         <div className={NavCss.NavBarLinkDiv}> 
+        {
+          !user?
+          <>
+            <Link className={NavCss.NavBarLink} to={'/login'}>
+              <Button variant="primary" size='lg'>LOGIN</Button>
+            </Link>
 
-          <Link className={NavCss.NavBarLink} to={'/login'}>
-            <Button variant="primary" size='lg'>LOGIN</Button>
-          </Link>
-
-          <Link className={NavCss.NavBarLink} to={'/signupas'}>
-            <Button variant="primary" size='lg'>SIGNUP</Button>     
-          </Link>     
-
+            <Link className={NavCss.NavBarLink} to={'/signupas'}>
+              <Button variant="primary" size='lg'>SIGNUP</Button>     
+            </Link>  
+          </>   
+          :
+          <>
+            <DropdownButton  title={auth.user?auth.user.username:null} size='lg'>
+              <Dropdown.Item onClick={logout} href="">LOGOUT</Dropdown.Item>
+            </DropdownButton>
+          </>
+        }
         </div>
-        :
-        <div className={NavCss.NavBarLinkDiv}> 
-            <Button variant="primary" size='lg'>LOGOUT</Button>       
-        </div>
+
       }
     </div>
   )
