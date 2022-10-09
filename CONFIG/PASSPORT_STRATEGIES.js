@@ -33,7 +33,6 @@ passport.use(new FacebookStrategy({
     callbackURL: "/passport/auth/facebook/callback"
 },
 (accessToken, refreshToken, profile, cb) => {
-    console.log(profile)
     return cb(null, profile);
 }));
 /*-------> FACEBOOK STRATEGY <------- */
@@ -46,7 +45,6 @@ passport.use(new AmazonStrategy({
     callbackURL: "/passport/auth/amazon/callback"
 },
 (accessToken, refreshToken, profile, cb) => {
-    console.log(profile)
     return cb(null, profile);
 }));
 

@@ -85,7 +85,8 @@ export default function Settings(props) {
     <div className={CSS.OuterContainer}>
       <div className={CSS.OuterContainer__ImageSection}>
         <div className={CSS.ImageSection__ProfilePic}>
-          <img src={
+
+          <img className={CSS.ProfilePic__IMG} src={
                       user.profilepic?
                         user.profilepic instanceof File?
                         URL.createObjectURL(user.profilepic)
@@ -96,14 +97,20 @@ export default function Settings(props) {
                     } 
                     alt=''
           />
+
           <span>PROFILE PIC</span>
-          <input onChange={ImageUpload} type='file' name='profilepic'/>
+
+          <div className={CSS.ProfilePic__UPLOADBTN}>
+            <input onChange={ImageUpload} type='file' name='profilepic'/>
+            <img src={`${BACKEND_BASE}/upload.png`} alt=''/>
+          </div>
+
         </div>
         {
-          auth.user && store?
-            auth.user.role==='SELLER'?
+          user && store?
+            user.role==='SELLER'?
               <div className={CSS.ImageSection__StorePic}>
-                <img src={
+                <img className={CSS.StorePic__IMG} src={
                             store.storePic?
                               store.storePic instanceof File?
                                 URL.createObjectURL(store.storePic)
@@ -115,13 +122,49 @@ export default function Settings(props) {
                           alt=''
                 />
                 <span>STORE PIC</span>
-                <input onChange={ImageUpload} type='file' name='storePic'/>
+                <div className={CSS.ProfilePic__UPLOADBTN}>
+                  <input onChange={ImageUpload} type='file' name='storePic'/>
+                  <img src={`${BACKEND_BASE}/upload.png`} alt=''/>
+                </div>
+
+
               </div>
               :
               null
             :
             null
         }
+        <div className={CSS.ImageSection__RoleCheckBox}>
+          <div className={CSS.RoleCheckBox__Header}>
+            <span>USER ROLE</span>
+          </div>
+          <div className={CSS.RoleCheckBox__CustomerCheck}>
+            <span>CUSTOMER</span>
+            <div className={CSS.CustomerCheck}>
+              <img src={`${BACKEND_BASE}/people.png`} alt=''/>
+              <input 
+              type='checkbox' 
+              name='role' 
+              value='CUSTOMER' 
+              checked={user.role==='CUSTOMER'?true:false}
+              onChange={FORM__USERDATA}
+              />
+            </div>
+          </div>
+          <div className={CSS.RoleCheckBox__SellerCheck}>
+            <span>SELLER</span>
+            <div className={CSS.SellerCheck}>
+              <img src={`${BACKEND_BASE}/seller.png`} alt=''/>
+              <input 
+              type='checkbox' 
+              name='role' 
+              value='SELLER' 
+              checked={user.role==='SELLER'?true:false}
+              onChange={FORM__USERDATA}
+              />
+            </div>
+          </div>
+        </div>  
 
       </div>
       <form className={CSS.OuterContainer__InputForm} >
@@ -155,7 +198,7 @@ export default function Settings(props) {
               </div>
 
               {
-                auth.user.role==='SELLER'?
+                user.role==='SELLER'?
                   <div className={CSS.inputdata}>
                     <input name='storeName' type='text' autoComplete='off'  value={store?.storeName} onChange={FORM__STOREDATA} required/>
                     <div className={CSS.underline}></div>
@@ -197,6 +240,8 @@ function GET_FORMDATA(FormDataVar)
   if(FormDataVar.role==='SELLER') LocalFormData.append('storeName', FormDataVar.storeName);
   LocalFormData.append('profilepicupload', FormDataVar.profilepic);
   LocalFormData.append('storePicupload', FormDataVar.storePic);
+  LocalFormData.append('role', FormDataVar.role);
+
 
   return LocalFormData
 

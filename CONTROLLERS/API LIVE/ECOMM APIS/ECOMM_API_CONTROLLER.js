@@ -354,13 +354,15 @@ module.exports.DEACTIVATEUSER_API__CONTROLLER = async (req,res)=>{
 /*--------------------->UPDATE USER CONTROLLER <----------------- */
 module.exports.UPDATEUSER_API__CONTROLLER = async (req,res)=>{
     try{
+
         const user = await User.findByIdAndUpdate(req.user._id,{
             username:req.body.username,
             password:req.body.password,
             email:req.body.email,
             contact:req.body.contact,
-            DOB:req.body.DOB
-        });
+            DOB:req.body.DOB,
+            role:req.body.role
+        },{new:true});
         
 
         if(!user) return res.status(200).json({
@@ -371,17 +373,34 @@ module.exports.UPDATEUSER_API__CONTROLLER = async (req,res)=>{
         if(req.files.profilepicupload)
         {
             if(req.files.profilepicupload[0].fieldname==='profilepicupload'){
-                await User.findByIdAndUpdate(req.user._id,{
-                    profilepic:req.files.profilepicupload[0].filename
-                });
+
+                user.profilepic=req.files.profilepicupload[0].filename;
+                await user.save();
+                // await User.findByIdAndUpdate(req.user._id,{
+                //     profilepic:req.files.profilepicupload[0].filename
+                // });
             }
         }
         
         if(user.role ==='SELLER'){
             
-            let store=await Store.findOneAndUpdate({owner:req.user._id},{
+            let store = await Store.findOneAndUpdate({owner:req.user._id},{
                 storeName:req.body.storeName
-            });
+            },{new:true});
+
+            if(!store)
+            {
+                store = await Store.create({
+                    owner:req.user._id,
+                    storeName:req.body.storeName
+                });
+
+                store.followers = [req.user._id];
+                user.following = [store._id];
+                await user.save();
+                await store.save();
+
+            }
 
             if(req.files.storePicupload)
             {

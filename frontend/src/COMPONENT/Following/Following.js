@@ -20,6 +20,7 @@ function Following(props) {
             error:false
         })
         const response = await AUTHORIZED_REQ(USER_PERSONALIZATION_API.FETCH_FOLLOWERS, {},{},'POST');
+        console.log(response)
         if(response.data.errCode==='SUCCESS') {
             setAPIStatus({
                 loading:false,

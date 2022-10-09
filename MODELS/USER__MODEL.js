@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt')
 const userSchema = new  mongoose.Schema({
     profilepic:{
         type:String,
-        trim:true
+        trim:true,
+        default:'DefaultProfilePic.png'
     },
     username:{
         type:String,
@@ -27,9 +28,11 @@ const userSchema = new  mongoose.Schema({
     },
     contact:{
         type:Number,
+        default:0
     },
     DOB:{
-        type:Date
+        type:Date,
+        default:'000000'
     },
     following:[
         {
