@@ -14,6 +14,13 @@ module.exports.CHATINIT_API__CONTROLLER = async(req,res)=>{
                 conversationID:uuidv4(),
                 participants:[req.user._id,req.body.ToUserID]
             })
+
+            if(!conversation){
+                return res.status(200).json({
+                    message:`ERROR OCCURED IN CREATING CONVERSATION`,
+                    errCode:"FAILURE",
+                })
+            }
         }
 
         return res.status(200).json({
@@ -21,12 +28,15 @@ module.exports.CHATINIT_API__CONTROLLER = async(req,res)=>{
             errCode:"SUCCESS",
             conversation  
         })
+
     }
     catch(e){
+
         return res.status(200).json({
-            message:`ERROR OCCURED IN ChatInit_CONTROLLER ${e.message}`,
+            message:`ERROR OCCURED IN CREATING CONVERSATION ${e.message}`,
             errCode:"FAILURE",
         })
+
     }
 }
 /*-------------> CHAT INIT CONTROLLER <--------------- */
@@ -54,16 +64,13 @@ module.exports.FETCHALLCHATS_API__CONTROLLER = async (req,res)=>{
 }
 /*------------> FETCH ALL CHATS CONTROLLER <------------- */
 
-
-/* FETCH CHAT HEADER ALTERNATIVE TODO */
-/* FETCH CHAT MESSAGE */
-/* FETCH CHATID */
-
 /*------------> SAVE MESSAGE CONTROLLER <------------- */
 module.exports.SAVEMESSAGE_API__CONTROLLER = async (req,res)=>{
     try{
         const message = await Message.create(req.body.message);
+
         const conversation = await Conversation.findOne({conversationID: req.body.conversationID});
+
         if(message && conversation){
             conversation.message.push(message._id);
             conversation.save();
@@ -72,6 +79,7 @@ module.exports.SAVEMESSAGE_API__CONTROLLER = async (req,res)=>{
                 errCode:"SUCCESS",
             })
         }
+
         return res.status(200).json({
             message:"Message not saved in the conversation",
             errCode:"FAILURE",
@@ -79,7 +87,7 @@ module.exports.SAVEMESSAGE_API__CONTROLLER = async (req,res)=>{
     }
     catch(e){
         return res.status(200).json({
-            message:`ERROR OCCURED IN SaveMessage_CONTROLLER ${e.message}`,
+            message:`ERROR OCCURED IN SAVING MESSAGE ${e.message}`,
             errCode:"FAILURE",
         })
     }
@@ -90,6 +98,7 @@ module.exports.SAVEMESSAGE_API__CONTROLLER = async (req,res)=>{
 module.exports.FETCH_STORE_API_CONTROLLER = async (req,res)=>{
     try{
         const store = await Store.findOne({owner:req.body.ToUserID});
+
         if(!store) return res.status(200).json({
             message:`STORE DOESN'T EXISTS ${e.message}`,
             errCode:"FAILURE",
@@ -104,10 +113,9 @@ module.exports.FETCH_STORE_API_CONTROLLER = async (req,res)=>{
     }
     catch(e){
         return res.status(200).json({
-            message:`ERROR OCCURED IN FETCH_STORE_API_CONTROLLER ${e.message}`,
+            message:`ERROR OCCURED IN FETCHING STORE ${e.message}`,
             errCode:"FAILURE",
         })
     }
-
 }
 /*-----------> FETCH STORE <------------------------- */

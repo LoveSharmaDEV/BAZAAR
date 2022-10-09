@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react'
-import StoreManageGridCss from './StoreManageGrid.module.css'
+import CSS from './StoreManageGrid.module.css'
 import StoreManageGridElement from './StoreManageGridElement/StoreManageGridElement'
 import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
 import { useSelector, useDispatch } from 'react-redux';
@@ -39,13 +39,13 @@ function StoreManageGrid() {
 
 
   return (
-    <div className={StoreManageGridCss.StoreManageGrid_OuterDiv}>
-      <div className={StoreManageGridCss.StoreManageGrid_Actions_div}>
+    <div className={CSS.StoreManageGrid_OuterDiv}>
+      <div className={CSS.StoreManageGrid_Actions_div}>
         <Button onClick={onAddProduct} variant="primary" size='lg'>ADD PRODUCT</Button>
         <input  type='text' placeholder='Search' onChange={SearchFilter}/>
       </div>
 
-      <div className={StoreManageGridCss.StoreManageGridList}>
+      <div className={CSS.StoreManageGridList}>
         {
           
           !Products.FilteredProducts ?

@@ -5,7 +5,7 @@ import CSS from './Support.module.css'
 function Support() {
   return (
     <div className={CSS.OuterDiv}>
-        <img src={`${BACKEND_BASE}/noentry.png`}/>
+        <img src={`${BACKEND_BASE}/noentry.png`} alt=''/>
         <span>SERVICE CURRENTLY NOT AVAILABLE</span>
     </div>
   )

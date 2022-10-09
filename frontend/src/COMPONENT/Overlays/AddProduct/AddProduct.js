@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import AddProductCss from './AddProduct.module.css';
+import CSS from './AddProduct.module.css';
 import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
 import AUTHORIZED_REQ from '../../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useDispatch } from 'react-redux';
@@ -95,20 +95,20 @@ function AddProduct() {
 
 
   return (
-    <div className={AddProductCss.OuterMostContainer}>
+    <div className={CSS.OuterMostContainer}>
 
-        <form ref={formref} className={AddProductCss.OuterMostContainer__ProductUploadForm} encType="multipart/formdata" onChange={handleFormData}>
+        <form ref={formref} className={CSS.OuterMostContainer__ProductUploadForm} encType="multipart/formdata" onChange={handleFormData}>
 
-            <div className={AddProductCss.ProductUploadForm__FormHeader}>
-                <CloseButton onClick={()=>{ overlay.setShowOverlay(false)}}className={`${AddProductCss.FormHeader__CloseBTN} mx-2`}/>
+            <div className={CSS.ProductUploadForm__FormHeader}>
+                <CloseButton onClick={()=>{ overlay.setShowOverlay(false)}}className={`${CSS.FormHeader__CloseBTN} mx-2`}/>
                 <Button onClick={onFormSubmit} variant="primary" size='lg'>SUBMIT</Button>
             </div>
 
 
-          <div className={AddProductCss.ProductUploadForm__Container1}>
+          <div className={CSS.ProductUploadForm__Container1}>
 
-            <div className={AddProductCss.Container1__ImagePanel}>
-              <div className={AddProductCss.ImagePanel__ImageList}>
+            <div className={CSS.Container1__ImagePanel}>
+              <div className={CSS.ImagePanel__ImageList}>
 
                 {
                   formData.ProductImage.map((image , key) => (
@@ -124,24 +124,24 @@ function AddProduct() {
             </div>
 
 
-            <div className={AddProductCss.Container1_BodyTagsPanel}>
+            <div className={CSS.Container1_BodyTagsPanel}>
                 {
                   showHashTagOverlay?
-                    <div className={AddProductCss.BodyTagsPanel_InputOverlay}>
+                    <div className={CSS.BodyTagsPanel_InputOverlay}>
                           <input type='text' placeholder='Add your #Tags' onKeyPress={AddHashTag}/>
-                          <CloseButton onClick={()=>{setHashTagOverlay(false)}} className={`${AddProductCss.InputOverlay__CloseBTN} mt-2`}/>
+                          <CloseButton onClick={()=>{setHashTagOverlay(false)}} className={`${CSS.InputOverlay__CloseBTN} mt-2`}/>
                     </div>
                     :
                     null
                 }
-                <div className={AddProductCss.BodyTagsPanel_Header}>
+                <div className={CSS.BodyTagsPanel_Header}>
 
                       <img src={`${BACKEND_BASE}/add.png`} alt='Add' onClick={()=>{setHashTagOverlay(true)}}/>
                       <span>ADD HASH TAGS</span>
                 
                 </div>
 
-                <div className={AddProductCss.BodyTagsPanel_Tags}>
+                <div className={CSS.BodyTagsPanel_Tags}>
 
                       {
                         formData.hashtag.map((hashtag,key) => <span key={key}>#{hashtag}</span>)
@@ -152,33 +152,33 @@ function AddProduct() {
 
           </div>
 
-          <div className={AddProductCss.ProductUploadForm__Container2}>
+          <div className={CSS.ProductUploadForm__Container2}>
 
-                <div className={AddProductCss.Container2__Input1}>
+                <div className={CSS.Container2__Input1}>
                       
-                      <div className={AddProductCss.Input1__BodyInfoCollectForm}>
+                      <div className={CSS.Input1__BodyInfoCollectForm}>
                           <input name='ProductName' type='text' placeholder='Name'  required/>
                       </div>
 
-                      <div className={AddProductCss.Input1__BodyInfoCollectForm}>
+                      <div className={CSS.Input1__BodyInfoCollectForm}>
                           <input name='ProductPrice' type='number' placeholder='Price' required/>
                       </div>
 
-                      <div className={AddProductCss.Input1__BodyInfoCollectForm}>
+                      <div className={CSS.Input1__BodyInfoCollectForm}>
                           <input name='ProductQuantity' type='number' placeholder='Quantity' required/>
                       </div>
 
-                      <div className={AddProductCss.Input1__BodyInfoCollectForm}>
+                      <div className={CSS.Input1__BodyInfoCollectForm}>
                           <input name='ProductDiscount' type='number' placeholder='Discount %' required/>
                       </div>
 
-                      <div className={AddProductCss.Input1__BodyInfoCollectForm}>
+                      <div className={CSS.Input1__BodyInfoCollectForm}>
                           <input name='ProductDiscountedPrice' type='number' placeholder='Discounted Price' required/>
                       </div>
 
                 </div>
 
-                <div className={AddProductCss.Container2__Input2}>
+                <div className={CSS.Container2__Input2}>
                   
                     <textarea 
                     name='ProductDescription' 

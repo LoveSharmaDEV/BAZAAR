@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import AUTHORIZED_REQ from '../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
-import SettingsCss from './Settings.module.css';
+import CSS from './Settings.module.css';
 import { BACKEND_BASE} from '../../MasterData/GlobalData';
 import { USER_PERSONALIZATION_API } from '../../MasterData/GlobalData';
 import { ECOMM_API } from '../../MasterData/GlobalData';
@@ -82,9 +82,9 @@ export default function Settings(props) {
   },[ ])
 
   return (
-    <div className={SettingsCss.OuterContainer}>
-      <div className={SettingsCss.OuterContainer__ImageSection}>
-        <div className={SettingsCss.ImageSection__ProfilePic}>
+    <div className={CSS.OuterContainer}>
+      <div className={CSS.OuterContainer__ImageSection}>
+        <div className={CSS.ImageSection__ProfilePic}>
           <img src={
                       user.profilepic?
                         user.profilepic instanceof File?
@@ -102,7 +102,7 @@ export default function Settings(props) {
         {
           auth.user && store?
             auth.user.role==='SELLER'?
-              <div className={SettingsCss.ImageSection__StorePic}>
+              <div className={CSS.ImageSection__StorePic}>
                 <img src={
                             store.storePic?
                               store.storePic instanceof File?
@@ -124,41 +124,41 @@ export default function Settings(props) {
         }
 
       </div>
-      <form className={SettingsCss.OuterContainer__InputForm} >
+      <form className={CSS.OuterContainer__InputForm} >
       {
           auth.user?
-          <div className={SettingsCss.signupcard}>
-            <div className={SettingsCss.signupcardinput}>
+          <div className={CSS.signupcard}>
+            <div className={CSS.signupcardinput}>
               
-              <div className={SettingsCss.inputdata}>
+              <div className={CSS.inputdata}>
                 <input name='email' type='text' value={user.email} onChange={FORM__USERDATA} required/>
-                <div className={SettingsCss.underline}></div>
+                <div className={CSS.underline}></div>
                 <label>Email</label>
               </div> 
 
-              <div className={SettingsCss.inputdata}>
+              <div className={CSS.inputdata}>
                 <input name='username' type='text' autoComplete='off' value={user.username} onChange={FORM__USERDATA} required/>
-                <div className={SettingsCss.underline}> </div>
+                <div className={CSS.underline}> </div>
                 <label>Username</label>
               </div> 
 
-              <div className={SettingsCss.inputdata}>
+              <div className={CSS.inputdata}>
                 <input name='contact' type='tel' autoComplete='off' value={user.contact} onChange={FORM__USERDATA} required/>
-                <div className={SettingsCss.underline}></div>
+                <div className={CSS.underline}></div>
                 <label>Contact No.</label>
               </div> 
 
-              <div className={SettingsCss.inputdata}>
+              <div className={CSS.inputdata}>
                 <input name='DOB' type='Date' autoComplete='off'  value={new Date(user.DOB).toISOString().split('T')[0]} onChange={FORM__USERDATA} required/>
-                <div className={SettingsCss.underline}></div>
+                <div className={CSS.underline}></div>
                 <label>DOB</label>
               </div>
 
               {
                 auth.user.role==='SELLER'?
-                  <div className={SettingsCss.inputdata}>
+                  <div className={CSS.inputdata}>
                     <input name='storeName' type='text' autoComplete='off'  value={store?.storeName} onChange={FORM__STOREDATA} required/>
-                    <div className={SettingsCss.underline}></div>
+                    <div className={CSS.underline}></div>
                     <label>Store Name</label>
                     <input type='hidden' name="role" value="SELLER" />
                   </div>
@@ -168,7 +168,7 @@ export default function Settings(props) {
 
             </div> 
 
-            <div className={SettingsCss.ActionBtns}>
+            <div className={CSS.ActionBtns}>
               <Button className='mx-3' onClick={UpdateControl} variant="primary" size='lg'>UPDATE</Button>
               <Button className='mx-3' onClick={callAPI_DeactivateUser} variant="primary" size='lg'>DEACTIVATE</Button>
            </div>

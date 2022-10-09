@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import ChatBoxCss from './ChatBox.module.css'
+import CSS from './ChatBox.module.css'
 import { useSelector,useDispatch } from 'react-redux';
 import { addtoActiveChat, removefromActiveChat } from '../../../REDUX/REDUCERS/FETCHACTIVECHAT__REDUCER';
 import AUTHORIZED_REQ from '../../../COMMON_UTILS/AUTHORIZED_REQUEST';
@@ -75,7 +75,7 @@ export default function ChatBox(props) {
 
 
   function dragElement(elmnt) {
-    const ChatBox = Array.from(document.getElementsByClassName(ChatBoxCss.main))[0];
+    const ChatBox = Array.from(document.getElementsByClassName(CSS.main))[0];
     elmnt.onmousedown = dragMouseDown;
     
   
@@ -105,12 +105,12 @@ export default function ChatBox(props) {
   
     
   useLayoutEffect(()=>{
-    const ChatHeader = Array.from(document.getElementsByClassName(ChatBoxCss.cross_div))[0];
+    const ChatHeader = Array.from(document.getElementsByClassName(CSS.cross_div))[0];
     dragElement(ChatHeader);
   },[])
 
   useLayoutEffect(()=>{
-    const ChatBody = Array.from(document.getElementsByClassName(ChatBoxCss.chats_div))[0];
+    const ChatBody = Array.from(document.getElementsByClassName(CSS.chats_div))[0];
     ChatBody.scrollTop = ChatBody.scrollHeight;
   })
 
@@ -126,16 +126,16 @@ export default function ChatBox(props) {
 
 
   return (
-    <div className={ChatBoxCss.main}>
+    <div className={CSS.main}>
 
-      <div className={ChatBoxCss.cross_div}>
-        <img className={ChatBoxCss.crossimg} 
+      <div className={CSS.cross_div}>
+        <img className={CSS.crossimg} 
           onClick={closeChatBox} 
           src={`${BACKEND_BASE}/close.png`}
           alt='Cross'
         />
-        <span className={ChatBoxCss.chatHeader}>{props?.toStore?.storeName}</span>
-        <img className={ChatBoxCss.profilepic} 
+        <span className={CSS.chatHeader}>{props?.toStore?.storeName}</span>
+        <img className={CSS.profilepic} 
           onClick= {closeChatBox} 
           src={
                 props.toUser.role==='SELLER'?
@@ -147,15 +147,15 @@ export default function ChatBox(props) {
         />
       </div>
 
-      <div className={ChatBoxCss.chats_div} ref={messagesEndRef}>
+      <div className={CSS.chats_div} ref={messagesEndRef}>
         {activeChats?.conversation.message.map((message,key)=>{
-            return <div className={`${ChatBoxCss.chatItem} ${message.From === auth.user._id?ChatBoxCss.chatAlignLeft:ChatBoxCss.chatAlignRight}`} key={key}>
+            return <div className={`${CSS.chatItem} ${message.From === auth.user._id?CSS.chatAlignLeft:CSS.chatAlignRight}`} key={key}>
               <span>{message.message}</span>
             </div>
           })}
       </div>
 
-      <div className={ChatBoxCss.formInput_div}>
+      <div className={CSS.formInput_div}>
         <form ref={formref} method='POST' onChange={onMessageChange}>
           <input type='text' name='message'/>
           <button onClick={sendMessage}>SEND</button>

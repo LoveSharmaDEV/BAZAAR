@@ -1,5 +1,5 @@
 import React, {useCallback,useLayoutEffect, useState} from 'react'
-import css from './LeftNavBar.module.css'
+import CSS from './LeftNavBar.module.css'
 import { LeftNavBarData } from './LeftNavBarData'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -14,16 +14,16 @@ export default function LeftNavBar(props) {
   const navigate = useNavigate();
 
   const activeTabs = useCallback(()=>{
-    const activeElement = Array.from(document.getElementsByClassName(css.active))[0];
-    if(activeElement) activeElement.classList.remove(css.active);
+    const activeElement = Array.from(document.getElementsByClassName(CSS.active))[0];
+    if(activeElement) activeElement.classList.remove(CSS.active);
     
-    document.querySelector(`[data-value="${optionSelected}"]`).classList.add(css.active);
+    document.querySelector(`[data-value="${optionSelected}"]`).classList.add(CSS.active);
   },[optionSelected])
 
 
   const toggleListeners = useCallback(()=>{
-    const slider = Array.from(document.getElementsByClassName(css.slider))[0];
-    const NavBar = Array.from(document.getElementsByClassName(css.main))[0];
+    const slider = Array.from(document.getElementsByClassName(CSS.slider))[0];
+    const NavBar = Array.from(document.getElementsByClassName(CSS.main))[0];
 
     function transform0px() {
       NavBar.style.transform = 'translateX(0px)';
@@ -73,7 +73,7 @@ export default function LeftNavBar(props) {
     setOptionSelected(e.target.dataset.value);
     cookies.set('optionSelected', e.target.dataset.value);
     cookies.set('selectedPath', e.target.dataset.path);
-    const NavBar = Array.from(document.getElementsByClassName(css.main))[0];
+    const NavBar = Array.from(document.getElementsByClassName(CSS.main))[0];
     activeTabs();
     if(hide){      
           NavBar.style.transform = 'translateX(-3000px)'
@@ -85,20 +85,20 @@ export default function LeftNavBar(props) {
   return (
   <>
     <img 
-    className={css.slider} 
+    className={CSS.slider} 
     src={`${BACKEND_BASE}/door.png`} 
     alt="PULL"
     />
-    <div className={css.main}>
+    <div className={CSS.main}>
       {
           LeftNavBarData.filter((val)=> auth.user.role==='CUSTOMER'?val.title!=='Store':true).map((val,key)=>
           {
             return(      
-                <div className={css.LeftNavBarItem} data-value={val.title} data-path={val.path} onClick={onSelect} key={key}>
-                  <div className={css.LeftNavBarContent}>
+                <div className={CSS.LeftNavBarItem} data-value={val.title} data-path={val.path} onClick={onSelect} key={key}>
+                  <div className={CSS.LeftNavBarContent}>
                     <img src={val.icon} alt="Home"/>
                     <label>{val.title}</label>
-                    <div className={css.overlay}></div>
+                    <div className={CSS.overlay}></div>
                   </div>
                 </div>
             )

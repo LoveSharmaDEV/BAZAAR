@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import SearchResultCss from './SearchResult.module.css'
+import CSS from './SearchResult.module.css'
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import { useDispatch } from 'react-redux';
 import { USER_PERSONALIZATION_API } from '../../MasterData/GlobalData';
@@ -50,9 +50,9 @@ export default function SearchResult(props) {
     },[updateAuthUser])
 
   return (
-    <div className={SearchResultCss.main}>
+    <div className={CSS.main}>
         <span>{props.store.storeName}</span>
-        <div className={SearchResultCss.actions}>
+        <div className={CSS.actions}>
             {
             user && !follower.includes(props.store._id) ?
                 <button data-storeid={props.store._id} onClick={FollowAction}>FOLLOW</button>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState} from 'react'
-import ChatHighlightCSS from './ChatHighlight.module.css'
+import CSS from './ChatHighlight.module.css'
 import AUTHORIZED_REQ from '../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useDispatch, useSelector} from 'react-redux';
 import { BACKEND_BASE} from '../../MasterData/GlobalData';
@@ -50,10 +50,10 @@ export default function ChatHighlight(props) {
 
   return (
     <>
-      <div className={ChatHighlightCSS.main} onClick={initiateChat}>
+      <div className={CSS.main} onClick={initiateChat}>
         <img src={`${BACKEND_BASE}/${chatHeader.storePic}`} alt=' '/>
-        <div className={ChatHighlightCSS.Content}>
-          <span className={ChatHighlightCSS.Header}>{chatHeader.storeName}</span>
+        <div className={CSS.Content}>
+          <span className={CSS.Header}>{chatHeader.storeName}</span>
           <span>{props.latestConversation.message}</span>
         </div>
       </div>

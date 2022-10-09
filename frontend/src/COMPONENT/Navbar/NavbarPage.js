@@ -1,7 +1,7 @@
 import React, {useState } from 'react';
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import {Link, useNavigate} from 'react-router-dom';
-import NavCss from './NavbarPage.module.css';
+import CSS from './NavbarPage.module.css';
 import axios from 'axios';
 import ReactLoading from "react-loading";
 import SearchResult from './SearchResult';
@@ -36,13 +36,13 @@ export default function NavbarPage(props) {
 
 
   return (
-    <div className={NavCss.NavBar}>
-      <div className={NavCss.NavBar__Logo}>
+    <div className={CSS.NavBar}>
+      <div className={CSS.NavBar__Logo}>
         <img onClick={()=>{navigate('/home')}} src={`${BACKEND_BASE}/Logo.jpg`} alt=''/>
       </div>
-      <div className={NavCss.NavBar_Search}>
+      <div className={CSS.NavBar_Search}>
         <input type='text' placeholder='Search' onChange={populateSearch} required/>
-        <div className={NavCss.NavBar_SearchPopulate}>
+        <div className={CSS.NavBar_SearchPopulate}>
           {
             searchStore.loading?
             <ReactLoading type="spin" color="#0000FF" height={100} width={50}/>
@@ -55,15 +55,15 @@ export default function NavbarPage(props) {
       </div>
       {
         
-        <div className={NavCss.NavBarLinkDiv}> 
+        <div className={CSS.NavBarLinkDiv}> 
         {
           !user?
           <>
-            <Link className={NavCss.NavBarLink} to={'/login'}>
+            <Link className={CSS.NavBarLink} to={'/login'}>
               <Button variant="primary" size='lg'>LOGIN</Button>
             </Link>
 
-            <Link className={NavCss.NavBarLink} to={'/signupas'}>
+            <Link className={CSS.NavBarLink} to={'/signupas'}>
               <Button variant="primary" size='lg'>SIGNUP</Button>     
             </Link>  
           </>   

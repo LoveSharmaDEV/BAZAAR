@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react'
 import {useToasts } from 'react-toast-notifications';
 import {Navigate} from 'react-router-dom'
 import ReactLoading from "react-loading";
-import css from './SignupPage.module.css';
-import { AUTH_API} from '../../MasterData/GlobalData';
+import CSS from './SignupPage.module.css';
+import { AUTH_API, BACKEND_BASE} from '../../MasterData/GlobalData';
+import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
 
@@ -29,16 +30,32 @@ export default function SignupPage(props) {
     })
   } 
 
+  const GOOGLE_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/google`
+  }
+
+  const FACEBOOK_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/facebook`
+  }
+
+  const GITHUB_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/github`
+  }
+
+  const AMAZON_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/amazon`
+  }
+
+
+
   const onSubmit= async (e)=>{
+
     e.preventDefault();
 
-    /*-----------------------------------------FORM BASIC VALIDATIONS------------------------------------------*/
     if(!formref.current.checkValidity()){
       formref.current.reportValidity()
       return;
     }
-    /*---------------------------------------------------------------------------------------------------------*/
-
     
     if(signupInfo.password!==signupInfo.confirmpassword){
       addToast("PASSWORD MISMATCH", { appearance: 'error' });
@@ -63,9 +80,8 @@ export default function SignupPage(props) {
 
 
   
-  /*------------------WEB----------------------------------*/                    
   return (
-    <div  className={css.main}>
+    <div  className={CSS.main}>
       {
       status.loading && !status.signupsuccess?
        
@@ -73,49 +89,83 @@ export default function SignupPage(props) {
       
       !status.loading&&!status.signupsuccess?    
 
-          <form className={css.form} ref={formref} method='POST' value={signupInfo} onChange={signupData}>
-            <div className={css.signupcard}>
-              <div className={css.signupcardinput}>
-                <div className={css.inputdata}>
+          <form className={CSS.form} ref={formref} method='POST' value={signupInfo} onChange={signupData}>
+            <div className={CSS.signupcard}>
+              <div className={CSS.signupcardinput}>
+                <div className={CSS.inputdata}>
                   <input name='email' type='text' required/>
-                  <div className={css.underline}></div>
+                  <div className={CSS.underline}></div>
                   <label>Email</label>
                 </div>  
-                <div className={css.inputdata}>
+                <div className={CSS.inputdata}>
                   <input name='username' type='text' autoComplete='off' required/>
-                  <div className={css.underline}> </div>
+                  <div className={CSS.underline}> </div>
                   <label>Username</label>
                 </div> 
-                <div className={css.inputdata}>
+                <div className={CSS.inputdata}>
                   <input name='password' type='password' autoComplete='off' required/>
-                  <div className={css.underline}></div>
+                  <div className={CSS.underline}></div>
                   <label>Password</label>
                 </div> 
-                <div className={css.inputdata}>
+                <div className={CSS.inputdata}>
                   <input name='confirmpassword' type='password' autoComplete='off' required/>
-                  <div className={css.underline}></div>
+                  <div className={CSS.underline}></div>
                   <label>Confirm Password</label>
                 </div> 
-                <div className={css.inputdata}>
+                <div className={CSS.inputdata}>
                   <input name='contact' type='tel' autoComplete='off' required/>
-                  <div className={css.underline}></div>
+                  <div className={CSS.underline}></div>
                   <label>Contact No.</label>
                 </div> 
-                <div className={css.inputdata}>
+                <div className={CSS.inputdata}>
                   <input name='DOB' type='Date' autoComplete='off' required/>
-                  <div className={css.underline}></div>
+                  <div className={CSS.underline}></div>
                   <label>DOB</label>
                 </div>
                 {role==="seller"?
-                <div className={css.inputdata}>
+                <div className={CSS.inputdata}>
                   <input name='storeName' type='text' autoComplete='off' required/>
-                  <div className={css.underline}></div>
+                  <div className={CSS.underline}></div>
                   <label>Store Name</label>
                   <input ref={roleref} type='hidden' name="role" value="SELLER"/>
                 </div>
                 :<input ref={roleref} type='hidden' name="role" value="CUSTOMER"/> } 
               </div> 
-              <button className={css.button66} type='submit' onClick={onSubmit}>Sign-in</button> 
+
+              <Button type='submit' onClick={onSubmit} variant="primary" size='lg'>SIGNUP</Button>
+
+              <div className={CSS.AuthenticationStrategies}>
+
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/google.png`} 
+                alt=''
+                onClick={GOOGLE_AUTH}
+                />
+
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/facebook.png`} 
+                alt=''
+                onClick={FACEBOOK_AUTH}
+                />
+                
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/github.png`} 
+                alt=''
+                onClick={GITHUB_AUTH}
+                />
+
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/amazon.png`} 
+                alt=''
+                onClick={AMAZON_AUTH}
+                />
+              </div>
+
+
             </div>
           </form>:
           

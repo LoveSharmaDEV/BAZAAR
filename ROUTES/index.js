@@ -20,6 +20,8 @@ router.use('/user-personalization',require('./USER_PERSONALIZATION_ROUTES/USER_P
 /*---> STRIPE ROUTE <--- */
 router.use('/stripe',require('./STRIPE ROUTES/STRIPE__ROUTES'))
 
+/*---> PASSPORT AUTH ROUTE <--- */
+router.use('/passport/auth',require('./PASSPORT ROUTES/PASSPORT__ROUTES'))
 
 
 // EXPORT ROUTER

@@ -1,7 +1,7 @@
 import React from 'react'
 import AUTHORIZED_REQ from '../../COMMON_UTILS/AUTHORIZED_REQUEST';
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
-import CommentsCss from './Comments.module.css'
+import CSS from './Comments.module.css'
 import { BACKEND_BASE, POST_API } from '../../MasterData/GlobalData';
 
 export const CommentItem = (props) => {
@@ -35,7 +35,7 @@ export const CommentItem = (props) => {
 
 
   return (
-    <div className={CommentsCss.CommentOuterBody}>
+    <div className={CSS.CommentOuterBody}>
         <h4>{props.comment.user.username}</h4>
         <span> {props.comment.comment} </span>
         {

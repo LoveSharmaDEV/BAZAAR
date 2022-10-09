@@ -1,16 +1,43 @@
+import axios from 'axios';
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { BACKEND_BASE } from '../../MasterData/GlobalData'
 import CSS from './LandingPage.module.css'
+import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 
 export default function LandingPage(props) {
   
   const navigate = useNavigate();
+  const auth = useAuth();
+  const [searchParams]= useSearchParams();
 
   const NavigateToFeeds = ()=>{
     navigate('/posts')
   }
   
+  const SocialAuthenticate = async()=> {
+    if(searchParams.get('SocialAuth')==='true'){
+
+      const response = await axios.post(`${BACKEND_BASE}/passport/auth/${searchParams.get('SocialApp')}/success`,
+      {},
+      {
+        withCredentials: true,
+        headers: 
+        {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        }
+      });
+
+      if(response.data.errCode==='SUCCESS') {
+        auth.setUser(response.data.user);
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+      }
+    }
+  }
+
   useEffect(()=>{
     props.setBarVisibility(    
       {
@@ -21,6 +48,9 @@ export default function LandingPage(props) {
     })
   },[ ])
 
+  useEffect(()=>{
+      SocialAuthenticate();
+  },[])
 
 
   return (
@@ -75,7 +105,7 @@ export default function LandingPage(props) {
         </div>
 
         <div className={CSS.Content__Poster}>
-          <img src={BACKEND_BASE+'/DesignPattern.png'}/>
+          <img src={BACKEND_BASE+'/DesignPattern.png'} alt=''/>
           <div className={CSS.Poster__Overlay}></div>
           <div onClick={NavigateToFeeds} className={CSS.Poster__Button}>
             <div className={CSS.Poster__Button_Animation}></div>

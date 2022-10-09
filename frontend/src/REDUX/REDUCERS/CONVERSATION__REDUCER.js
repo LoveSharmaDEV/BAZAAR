@@ -100,7 +100,7 @@ export const fetch_conversation_reducer = (state=initState, action)=>{
 /* ----------------------> REDUCERS <------------------------- */
 
 
-/* HELPER AND TESTER FUNCTIONS */
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// /* HELPER AND TESTER FUNCTIONS */
+// function sleep(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }

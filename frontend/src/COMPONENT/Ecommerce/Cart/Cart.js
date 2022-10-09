@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import CartCss from './Cart.module.css'
+import CSS from './Cart.module.css'
 import CartCard from './CartCard';
 import { useDispatch } from 'react-redux';
 import { APICALL_GETCART } from '../../../REDUX/REDUCERS/CART__REDUCER';
@@ -55,8 +55,8 @@ export default function Cart(props) {
     })
 
   return (
-    <div className={CartCss.OuterMostContainer}>
-        <div className={CartCss.OuterMostContainer__CartBody}>
+    <div className={CSS.OuterMostContainer}>
+        <div className={CSS.OuterMostContainer__CartBody}>
             {   
                 cart.loading && !cart.error?
                 <ReactLoading type='spin' color='blue' height={'3%'} width={'3%'} />        

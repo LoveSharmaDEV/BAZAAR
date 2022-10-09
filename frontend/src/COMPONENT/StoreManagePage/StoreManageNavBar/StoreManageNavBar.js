@@ -1,5 +1,5 @@
 import React from 'react'
-import StoreManageNavBarCss from './StoreManageNavBar.module.css' 
+import CSS from './StoreManageNavBar.module.css' 
 import StoreManageNavBarData from './StoreManageNavBarData'
 
 function StoreManageNavBar(props) {
@@ -10,10 +10,10 @@ function StoreManageNavBar(props) {
     }
   
     return (
-    <div className={StoreManageNavBarCss.StoreManageNavBar_div}>
-        <div className={StoreManageNavBarCss.StoreManageNavBar_Tabs_div}>
+    <div className={CSS.StoreManageNavBar_div}>
+        <div className={CSS.StoreManageNavBar_Tabs_div}>
             {StoreManageNavBarData.map((option,key)=>
-                <div className={StoreManageNavBarCss.StoreManageNavBar_TabsOption_div}
+                <div className={CSS.StoreManageNavBar_TabsOption_div}
                 onClick={onTabClick}
                 data-option={option.title}
                 key={key}
@@ -26,7 +26,7 @@ function StoreManageNavBar(props) {
         {/*
         props.optionSelected==='Maintain Store'
         ?
-        <div className={StoreManageNavBarCss.StoreManageNavBar_Search_div}>
+        <div className={CSS.StoreManageNavBar_Search_div}>
             <input type='text' placeholder='Search Product'/>
         </div>
         :

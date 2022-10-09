@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import CardCardCss from './CartCard.module.css'
+import CSS from './CartCard.module.css'
 import { useDispatch } from 'react-redux';
 import { CHANGE_QUANT, DELETE_PRODUCT } from '../../../REDUX/REDUCERS/CART__REDUCER';
 import AUTHORIZED_REQ from '../../../COMMON_UTILS/AUTHORIZED_REQUEST';
@@ -21,36 +21,36 @@ function CartCard(props) {
         else console.log(response)
     }
   return (
-    <div className={CardCardCss.CardContainer}>
-        <div className={CardCardCss.CardContainer__ImagePanel}>
+    <div className={CSS.CardContainer}>
+        <div className={CSS.CardContainer__ImagePanel}>
             {
                 props.product.productImage.length>1?
-                <img className={CardCardCss.ImagePanel__rightBtn} src={`${BACKEND_BASE}/right.png`} alt=''/>
+                <img className={CSS.ImagePanel__rightBtn} src={`${BACKEND_BASE}/right.png`} alt=''/>
                 :
                 null
             }
-            <img className={CardCardCss.ImagePanel__image} src={`${BACKEND_BASE}/${props.product.productImage[index]}`} alt=''/>
+            <img className={CSS.ImagePanel__image} src={`${BACKEND_BASE}/${props.product.productImage[index]}`} alt=''/>
 
             {
                 props.product.productImage.length>1?
-                <img className={CardCardCss.ImagePanel__leftBtn} src={`${BACKEND_BASE}/right.png`} alt=''/>
+                <img className={CSS.ImagePanel__leftBtn} src={`${BACKEND_BASE}/right.png`} alt=''/>
                 :
                 null
             }
 
         </div>
-        <div className={CardCardCss.CardContainer__DetailPanel}>
+        <div className={CSS.CardContainer__DetailPanel}>
             <img style={{backgroundColor:props.product.color}} 
             onClick={deleteCartProduct}
-            className={CardCardCss.DetailPanel__Delete} 
+            className={CSS.DetailPanel__Delete} 
             src={`${BACKEND_BASE}/delete.png`} alt=''/>
-            <div className={CardCardCss.DetailPanel__Heading}>
+            <div className={CSS.DetailPanel__Heading}>
                 <span style={{backgroundColor:props.product.color}}>{props.product.product.ProductName}</span>
             </div>
 
             {
                 props.product.product.isColorAvailable?
-                    <div className={CardCardCss.DetailPanel__Color}>
+                    <div className={CSS.DetailPanel__Color}>
                         <div style={{backgroundColor:props.product.color}}></div>
                     </div>
                 :
@@ -59,19 +59,19 @@ function CartCard(props) {
 
             {
                 props.product.product.isSizeAvailable?
-                    <div className={CardCardCss.DetailPanel__Size}>
+                    <div className={CSS.DetailPanel__Size}>
                         <span style={{backgroundColor:props.product.color}}>{props.product.size}</span>
                     </div>
                 :
                 null
             }
 
-            <div  className={CardCardCss.DetailPanel__Quantity}>
+            <div  className={CSS.DetailPanel__Quantity}>
                 <div onClick={decreaseQuantity} style={{backgroundColor:props.product.color}}>-</div> 
                 <span>{props.product.Quantity}</span>
                 <div onClick={increaseQuantity} style={{backgroundColor:props.product.color}}>+</div>
             </div>
-            <div className={CardCardCss.DetailPanel__Price}>
+            <div className={CSS.DetailPanel__Price}>
 
                 <img src={`${BACKEND_BASE}/rupee.png`} alt=''/>
                 <span>{props.product.Quantity*props.product.product.ProductPrice}</span>

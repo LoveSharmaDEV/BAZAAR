@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactLoading from "react-loading";
 import {useToasts } from 'react-toast-notifications';
-import logincss from './LoginPage.module.css'
+import CSS from './LoginPage.module.css'
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import Button from 'react-bootstrap/esm/Button';
+import { BACKEND_BASE } from '../../MasterData/GlobalData';
 
 export default function LoginPage(props) {
   const [loginInfo, setloginInfo]= useState({});
@@ -35,6 +36,22 @@ export default function LoginPage(props) {
     }
   }
 
+  const GOOGLE_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/google`
+  }
+
+  const FACEBOOK_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/facebook`
+  }
+
+  const GITHUB_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/github`
+  }
+
+  const AMAZON_AUTH = (e)=>{
+    window.location = `${BACKEND_BASE}/passport/auth/amazon`
+  }
+
 useEffect(()=>{
   props.setBarVisibility(    
     {
@@ -47,7 +64,7 @@ useEffect(()=>{
 
   
   return (
-    <div className={logincss.main}>
+    <div className={CSS.main}>
       {
       !auth.user && auth.loading?
       
@@ -56,18 +73,47 @@ useEffect(()=>{
       !auth.user && !auth.loading?
 
         <form ref={formref} method='POST' onChange={loginData}>
-          <div className={logincss.logincard}>
-            <div className={logincss.inputdata}>
+          <div className={CSS.logincard}>
+            <div className={CSS.inputdata}>
               <input type='text' name='email' autoComplete='off' required/>
-              <div className={logincss.underline}></div> 
+              <div className={CSS.underline}></div> 
               <label>Username</label>
             </div>
-            <div className={logincss.inputdata}>
+            <div className={CSS.inputdata}>
               <input type='password' name="password" autoComplete='off' required/>
-              <div className={logincss.underline}></div> 
+              <div className={CSS.underline}></div> 
               <label>Password</label>
             </div>
             <Button onClick={onlogin} variant="primary" size='lg'>LOGIN</Button>
+              <div className={CSS.AuthenticationStrategies}>
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/google.png`} 
+                alt=''
+                onClick={GOOGLE_AUTH}
+                />
+
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/facebook.png`} 
+                alt=''
+                onClick={FACEBOOK_AUTH}
+                />
+                
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/github.png`} 
+                alt=''
+                onClick={GITHUB_AUTH}
+                />
+
+                <img 
+                className={CSS.AuthenticationStrategies__Icon} 
+                src={`${BACKEND_BASE}/amazon.png`} 
+                alt=''
+                onClick={AMAZON_AUTH}
+                />
+              </div>
           </div>
         </form>:null
       }

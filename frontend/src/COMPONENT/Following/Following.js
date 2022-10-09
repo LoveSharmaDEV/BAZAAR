@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import AUTHORIZED_REQ from '../../COMMON_UTILS/AUTHORIZED_REQUEST'
-import FollowingCss from './Following.module.css'
+import CSS from './Following.module.css'
 import ReactLoading from 'react-loading';
 import FollowingCard from './FollowingCard';
 import { USER_PERSONALIZATION_API } from '../../MasterData/GlobalData';
@@ -52,7 +52,7 @@ function Following(props) {
     },[])
 
     return (
-        <div className={FollowingCss.OuterContainer}>
+        <div className={CSS.OuterContainer}>
         {
             apiStatus.loading && !apiStatus.error?
                 <ReactLoading type='spin' color='blue' height={'3%'} width={'3%'} />         

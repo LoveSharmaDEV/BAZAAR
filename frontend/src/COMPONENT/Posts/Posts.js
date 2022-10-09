@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import css from './Posts.module.css';
+import CSS from './Posts.module.css';
 import {useDispatch, useSelector} from 'react-redux'
 import { APICALL_GETPOST} from '../../REDUX/REDUCERS/POSTS__REDUCER';
 import PostCard from './PostCard';
@@ -39,11 +39,11 @@ export default function Posts(props) {
   },[ ])
 
   return (
-    <div className={css.main}>
-      <div className={css.createPost_div}>
-        <img src={`${BACKEND_BASE}/plus.png`} className={css.createPost_btn} onClick={showPopUpScreen} alt='createpost'/>
+    <div className={CSS.main}>
+      <div className={CSS.createPost_div}>
+        <img src={`${BACKEND_BASE}/plus.png`} className={CSS.createPost_btn} onClick={showPopUpScreen} alt='createpost'/>
       </div>
-      <div className={css.postsScreen_div}>
+      <div className={CSS.postsScreen_div}>
         {
           posts.loading && !posts.error?
           <ReactLoading type='spin' color='blue' height={'3%'} width={'3%'} />        

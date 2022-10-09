@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { chatSocketContext } from "../CONTEXT API/CHATSOCKET_CONTEXT";
 import socketIO from 'socket.io-client';
 import { useAuth } from "./AUTH_CUSTOM_HOOK";

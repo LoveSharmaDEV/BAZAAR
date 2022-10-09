@@ -1,4 +1,4 @@
-import StoreManageGridElementCss from './StoreManageGridElement.module.css'
+import CSS from './StoreManageGridElement.module.css'
 import { useState } from 'react';
 import { DELETE_FROM_STOCK } from '../../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCER';
 import { useDispatch } from 'react-redux';
@@ -49,10 +49,10 @@ function StoreManageGridElement(props) {
         null
       } */}
 
-      <div className={StoreManageGridElementCss.StoreManageGridElement}>
-        <div className={StoreManageGridElementCss.StoreManageGridElement_ImageCarousal}>
-          <img onClick={changePicBackward} src={`${BACKEND_BASE}/right.png`} className={StoreManageGridElementCss.ProductCardBackward} alt='changePic'/>
-          <div className={StoreManageGridElementCss.StoreManageGridElement_ImagePanel_div}>
+      <div className={CSS.StoreManageGridElement}>
+        <div className={CSS.StoreManageGridElement_ImageCarousal}>
+          <img onClick={changePicBackward} src={`${BACKEND_BASE}/right.png`} className={CSS.ProductCardBackward} alt='changePic'/>
+          <div className={CSS.StoreManageGridElement_ImagePanel_div}>
             
             {
               props.product.ProductImage?
@@ -71,14 +71,14 @@ function StoreManageGridElement(props) {
             }
 
           </div>
-          <img onClick={changePicForward} src={`${BACKEND_BASE}/right.png`} className={StoreManageGridElementCss.ProductCardForward} alt='changePic'/>
+          <img onClick={changePicForward} src={`${BACKEND_BASE}/right.png`} className={CSS.ProductCardForward} alt='changePic'/>
         </div>
         
-        <div className={StoreManageGridElementCss.StoreManageGridElement_ProductName}>
+        <div className={CSS.StoreManageGridElement_ProductName}>
           <span>{props.product.ProductName}</span>
         </div>
         
-        <div className={StoreManageGridElementCss.StoreManageGridElement_Actions}>
+        <div className={CSS.StoreManageGridElement_Actions}>
 
           <Button onClick={toggleUpdateForm} variant="primary" size='lg'>UPDATE</Button>
           <Button onClick={DeleteProduct} variant="primary" size='lg'>DELETE</Button>

@@ -5,28 +5,32 @@ const User = require('../../../MODELS/').User
 
 /* ---------------> FETCH STORE BY STOREID <--------------- */
 module.exports.FETCHSTOREBYUSERID_API__CONTROLLER = async(req,res)=>{
+
     try{
         const store = await Store.findOne({owner:req.user._id});
-        const products = await Product.find({user:req.user._id});   
-        if(store)
-        {
+
+        if(!store){
             return res.status(200).json({
-                message:'Store fetched successfully',
-                errCode:'SUCCESS',
-                store,
-                products
+                message:`STORE DOESN'T EXISTS`,
+                errCode:'FAILURE'
             })
         }
 
+        const products = await Product.find({user:req.user._id});   
+
+
         return res.status(200).json({
-            message:`Store doesn't exist`,
-            errCode:'FAILURE'
+            message:'Store fetched successfully',
+            errCode:'SUCCESS',
+            store,
+            products
         })
+     
     }
     catch(e)
     {
         return res.status(200).json({
-            message:`INTERNAL ERROR ${e.message}`,
+            message:`STORE DOESN'T EXISTS ${e.message}`,
             errCode:'FAILURE'
         })
     }
@@ -38,11 +42,13 @@ module.exports.FETCHSTOREBYUSERID_API__CONTROLLER = async(req,res)=>{
 module.exports.FETCHSTOREBYSTORENAME_API__CONTROLLER = async (req,res)=>{
     try{
         const store = await Store.findOne({storeName:req.params.storeName});
+
         if(!store) return res.status(200).json({
             message:'Store Not Found',
             errCode:'FAILURE'
         })
         const product = await Product.find({store:store._id});
+
         return res.status(200).json({
             message:'Stock fetched',
             errCode:'SUCCESS',
@@ -90,25 +96,25 @@ module.exports.PRODUCTUPLOAD_API__CONTROLLER = async (req, res)=>{
         if(!product)
         {
             return res.status(200).json({
-                message:'Product Uploading failed',
+                message:'PRODUCT UPLOADING FAILED',
                 errCode:'FAILURE'
             })
         }
 
         return res.status(200).json({
-            message:'Product Successfully Uploaded',
+            message:'PRODUCT SUCCESSFULLY UPLOADED',
             errCode:'SUCCESS',
             product
         })
+
     }
     catch(e)
     {
         return res.status(200).json({
-            message:`INTERNAL SERVER ERROR ${e.message}`,
+            message:`PRODUCT SUCCESSFULLY UPLOADED ${e.message}`,
             errCode:'FAILURE'
         })
     }
-
 }
 /*--------------------> PRODUCT UPLOAD CONTAINER <----------------- */
 
@@ -117,22 +123,23 @@ module.exports.PRODUCTFETCH_API__CONTROLLER = async (req,res)=>{
 
     try{
         const products = await Product.find({user:req.user._id});
-        if(products.length==0)
-        return res.status(200).json({
-            message:`Product Fetching failed`,
-            errCode:'FAILURE'
+            if(products.length==0)
+            return res.status(200).json({
+                message:`PRODUCT FETCHING FAILED`,
+                errCode:'FAILURE'
         })
 
         return res.status(200).json({
-            message:`Product Fetching Successfull`,
+            message:`PRODUCT FETCHING SUCCESS`,
             errCode:'SUCCESS',
             products
         })
+
     }   
     catch(e)
     {
         return res.status(200).json({
-            message:`Product Fetching failed ${e.message}`,
+            message:`PRODUCT FETCHING FAILED ${e.message}`,
             errCode:'FAILURE'
         })
     }
@@ -142,14 +149,16 @@ module.exports.PRODUCTFETCH_API__CONTROLLER = async (req,res)=>{
 /*--------------------> PRODUCT DELETE CONTAINER <----------------- */
 module.exports.PRODUCTDELETE_API__CONTROLLER = async (req,res) =>{
     try{
+
         const product = await Product.deleteOne({_id:req.body.productID});
+
         if(product) return res.status(200).json({
-            message:"Product removed successfully",
+            message:"PRODUCT REMOVAL SUCCESS",
             errCode:'SUCCESS'
         })
 
         return res.status(200).json({
-            message:"Product removing failed",
+            message:"PRODUCT REMOVAL FAILED",
             errCode:'FAILURE'
         })
         
@@ -168,8 +177,11 @@ module.exports.PRODUCTDELETE_API__CONTROLLER = async (req,res) =>{
 /*--------------------> PRODUCT UPDATE CONTAINER <----------------- */
 module.exports.PRODUCTUPDATE_API__CONTROLLER = async(req,res)=>{
     try{
+
         const opts = {new:true};
+
         let TempProductImage = [];
+
         if(req.body.ProductImage){
 
             req.body.ProductImage.forEach((product,key)=>{
@@ -178,7 +190,6 @@ module.exports.PRODUCTUPDATE_API__CONTROLLER = async(req,res)=>{
                     TempProductImage[key]={
                         path:req.files[i].filename,
                         color:JSON.parse(product).color
-                    
                     }
                     i++;
                 }
@@ -215,11 +226,6 @@ module.exports.PRODUCTUPDATE_API__CONTROLLER = async(req,res)=>{
                         req.body.HashTags
         },opts)
 
-
-        // const status = await Product.updateOne({_id:req.body.ProductID},{
-        //    ProductImage: product.ProductImage.map((product,key)=>{ 
-        //     return {path:product.path,color:JSON.parse(req.body.ProductImage[key]).color} })
-        // })
         
         if(product) return res.status(200).json({
             message:"Product Updated Successfully",

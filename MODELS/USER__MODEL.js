@@ -1,5 +1,6 @@
 /* ------> IMPORT DEPENDENCIES <------ */
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 /* ------> DEFINE SCHEMA <------ */
 const userSchema = new  mongoose.Schema({
@@ -9,9 +10,7 @@ const userSchema = new  mongoose.Schema({
     },
     username:{
         type:String,
-        unique: true,
         trim:true,
-        required:true
     },
     password:{
         type: String,
@@ -21,8 +20,6 @@ const userSchema = new  mongoose.Schema({
     email:{
         type:String,
         trim:true,
-        required: true,
-        unique: true
     },
     role:{
         type: String,
@@ -39,11 +36,32 @@ const userSchema = new  mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:'Store'
         }
-    ]
+    ],
+    SocialAuth:{
+        type:Boolean,
+        default:false
+    },
+    SocialAuthID:{
+        type:String,
+    }
+
 },{
     timestamps:{
         createdAt:true,
         updatedAt:false
+    }
+})
+
+
+userSchema.pre('save',async function (next){
+
+    try{
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(this.password,salt);
+        this.password = hashedPassword;
+        next();
+    }catch(error){
+        next(error)
     }
 })
 

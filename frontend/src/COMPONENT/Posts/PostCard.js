@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import css from './PostCard.module.css'
+import CSS from './PostCard.module.css'
 import { useAuth } from '../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import { APICALL_GETPOST, remove_post } from '../../REDUX/REDUCERS/POSTS__REDUCER';
 import AUTHORIZED_REQ from '../../COMMON_UTILS/AUTHORIZED_REQUEST';
@@ -100,7 +100,7 @@ export default function PostCard(props) {
   }
 
   return (
-    <div className={css.PostCard}>
+    <div className={CSS.PostCard}>
       {
         showCommentBox
         ?
@@ -111,11 +111,11 @@ export default function PostCard(props) {
         :
         null
       }
-      <div className={css.main}>
+      <div className={CSS.main}>
         {/* ------------------------------------------------------------------------------- */}
-          <div className={css.postpic_Outerdiv}>
-              <img onClick={changePicBackward} src={`${BACKEND_BASE}/right.png`} className={css.ProductCardBackward} alt='changePic'/>
-              <div className={css.postpic_div}>
+          <div className={CSS.postpic_Outerdiv}>
+              <img onClick={changePicBackward} src={`${BACKEND_BASE}/right.png`} className={CSS.ProductCardBackward} alt='changePic'/>
+              <div className={CSS.postpic_div}>
                   <img src={
                             props.post.postPic[imageIndex] instanceof File?
                               URL.createObjectURL(props.post.postPic[imageIndex])
@@ -124,65 +124,66 @@ export default function PostCard(props) {
                           } 
                     alt='' 
                   />
-                  <div className={css.productPic_Sliding_Name}>
+                  <div className={CSS.productPic_Sliding_Name}>
                       <span>
                         {props.post.postName}
                       </span>
                   </div>
               </div>
-              <img onClick={changePicForward} src={`${BACKEND_BASE}/right.png`} className={css.ProductCardForward} alt='changePic'/>
+              <img onClick={changePicForward} src={`${BACKEND_BASE}/right.png`} className={CSS.ProductCardForward} alt='changePic'/>
           </div>
           
         {/* ------------------------------------------------------------------------------- */}
-          <div className={css.PostCard_Content_div}>
+          <div className={CSS.PostCard_Content_div}>
 
-            <div className={css.PostCard_StoreName_div}>
+            <div className={CSS.PostCard_StoreName_div}>
               <span>
                 {
                   props.post.like.includes(user._id)?
-                    <img onClick={toggleLike} className={css.PostCard_Action_img} src={`${BACKEND_BASE}/heart.png`} alt='like'/> 
+                    <img onClick={toggleLike} className={CSS.PostCard_Action_img} src={`${BACKEND_BASE}/heart.png`} alt='like'/> 
                   :
-                    <img onClick={toggleLike} className={css.PostCard_Action_img} src={`${BACKEND_BASE}/emptyheart.png`} alt='like'/>
+                    <img onClick={toggleLike} className={CSS.PostCard_Action_img} src={`${BACKEND_BASE}/emptyheart.png`} alt='like'/>
                 }
               </span>
-              <span className={css.PostCard_Storename}>{props.post?.store?.storeName}</span>
+              <span className={CSS.PostCard_Storename}>{props.post?.store?.storeName}</span>
               {
-              props.post.user._id===auth.user._id?
-                <img 
-                className={css.PostCard_Action_img_delete} 
-                src={`${BACKEND_BASE}/delete.png`}
-                onClick={Delete_Post}
-                />
-                :
-                null
+                props.post.user._id===auth.user._id?
+                  <img 
+                  className={CSS.PostCard_Action_img_delete} 
+                  src={`${BACKEND_BASE}/delete.png`}
+                  onClick={Delete_Post}
+                  alt=''
+                  />
+                  :
+                  null
               }
             </div>
 
-            <div className={css.PostCard_Description_div}>
+            <div className={CSS.PostCard_Description_div}>
                 <span>{props.post.postDescription}</span>
             </div>
 
-            <div className={css.PostCard_Action_div1}>
+            <div className={CSS.PostCard_Action_div1}>
               <span>
-                <img className={css.PostCard_Action_img} src={`${BACKEND_BASE}/price-tag.png`} alt='ag'/>
+                <img className={CSS.PostCard_Action_img} src={`${BACKEND_BASE}/price-tag.png`} alt='ag'/>
                 {props.post.postPrice} Rs
               </span>
               <button onClick={NavigateToStore}> <img src={`${BACKEND_BASE}/shop.png`} alt=''/>Store</button>
               <button onClick={toggleCommentBox}> <img src={`${BACKEND_BASE}/comment.png`} alt=''/> Comment</button>
             </div>
 
-            <div className={css.PostCard_Action_div2}>
+            <div className={CSS.PostCard_Action_div2}>
 
               {
                 user._id !== props.post.user._id
                 ?
                 <>              
                   <button onClick={UnFollowAction} >
-                    <img className={css.PostCard_Action_img} src={`${BACKEND_BASE}/unfollow.png`} alt='' />
+                    <img className={CSS.PostCard_Action_img} src={`${BACKEND_BASE}/unfollow.png`} alt='' />
                     unfollow
                   </button>
                   <button onClick={initiateChat}>
-                    <img className={css.PostCard_Action_img} src={`${BACKEND_BASE}/chat.png`} alt='chat' />
+                    <img className={CSS.PostCard_Action_img} src={`${BACKEND_BASE}/chat.png`} alt='chat' />
                     Chat
                   </button>
                 </>

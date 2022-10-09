@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import StoreManageAccountCss from './StoreManageAccount.module.css'
+import CSS from './StoreManageAccount.module.css'
 import AUTHORIZED_REQ from '../../../COMMON_UTILS/AUTHORIZED_REQUEST'
 import { STRIPE_API } from '../../../MasterData/GlobalData';
 import ReactLoading from 'react-loading';
@@ -94,7 +94,7 @@ function StoreManageAccount() {
   },[])
 
   return (
-    <div className={StoreManageAccountCss.OuterDiv}>
+    <div className={CSS.OuterDiv}>
       
         {
           apiStatus.loading && !apiStatus.error?
@@ -104,16 +104,16 @@ function StoreManageAccount() {
               <span>Internal Server Issue</span>
               :
               buttonView.showCreateConnectedAccountBtn?
-              <button onClick={createConnectedAccount} className={StoreManageAccountCss.button66}>LINK YOUR ACCOUNT</button>   
+              <button onClick={createConnectedAccount} className={CSS.button66}>LINK YOUR ACCOUNT</button>   
               :
               buttonView.showContinueOnBoardingProcessBtn?
-                <button onClick={continueOnBoardingProcess} className={StoreManageAccountCss.button66}>CHECK ONBOARDING PROCESS</button>        
+                <button onClick={continueOnBoardingProcess} className={CSS.button66}>CHECK ONBOARDING PROCESS</button>        
                 :  
                 !buttonView.showCreateConnectedAccountBtn && !buttonView.showContinueOnBoardingProcessBtn?
                   <>
-                    <span className={StoreManageAccountCss.Message1}>Your Account is configured</span>
-                    <span className={StoreManageAccountCss.Message2}>For Updating Please Click On Below Button</span>
-                    <button onClick={continueOnBoardingProcess} className={StoreManageAccountCss.button66}>UPDATE</button>        
+                    <span className={CSS.Message1}>Your Account is configured</span>
+                    <span className={CSS.Message2}>For Updating Please Click On Below Button</span>
+                    <button onClick={continueOnBoardingProcess} className={CSS.button66}>UPDATE</button>        
                   </> 
                   :
                   null

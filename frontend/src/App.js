@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
-import { ToastProvider} from 'react-toast-notifications';
-import {  useState } from 'react';
+import { ToastProvider } from 'react-toast-notifications';
+import { useState } from 'react';
 import { useAuth } from './CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import { useOverlayContext } from './CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
 import LandingPage from './COMPONENT/Landing/LandingPage';
@@ -27,97 +27,97 @@ const cookies = new Cookies();
 
 export const RequireAuth = function ({ children }) {
   const auth = useAuth();
-  if(auth.user && !auth.loading) return children;
-  if(!auth.user && auth.loading) return <ReactLoading type="spin" color="#0000FF" height={100} width={50}/>;
-  if(!auth.user && !auth.loading) return <Navigate to='/login'/>;
+  if (auth.user && !auth.loading) return children;
+  if (!auth.user && auth.loading) return <ReactLoading type="spin" color="#0000FF" height={100} width={50} />;
+  if (!auth.user && !auth.loading) return <Navigate to='/login' />;
 }
 
-export const RestrictPath = function ({children}){
+export const RestrictPath = function ({ children }) {
   const auth = useAuth();
-  if(!auth.user && !auth.loading) return children;
-  if(!auth.user && auth.loading) return <ReactLoading type="spin" color="#0000FF" height={100} width={50}/>;
-  if(auth.user && !auth.loading) return <Navigate to={cookies.get('selectedPath')?cookies.get('selectedPath'):'/posts'}/>
+  if (!auth.user && !auth.loading) return children;
+  if (!auth.user && auth.loading) return <ReactLoading type="spin" color="#0000FF" height={100} width={50} />;
+  if (auth.user && !auth.loading) return <Navigate to={cookies.get('selectedPath') ? cookies.get('selectedPath') : '/posts'} />
 }
 
 
 function App() {
   const auth = useAuth();
   const overlay = useOverlayContext();
-  const [BarVisibility,setBarVisibility] = useState(
+  const [BarVisibility, setBarVisibility] = useState(
     {
-      rightNavBarVisibility:true,
-      leftNavBarVisibility:true,
-      topNavBarVisibility:true,
-      EcomNavBarVisibility:false
+      rightNavBarVisibility: true,
+      leftNavBarVisibility: true,
+      topNavBarVisibility: true,
+      EcomNavBarVisibility: false
     }
-  ) 
+  )
 
-  const [optionSelected, setOptionSelected] = useState(cookies.get('optionSelected')?cookies.get('optionSelected'):'Home');
-  
+  const [optionSelected, setOptionSelected] = useState(cookies.get('optionSelected') ? cookies.get('optionSelected') : 'Home');
 
-  
+
+
   return (
-      <Router>
-        
-        {
-          overlay.showOverlay?
+    <Router>
+
+      {
+        overlay.showOverlay ?
           <ToastProvider><Overlay data={overlay.customOverlayProps} setBarVisibility={setBarVisibility} /></ToastProvider>
           :
           null
-        }
+      }
+
+      {
+        BarVisibility.topNavBarVisibility
+          ?
+          <NavbarPage /> :
+          null
+      }
+
+      {
+        BarVisibility.EcomNavBarVisibility
+          ?
+          <EcomNavBar /> :
+          null
+      }
+
+      <div className='main_div_body'>
 
         {
-          BarVisibility.topNavBarVisibility
-          ?
-          <NavbarPage/>:
-          null
+          auth.user && BarVisibility.leftNavBarVisibility
+            ?
+            <LeftNavBar optionSelected={optionSelected} setOptionSelected={setOptionSelected} />
+            :
+            null
         }
+
+        <Routes>
+
+          <Route exact path='' element={<Navigate to={'/home'} />} />
+          <Route exact path='home' element={<LandingPage setBarVisibility={setBarVisibility} />} />
+          <Route exact path='login' element={<RestrictPath><ToastProvider><LoginPage setBarVisibility={setBarVisibility} /></ToastProvider></RestrictPath>} />
+          <Route exact path='signupas' element={<RestrictPath><SignUpAsPage /></RestrictPath>} />
+          <Route exact path='signup' element={<RestrictPath><ToastProvider><SignupPage /></ToastProvider></RestrictPath>} />
+          <Route exact path='posts' element={<RequireAuth><ToastProvider><Posts setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
+          <Route exact path='following' element={<RequireAuth><ToastProvider><Following setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
+          <Route exact path='store' element={<RequireAuth><ToastProvider><StoreManage setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
+          <Route exact path='settings' element={<RequireAuth><ToastProvider><Settings setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
+          <Route exact path='support' element={<RequireAuth><ToastProvider><Support /></ToastProvider></RequireAuth>} />
+          <Route exact path='store/:storeName' element={<Store setBarVisibility={setBarVisibility} />} />
+          <Route exact path='product/:storeName/:productID' element={<ProductView setBarVisibility={setBarVisibility} />} />
+          <Route exact path='cart' element={<ToastProvider><Cart setBarVisibility={setBarVisibility} /></ToastProvider>} />
+
+        </Routes>
 
         {
-          BarVisibility.EcomNavBarVisibility
-          ?
-          <EcomNavBar/>:
-          null
+          auth.user && BarVisibility.rightNavBarVisibility
+            ?
+            <RightNavBar />
+            :
+            null
         }
-        
-        <div className='main_div_body'>
 
-          {
-            auth.user && BarVisibility.leftNavBarVisibility
-            ?
-              <LeftNavBar optionSelected={optionSelected} setOptionSelected={setOptionSelected}/>
-            :
-            null
-          }
-
-          <Routes>
-
-            <Route exact path = '' element={<Navigate to={'/home'}/>}/>
-            <Route exact path = 'home' element={<LandingPage setBarVisibility={setBarVisibility}/>}/>
-            <Route exact path = 'login' element={ <RestrictPath><ToastProvider><LoginPage setBarVisibility={setBarVisibility}/></ToastProvider></RestrictPath>}/>
-            <Route exact path  ='signupas' element={<RestrictPath><SignUpAsPage/></RestrictPath>}/>
-            <Route exact path = 'signup' element={<RestrictPath><ToastProvider><SignupPage/></ToastProvider></RestrictPath>}/>
-            <Route exact path = 'posts' element={<RequireAuth><ToastProvider><Posts setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/>
-            <Route exact path = 'following' element={<RequireAuth><ToastProvider><Following setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/> 
-            <Route exact path = 'store' element={<RequireAuth><ToastProvider><StoreManage setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/> 
-            <Route exact path = 'settings' element={<RequireAuth><ToastProvider><Settings setBarVisibility={setBarVisibility}/></ToastProvider></RequireAuth>}/> 
-            <Route exact path = 'support' element={<RequireAuth><ToastProvider><Support/></ToastProvider></RequireAuth>}/>                                 
-            <Route exact path = 'store/:storeName' element={<Store setBarVisibility={setBarVisibility}/>}/>
-            <Route exact path = 'product/:storeName/:productID' element={<ProductView setBarVisibility={setBarVisibility}/>}/>
-            <Route exact path = 'cart' element={<ToastProvider><Cart setBarVisibility={setBarVisibility}/></ToastProvider>} />
-          
-          </Routes>
-
-          {
-            auth.user && BarVisibility.rightNavBarVisibility
-            ?
-              <RightNavBar/>
-            :
-            null
-          }
-
-        </div>
-      </Router>
+      </div>
+    </Router>
   );
 }
 

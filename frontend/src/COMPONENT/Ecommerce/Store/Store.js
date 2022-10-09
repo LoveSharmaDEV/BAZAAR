@@ -2,7 +2,7 @@ import React, { useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchStockByStoreNameAPI } from '../../../REDUX/REDUCERS/FETCH_STOCK_BY_STORENAME__REDUCER';
-import StoreCss from './Store.module.css';
+import CSS from './Store.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 
 const Store = (props) => {
@@ -32,8 +32,8 @@ const Store = (props) => {
     },[dispatch,storeName])
 
   return (
-    <div className={StoreCss.Store}>
-      <div className={StoreCss.StoreProductPage}>
+    <div className={CSS.Store}>
+      <div className={CSS.StoreProductPage}>
       {
         stock.stock.length!==0?
         stock.stock.map((product, key)=>{
