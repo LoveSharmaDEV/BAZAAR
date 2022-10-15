@@ -79,7 +79,7 @@
     left: 45%;
     height: 3rem;
     width: 3rem;
-    visibility: hidden;
+    opacity: 0.5;
 }
 
 .Container1__ImagePanel input[type='file']
@@ -94,12 +94,6 @@
 
 }
 
-.Container1__ImagePanel:hover .ImagePanel__UploadIcon
-{
-    visibility: visible;
-    pointer-events: none;
-
-}
 
 .ImagePanel__ImageList{
     display: flex;
@@ -131,14 +125,14 @@
 .ImageContainer__CloseBtn
 {
     position: absolute;
-    height: 1rem;
-    width: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
     cursor: pointer;
     top: 0;
     right: 0;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.266);
-    padding: 0.5rem
+    background-color: red;
+    opacity: 0.5;
 }
 
 .ImageContainer__ColorPanel
@@ -187,6 +181,7 @@
     width: 2rem;
     margin: 0rem 0rem 0rem 1rem;
     cursor: pointer;
+    opacity: 0.5;
 }
 
 .BodyTagsPanel_Header span
@@ -223,6 +218,12 @@
     top:0;
     right: 0;
     z-index: 1;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: red;
+    border-radius: 50%;
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 .BodyTagsPanel_Tags
@@ -240,7 +241,8 @@
     justify-content: center;
     align-items: center;
     padding: 0.5rem 1rem 0.5rem 1rem;
-    border: 1px solid black;
+    border: 1px solid silver;
+    color: silver;
     height: 2rem;
     border-radius: 1rem;
     margin: 1rem;
@@ -253,7 +255,11 @@
     right: 0;
     padding: 0.2rem;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.359);
+    background-color: red;
+    height: 1rem;
+    width: 1rem;
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 .ProductUploadForm__Container2

@@ -7,6 +7,9 @@ import { BACKEND_BASE, ECOMM_API } from '../../../MasterData/GlobalData';
 import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
 import Button from 'react-bootstrap/Button'
 import CloseButton from 'react-bootstrap/CloseButton';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 
 
@@ -14,6 +17,10 @@ function StoreManageGridElementUpdate(props) {
 
     const [showHashTagOverlay,setHashTagOverlay] = useState(false);
     const [currentInfo,setCurrentInfo] = useState('Product');
+    const [RequestStatus,setRequestStatus] = useState({loading:false,error:false,success:false})
+    const navigate = useNavigate();
+    const auth = useAuth(); 
+
     const overlay = useOverlayContext();
     
     const dispatch = useDispatch();
@@ -147,9 +154,17 @@ function StoreManageGridElementUpdate(props) {
     const OnProductUpdate = async (e)=>{
         e.preventDefault();
         const LocalFormData = GET_FormData(FormData);
+        setRequestStatus({...RequestStatus,loading:true,error:false,success:false})
         const response = await AUTHORIZED_REQ(ECOMM_API.STORE_PRODUCT_UPDATE,LocalFormData,{},'POST');
-        console.log(response)
+
+        if(response.data.errCode==="UNAUTHORIZED"){
+            setRequestStatus({...RequestStatus,loading:false,error:true,success:false});
+            auth.logout();
+            navigate('/login');
+        }
+
         if(response.data.errCode==='SUCCESS'){
+            setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
             dispatch(UPDATE_STOCK({...response.data.product})); 
             overlay.setShowOverlay(false)
         }
@@ -163,7 +178,14 @@ function StoreManageGridElementUpdate(props) {
 
             <div className={CSS.ProductUploadForm__FormHeader}>
                 <CloseButton className='mx-3'  onClick={onClose__UpdateForm} />          
-                <Button onClick={OnProductUpdate} variant="primary" size='lg'>UPDATE</Button>
+                <Button className='mt-2' onClick={OnProductUpdate} variant="primary" size='lg'>
+                  {
+                    RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                      <Spinner animation="border" /> 
+                      :
+                      'UPDATE'             
+                  }
+              </Button>
             </div>
 
 
@@ -176,10 +198,12 @@ function StoreManageGridElementUpdate(props) {
                   FormData.ProductImage.map((image , key) =>(
                     <div className={CSS.ImageList__ImageContainer} key={key}>
                         
-                        <CloseButton  
+                        <img
+                        src={`${BACKEND_BASE}/close.png`}  
                         className={CSS.ImageContainer__CloseBtn} 
                         data-delete={key}  
                         onClick={OnDelete__ProductImage} 
+                        alt=''
                         />          
 
                         <img 
@@ -244,7 +268,8 @@ function StoreManageGridElementUpdate(props) {
                             onKeyPress={OnAdd__HashTag}
                             />
                             
-                        <CloseButton 
+                        <img
+                        src={`${BACKEND_BASE}/close.png`}
                         className={`${CSS.InputOverlay__CloseBTN} mt-2 mr-2`} 
                         onClick={onToggle__HashTagOverlay} 
                         />       
@@ -269,7 +294,9 @@ function StoreManageGridElementUpdate(props) {
                         FormData.HashTags.map((hashtag,key) => 
                         <span key={key}>
                             
-                            <CloseButton className={CSS.Tags__CloseBTN} 
+                            <img
+                            src={`${BACKEND_BASE}/close.png`}
+                            className={CSS.Tags__CloseBTN} 
                             data-delete={key}  
                             onClick={OnDelete__HashTag} 
                             />          
@@ -288,8 +315,8 @@ function StoreManageGridElementUpdate(props) {
                 <div className={CSS.Container2__Input1}>
 
                     <div className={CSS.Container2__Header}>
-                        <Button className='mx-3' onClick={onToggle__Page} variant="primary" size='lg'>PRODUCT DETAILS</Button>
-                        <Button className='mx-3' onClick={onToggle__Page} variant="primary" size='lg'>BUISNESS DETAILS</Button>
+                        <Button className='mx-3 mt-2 mb-2' onClick={onToggle__Page} variant="secondary" size='sm'>PRODUCT DETAILS</Button>
+                        <Button className='mx-3 mt-2 mb-2' onClick={onToggle__Page} variant="secondary" size='sm'>BUISNESS DETAILS</Button>
                     </div>
 
                     {

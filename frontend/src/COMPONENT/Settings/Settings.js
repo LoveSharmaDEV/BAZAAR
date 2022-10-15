@@ -7,6 +7,7 @@ import { USER_PERSONALIZATION_API } from '../../MasterData/GlobalData';
 import { ECOMM_API } from '../../MasterData/GlobalData';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 
 export default function Settings(props) {
@@ -15,6 +16,8 @@ export default function Settings(props) {
   const navigate = useNavigate();
   const [store,setStore] = useState({storePic:''});
   const [user, setUser] = useState({...auth.user});
+  const [RequestStatus,setRequestStatus] = useState({loading:false,error:false,success:false})
+
 
   const callAPI_DeactivateUser = async (e)=>{
       e.preventDefault()
@@ -23,19 +26,29 @@ export default function Settings(props) {
   }
 
   const callAPI_GetStore = async()=>{
+    setRequestStatus({...RequestStatus,loading:true,error:false,success:false});
+
     const response = await AUTHORIZED_REQ(ECOMM_API.FETCH_STORE_USERID,{},{},'POST');
-    if(response.data.errCode==='SUCCESS') setStore(response.data.store) ;
+
+    if(response.data.errCode==="UNAUTHORIZED"){
+      setRequestStatus({...RequestStatus,loading:false,error:true,success:false});
+      auth.logout();
+      navigate('/login');
+    }
+
+    if(response.data.errCode==='SUCCESS') {
+      setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
+      setStore(response.data.store) ;
+    }
   }
 
   const UpdateControl = async (e)=>{
     e.preventDefault();
     const LocalFormData = GET_FORMDATA({...user,...store});
-    // Log the key/value pairs
-// for (var pair of LocalFormData.entries()) {
-//   console.log(pair[0]+ ' - ' + pair[1]); 
-// }
     const response = await AUTHORIZED_REQ(USER_PERSONALIZATION_API.UPDATE_USER,LocalFormData,{},'POST')
-    if(response.data.errCode === 'SUCCESS') navigate('../posts')
+    if(response.data.errCode === 'SUCCESS') {
+      navigate('../posts')
+    }
   }
 
 
@@ -200,9 +213,18 @@ export default function Settings(props) {
               {
                 user.role==='SELLER'?
                   <div className={CSS.inputdata}>
-                    <input name='storeName' type='text' autoComplete='off'  value={store?.storeName} onChange={FORM__STOREDATA} required/>
-                    <div className={CSS.underline}></div>
-                    <label>Store Name</label>
+                    {
+                      RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                      <Spinner animation="border" /> 
+                      :
+                      <>
+                        <input name='storeName' type='text' autoComplete='off'  value={store?.storeName} onChange={FORM__STOREDATA} required/>
+                        <div className={CSS.underline}></div>
+                        <label>Store Name</label>
+                      </>
+
+                    }
+
                     <input type='hidden' name="role" value="SELLER" />
                   </div>
                   :

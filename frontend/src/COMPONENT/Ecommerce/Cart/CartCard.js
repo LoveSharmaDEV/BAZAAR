@@ -18,7 +18,6 @@ function CartCard(props) {
     const deleteCartProduct = async ()=>{
         const response = await AUTHORIZED_REQ(ECOMM_API.STORE_PRODUCT_DELETE_FROM_CART_API,{cartID:props.product._id},{},'POST')
         if(response.data.errCode==='SUCCESS') dispatch(DELETE_PRODUCT(props.index))
-        else console.log(response)
     }
   return (
     <div className={CSS.CardContainer}>

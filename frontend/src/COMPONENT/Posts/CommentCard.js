@@ -31,7 +31,6 @@ function CommentCard(props) {
         {PostId:props.post._id,Comment},
         {},
         'POST');
-            console.log(response)
         if(response.data.errCode==='SUCCESS') setComments([...Comments,response.data.comment]);  
     }
 

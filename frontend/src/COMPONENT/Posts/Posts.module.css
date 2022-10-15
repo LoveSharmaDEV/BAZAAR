@@ -1,4 +1,4 @@
-.main {
+.OuterContainer {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -6,7 +6,7 @@
   background-color: rgb(246, 246, 246);
 }
 
-.createPost_div {
+.OuterContainer__CreatePost {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -15,13 +15,13 @@
   padding: 10px;
 }
 
-.createPost_div img{
+.OuterContainer__CreatePost img{
   height: 3rem;
   width: 3rem;
  
 }
 
-.createPost_btn {
+.CreatePost__BTN {
   width: 7rem;
   height: 100%;
   margin-right: 9rem;
@@ -30,19 +30,30 @@
   cursor: pointer;
 }
 
-.createPost_btn:hover {
+.CreatePost__BTN:hover {
   transform: scale(1.1);
 }
 
-.createPost_btn:active {
+.CreatePost__BTN:active {
   opacity: 0.5;
 }
 
-.postsScreen_div {
+.OuterContainer__PostList {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
   flex: auto;
   overflow-y: scroll;
+}
+
+
+.PostList__NoFeeds{
+  position: absolute;
+  text-align: center;
+  font-size: larger;
+  color: gray;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.2rem;
+  top:45%
 }

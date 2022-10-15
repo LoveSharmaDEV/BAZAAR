@@ -7,6 +7,9 @@ import { ADD_TO_THE_STOCK } from '../../../REDUX/REDUCERS/FETCH_MY_STOCK__REDUCE
 import { BACKEND_BASE, ECOMM_API } from '../../../MasterData/GlobalData';
 import Button from 'react-bootstrap/Button'
 import CloseButton from 'react-bootstrap/CloseButton';
+import Spinner from 'react-bootstrap/Spinner';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 
 
 
@@ -28,12 +31,14 @@ function AddProduct() {
     ProductSize:[]
   });
 
+  const [RequestStatus,setRequestStatus] = useState({loading:false,error:false,success:false})
 
   const [showHashTagOverlay,setHashTagOverlay] = useState(false);
   const formref = useRef();
   const overlay = useOverlayContext();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const auth = useAuth(); 
 
   const AddHashTag = (e)=>{
     if (e.key === "Enter") {
@@ -68,21 +73,28 @@ function AddProduct() {
 
     e.preventDefault();
     const LocalFormData = GET_FORMDATA(formData);
+
+    setRequestStatus({...RequestStatus,loading:true,error:false,success:false});
+
     const response = await AUTHORIZED_REQ(ECOMM_API.STORE_PRODUCT_UPLOAD,
       LocalFormData,
       {},
       'POST')
+
+    if(response.data.errCode==="UNAUTHORIZED"){
+      setRequestStatus({...RequestStatus,loading:false,error:true,success:false});
+      auth.logout();
+      navigate('/login');
+    }
+
     if(response.data.errCode==='SUCCESS')
     {
-
+      setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
       dispatch(ADD_TO_THE_STOCK({...response.data.product}));
       overlay.setShowOverlay(false);
       
     }
-    else{
-      console.log(response.data)
-      //formref.current.reset()
-    }
+
 
 
     if(!formref.current.checkValidity()){
@@ -101,7 +113,14 @@ function AddProduct() {
 
             <div className={CSS.ProductUploadForm__FormHeader}>
                 <CloseButton onClick={()=>{ overlay.setShowOverlay(false)}}className={`${CSS.FormHeader__CloseBTN} mx-2`}/>
-                <Button onClick={onFormSubmit} variant="primary" size='lg'>SUBMIT</Button>
+                <Button className='mt-2' onClick={onFormSubmit} variant="primary" size='lg'>
+                  {
+                    RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                      <Spinner animation="border" /> 
+                      :
+                      'SUBMIT'             
+                  }
+              </Button>
             </div>
 
 
@@ -112,7 +131,23 @@ function AddProduct() {
 
                 {
                   formData.ProductImage.map((image , key) => (
-                  <img src={URL.createObjectURL(image.path)} alt='' key={key}/>
+                    <div className={CSS.ImageList__ImageContainer}>
+
+                      <img 
+                        className={CSS.ImageContainer__ProductImage}
+                        src={URL.createObjectURL(image.path)} 
+                        alt='' 
+                        key={key}
+                      />
+
+                      <img 
+                        className={CSS.ImageContainer__Delete}
+                        src={`${BACKEND_BASE}/close.png`} 
+                        alt='' 
+                        key={key}
+                      />
+
+                    </div>
                   ))
                 }
 

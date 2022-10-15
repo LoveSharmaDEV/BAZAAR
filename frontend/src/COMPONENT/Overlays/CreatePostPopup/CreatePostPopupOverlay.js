@@ -8,13 +8,17 @@ import { useDispatch } from 'react-redux';
 import { useOverlayContext } from '../../../CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
 import { BACKEND_BASE} from '../../../MasterData/GlobalData';
 import { POST_API } from '../../../MasterData/GlobalData';
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
+import CloseButton from 'react-bootstrap/CloseButton';
 
 function CreatePostPopup() {
   const auth = useAuth(); 
-  const formref = useRef(); 
+  const overlay = useOverlayContext();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const overlay = useOverlayContext();
+  const formref = useRef(); 
+
 
   const [postData, setPostData] = useState({
     postPic:[],
@@ -23,7 +27,10 @@ function CreatePostPopup() {
     postPrice:'',
     like:[]
   });
+
+  const [RequestStatus,setRequestStatus] = useState({loading:false,error:false,success:false})
   
+
   const formPostData = (e)=>{
     if(e.target.files) setPostData({
                                     ...postData,
@@ -35,7 +42,6 @@ function CreatePostPopup() {
                       [e.target.name]:e.target.value,
                       user:auth.user._id
       })
-      
   }
 
 
@@ -43,28 +49,28 @@ function CreatePostPopup() {
 
     e.preventDefault();
     
-    /* ----> FORM VALIDATE <---- */
     if(!formref.current.checkValidity()){
       formref.current.reportValidity()
       return;
     }
-    /* ----> FORM VALIDATE <---- */
 
-    /* ---> CREATE FORM DATA <---- */
     const ToBeSubmittedFormData = GET_FORMDATA(postData);
-    /* ---> CREATE FORM DATA <---- */
+
+    setRequestStatus({...RequestStatus,loading:true,error:false,success:false});
+
     const response = await AUTHORIZED_REQ(POST_API.UPLOAD_POST,
                                       ToBeSubmittedFormData,
                                       {'content-type':'multipart/form-data'},
                                       "POST");
-    
-    console.log(response)
-                                      
+                                          
     if(response.data.errCode==="UNAUTHORIZED"){
+      setRequestStatus({...RequestStatus,loading:false,error:true,success:false});
       auth.logout();
       navigate('/login');
     }
+
     else if(response.data.errCode==="SUCCESS"){
+      setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
       dispatch(add_to_post(response.data.post));
       overlay.setShowOverlay(false);
     }
@@ -88,11 +94,9 @@ function CreatePostPopup() {
     <div className={CSS.createPost_main}>
         <form  ref={formref} className={CSS.createPost_form} encType='multipart/form-data' onChange={formPostData}>
             
-            <img 
-            onClick={crossClick} 
-            className={CSS.cross_btn} 
-            src={`${BACKEND_BASE}/close.png`} 
-            alt="Close Button"
+            <CloseButton
+              onClick={crossClick} 
+              className={CSS.cross_btn} 
             />
 
             <div className={CSS.createPost_ImageContainer}>
@@ -132,11 +136,20 @@ function CreatePostPopup() {
 
             </div>
             <div className={CSS.createPost_DetailContainer}>
+
               <input name="postName" placeholder='Title' type='text' autoComplete='off' required/> 
               <input name="postPrice" placeholder='Price' type='text' autoComplete='off' required/>           
               <textarea name="postDescription" placeholder='Description' minlength="30" rows="5" cols="25">
               </textarea>
-              <button onClick={postSubmit} className={CSS.button66}>Submit</button>
+
+              <Button className='mt-2' onClick={postSubmit} variant="primary" size='lg'>
+                {
+                  RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                    <Spinner animation="border" /> 
+                    :
+                    'SUBMIT'             
+                }
+              </Button>
             </div>
         </form>
     </div>
