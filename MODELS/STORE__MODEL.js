@@ -14,10 +14,6 @@ const storeSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    followers:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    }],
     customers:[
         {
             type:mongoose.Schema.Types.ObjectId,

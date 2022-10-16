@@ -3,9 +3,9 @@
   display: flex;
   box-sizing: border-box;
   margin: 0.5rem;
-  border-radius: 2rem;
-  width: 100%;
   height: 5rem;
+  border-radius: 2rem;
+  width: 90%;
   background-color: white;
   padding: 0.8rem;
   border: 1px solid gray;
@@ -20,6 +20,7 @@
   width: 3rem;
   border-radius: 50%;
   margin: 0 1rem 0 0;
+  border: 0.1rem solid silver ;
 }
 
 .Content{
@@ -29,7 +30,9 @@
   justify-content: space-between;
   width: 100%;
   color: gray;
+  overflow: hidden;
 }
+
 
 .Header{
   font-size: 1.3rem;

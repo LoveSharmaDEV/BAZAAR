@@ -68,7 +68,7 @@ export default function ChatBox(props) {
     setMessage({
       ...message,
       From:auth.user._id,
-      To: props.toUser._id,
+      To: props.chatHeader.User._id,
       [e.target.name]:e.target.value
     })
   }
@@ -127,21 +127,17 @@ export default function ChatBox(props) {
 
   return (
     <div className={CSS.main}>
-
       <div className={CSS.cross_div}>
         <img className={CSS.crossimg} 
           onClick={closeChatBox} 
           src={`${BACKEND_BASE}/close.png`}
           alt='Cross'
         />
-        <span className={CSS.chatHeader}>{props?.toStore?.storeName}</span>
+        <span className={CSS.chatHeader}>{props.chatHeader.ChatHeaderName}</span>
         <img className={CSS.profilepic} 
           onClick= {closeChatBox} 
           src={
-                props.toUser.role==='SELLER'?
-                `${BACKEND_BASE}/${props.toStore.storePic}`
-                :
-                `${BACKEND_BASE}/${props.toUser.profilepic}`
+                `${BACKEND_BASE}/${props.chatHeader.ChatHeaderPicture}`
               } 
           alt=' '
         />

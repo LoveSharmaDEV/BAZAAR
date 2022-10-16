@@ -1,6 +1,7 @@
 const Conversation = require('../../../MODELS/index').Conversation;
 const Message = require('../../../MODELS').Message;
 const Store = require('../../../MODELS').Store;
+const User = require('../../../MODELS/index').User;
 const { v4: uuidv4 } = require('uuid');
 
 /*-------------> CHAT INIT CONTROLLER <---------- */
@@ -97,18 +98,34 @@ module.exports.SAVEMESSAGE_API__CONTROLLER = async (req,res)=>{
 /*-----------> FETCH STORE <------------------------- */
 module.exports.FETCH_STORE_API_CONTROLLER = async (req,res)=>{
     try{
-        const store = await Store.findOne({owner:req.body.ToUserID});
 
-        if(!store) return res.status(200).json({
-            message:`STORE DOESN'T EXISTS ${e.message}`,
-            errCode:"FAILURE",
-        })
+        const user = await User.findById(req.body.ToUserID); 
+        if(user.role==='SELLER'){
+
+            const store = await Store.findOne({owner:req.body.ToUserID});
+
+            if(!store) return res.status(200).json({
+                message:`STORE DOESN'T EXISTS ${e.message}`,
+                errCode:"FAILURE",
+            })
+    
+            return res.status(200).json({
+                message:"STORE RETRIEVED SUCCESSFULLY",
+                errCode:"SUCCESS",
+                ChatHeaderPicture:store.storePic,
+                ChatHeaderName:store.storeName,
+                user
+            })
+        }
 
         return res.status(200).json({
             message:"STORE RETRIEVED SUCCESSFULLY",
             errCode:"SUCCESS",
-            store
+            ChatHeaderPicture:user.profilepic,
+            ChatHeaderName:user.username.
+            user
         })
+
         
     }
     catch(e){

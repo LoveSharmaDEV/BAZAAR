@@ -5,6 +5,7 @@ import {fetchActiveChat_reducer} from "./FETCHACTIVECHAT__REDUCER"
 import { fetch_conversation_reducer } from './CONVERSATION__REDUCER';
 import { fetchAvailableStock_reducer } from "./FETCH_MY_STOCK__REDUCER";
 import {fetchAvailableStockByStorename_reducer} from './FETCH_STOCK_BY_STORENAME__REDUCER'
+import { FETCH_FOLLOWERS_REDUCER } from "./FOLLOW_REDUCER";
 
 const rootReducer ={
     rootReducer: combineReducers({
@@ -13,7 +14,8 @@ const rootReducer ={
         conversations: fetch_conversation_reducer,
         stock: fetchAvailableStock_reducer,
         stockByStore: fetchAvailableStockByStorename_reducer,
-        cart:fetchCart_reducer
+        cart:fetchCart_reducer,
+        follow: FETCH_FOLLOWERS_REDUCER
     })
 }
 

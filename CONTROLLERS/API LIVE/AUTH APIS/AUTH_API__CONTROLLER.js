@@ -1,6 +1,7 @@
 const User = require('../../../MODELS/index').User;
 const Token = require('../../../MODELS/index').Token;
 const Store = require('../../../MODELS/index').Store;
+const Follow = require('../../../MODELS/index').Follow;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -167,8 +168,7 @@ module.exports.SIGNIN_API__CONTROLLER = async (req,res)=>{
 
             if(store)
             {
-                user.following.push(store._id);
-                user.save();
+                await Follow.create({USER:user._id,FOLLOWING:[store._id]})
             }
         }
 

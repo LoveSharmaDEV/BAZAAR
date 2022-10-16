@@ -1,7 +1,8 @@
 const Product = require('../../../MODELS/index').Product;
 const Store = require('../../../MODELS/index').Store;
 const Cart = require('../../../MODELS').Cart;
-const User = require('../../../MODELS/').User
+const User = require('../../../MODELS/').User;
+const Follow = require('../../../MODELS/index').Follow;
 
 /* ---------------> FETCH STORE BY STOREID <--------------- */
 module.exports.FETCHSTOREBYUSERID_API__CONTROLLER = async(req,res)=>{
@@ -376,9 +377,6 @@ module.exports.UPDATEUSER_API__CONTROLLER = async (req,res)=>{
 
                 user.profilepic=req.files.profilepicupload[0].filename;
                 await user.save();
-                // await User.findByIdAndUpdate(req.user._id,{
-                //     profilepic:req.files.profilepicupload[0].filename
-                // });
             }
         }
         
@@ -395,11 +393,8 @@ module.exports.UPDATEUSER_API__CONTROLLER = async (req,res)=>{
                     storeName:req.body.storeName
                 });
 
-                store.followers = [req.user._id];
-                user.following = [store._id];
-                await user.save();
-                await store.save();
-
+                await Follow.create({USER:req.user._id,FOLLOWING:[store.id]})
+                
             }
 
             if(req.files.storePicupload)

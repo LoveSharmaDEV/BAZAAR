@@ -17,7 +17,7 @@ export default function RightNavBar() {
   })
 
 
-  const toggleListeners = useCallback(()=>{
+  const TOGGLE_LISTENERS = useCallback(()=>{
     const slider_show = Array.from(document.getElementsByClassName(CSS.slider_show))[0];
     const NavBar = Array.from(document.getElementsByClassName(CSS.main))[0];
     const slider_hide = Array.from(document.getElementsByClassName(CSS.slider_hide))[0];
@@ -61,14 +61,14 @@ export default function RightNavBar() {
     Observer.observe(document.body);
     /* Add a resize Observer -End */
 
-    toggleListeners()
+    TOGGLE_LISTENERS()
 
 
     /* Cleanup */
     return()=>{
       Observer.disconnect();
     }
-  },[hide, toggleListeners])
+  },[hide, TOGGLE_LISTENERS])
 
   useEffect(()=>{
     dispatch(APICALL_GETCONVERSATION())

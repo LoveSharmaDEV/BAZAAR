@@ -4,6 +4,7 @@ const Post = require('../../../MODELS/index').Post;
 const Store = require('../../../MODELS/index').Store;
 const  Comment = require('../../../MODELS/index').Comment;
 const User = require('../../../MODELS/index').User;
+const Following = require('../../../MODELS/index').Follow;
 /* ------> IMPORT DEPENDENCIES <------- */
 
 
@@ -137,27 +138,41 @@ module.exports.TOGGLELIKEONCOMMENT_API__CONTROLLER = async (req,res)=>{
 module.exports.FETCHFEEDS_API__CONTROLLER = async (req,res)=>{
 
     try{
-        const Stores = await Store.find({_id:{$in:req.user.following}});
-        const Users = Stores.map((store)=>{
+        const follow = await Following.findOne({USER:req.user._id});
+        let Stores=[];
+        let Users=[];
+        let Posts=[];
+        
+        if(follow){
+            
+            Stores = await Store.find({_id:{$in:follow.FOLLOWING}});
+            
+            Users = Stores.map((store)=>{
                 return store.owner
-        });
-        const Posts = await Post.find({user:{$in:Users}}).sort({createdAt:-1}).populate('user').populate('store')
+            });
+            
+            Posts = await Post.find({user:{$in:Users}}).sort({createdAt:-1}).populate('user').populate('store')
+        }
+
         return res.status(200).json(
             {
-                message:"Post fetched Successfully",
+                message:"POST FETCHED SUCCESSFULLY",
                 errCode:"SUCCESS",
                 data: Posts
             }
         )
+
     }catch(e){
+
         return res.status(200).json(
             {
-                message:`Post not fetched ${e.message}`,
+                message:`ERROR OCCURED WHILE FETCHING POSTS ${e.message}`,
                 errCode:"FAILURE"
             }
             )
     }
 }
+
 /* ---------------->  FETCH FEEDS CONTROLLER <--------------------- */
 
 

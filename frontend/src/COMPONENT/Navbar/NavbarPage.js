@@ -26,12 +26,22 @@ export default function NavbarPage(props) {
     navigate('/login');
   }
 
-  const populateSearch= async (e)=>{
-    if(e.target.value){
-      setSearchStore({...searchStore, loading:true});
-      const result = await axios.post(ECOMM_API.NAV_SEARCH_STORE,{key:e.target.value});
-      setSearchStore({...searchStore, loading:false, data:result.data.data})
-    }
+  const populateSearch = async (e) => {
+
+    let timer;
+    setSearchStore({...searchStore, loading:true});
+    return function(){
+
+      clearTimeout(timer)
+
+      timer = setTimeout(async ()=>{
+
+        if(e.target.value){
+          const result = await axios.post(ECOMM_API.NAV_SEARCH_STORE,{key:e.target.value});
+          setSearchStore({...searchStore, loading:false, data:result.data.data})
+        }
+      },500)
+    }()
   }
 
 
@@ -41,7 +51,7 @@ export default function NavbarPage(props) {
         <img onClick={()=>{navigate('/home')}} src={`${BACKEND_BASE}/Logo.jpg`} alt=''/>
       </div>
       <div className={CSS.NavBar_Search}>
-        <input type='text' placeholder='Search' onChange={populateSearch} required/>
+        <input type='text' placeholder='Search' onChange={(e)=>{populateSearch(e)}} required/>
         <div className={CSS.NavBar_SearchPopulate}>
           {
             searchStore.loading?

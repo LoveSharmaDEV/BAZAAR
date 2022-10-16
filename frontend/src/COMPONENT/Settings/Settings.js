@@ -40,6 +40,11 @@ export default function Settings(props) {
       setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
       setStore(response.data.store) ;
     }
+
+    if(response.data.errCode==='FAILURE') {
+      setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
+    }
+
   }
 
   const UpdateControl = async (e)=>{
@@ -214,7 +219,7 @@ export default function Settings(props) {
                 user.role==='SELLER'?
                   <div className={CSS.inputdata}>
                     {
-                      RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                      RequestStatus.loading?
                       <Spinner animation="border" /> 
                       :
                       <>

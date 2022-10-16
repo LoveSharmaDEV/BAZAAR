@@ -9,4 +9,5 @@ module.exports = {
     Comment: require('./COMMENT__MODEL'),
     Cart:require('./CART__MODEL'),
     Stripe: require('./STRIPEDETAILS__MODEL'),
+    Follow: require('./FOLLOW_MODEL')
 }

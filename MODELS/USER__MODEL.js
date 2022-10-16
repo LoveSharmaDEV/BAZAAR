@@ -34,12 +34,6 @@ const userSchema = new  mongoose.Schema({
         type:Date,
         default:'000000'
     },
-    following:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'Store'
-        }
-    ],
     SocialAuth:{
         type:Boolean,
         default:false

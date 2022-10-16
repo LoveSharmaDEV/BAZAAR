@@ -16,9 +16,8 @@ function Overlay(props) {
             return(<AddProduct setBarVisibility={props.setBarVisibility} />)
     
         case 'Chat':
-            return(<ChatBox conversationID={props.data.conversationID} 
-                toUser = {props.data.toUser} 
-                toStore = {props.data.toStore}/>)
+            return(<ChatBox conversationID={props.data.conversationID} chatHeader={props.data.chatHeader}
+                />)
         case 'ProductUpdate':
             return(<StoreManageGridElementUpdate setUpdateForm={props.data.setUpdateForm} product={props.data.product}/>)
         default:

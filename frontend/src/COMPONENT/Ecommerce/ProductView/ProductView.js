@@ -33,18 +33,18 @@ function ProductView(props) {
     })
 
 
-    const ScrollLeft = ()=>{
+    const ScrollRight = ()=>{
        slider.current.scrollBy({
         top: 0,
-        left: +60,
+        left: +200,
         behavior: 'smooth'
        })
     }
 
-    const ScrollRight=()=>{
+    const ScrollLeft=()=>{
         slider.current.scrollBy({
             top: 0,
-            left: -60,
+            left: -200,
             behavior: 'smooth'
         })
     }

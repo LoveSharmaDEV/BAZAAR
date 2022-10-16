@@ -258,57 +258,29 @@
 
 /*----------Post Card Header Start--------*/
 
+
+
 .PostCard_StoreName_div{
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
   font-size: 1.5rem;
 }
 
-.PostCard_StoreName_div > span{
+.PostCard_Storename{
+  position: absolute;
+  left: 40%;
   display: flex;
   align-items: center;
   color: gray;
 }
 
 
-.PostCard_StoreName_div span img{
+.PostCard_LikeAction img{
   height: 2rem;
   width: 2rem;
 }
-
-/*----------Post Card Header End--------*/
-
-/* CSS */
-.button54 {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
-  cursor: pointer;
-  border: 3px solid;
-  padding: 0.25em 0.5em;
-  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button54:active {
-  box-shadow: 0px 0px 0px 0px;
-  top: 5px;
-  left: 5px;
-}
-
-@media (min-width: 768px) {
-  .button54 {
-    padding: 0.25em 0.75em;
-  }
-}
-
 
 @media only screen and (max-width: 1430px) {
   .main {
