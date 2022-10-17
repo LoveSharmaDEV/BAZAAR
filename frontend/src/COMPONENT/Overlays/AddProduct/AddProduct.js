@@ -40,7 +40,7 @@ function AddProduct() {
   const navigate = useNavigate();
   const auth = useAuth(); 
 
-  const AddHashTag = (e)=>{
+  const ADD_TAG = (e)=>{
     if (e.key === "Enter") {
       setFormData({
         ...formData,
@@ -51,7 +51,7 @@ function AddProduct() {
   }
 
 
-  const handleFormData = (e) =>{
+  const HANDLE_FORM_DATA = (e) =>{
     if(e.target.files)
     {
       setFormData({
@@ -68,8 +68,19 @@ function AddProduct() {
       
   }
 
+  const DELETE_PICTURE = (e)=>{
+    const TempFormData = formData;
+    TempFormData.ProductImage.splice(e.target.dataset.key,1);
+    setFormData({...formData,TempFormData});
+  }
 
-  const onFormSubmit = async (e)=>{
+  const DELETE_TAG = (e)=>{
+    const TempFormData = formData;
+    TempFormData.hashtag.splice(e.target.dataset.key,1);
+    setFormData({...formData,TempFormData});
+  }
+
+  const FORM_SUBMIT = async (e)=>{
 
     e.preventDefault();
     const LocalFormData = GET_FORMDATA(formData);
@@ -95,8 +106,6 @@ function AddProduct() {
       
     }
 
-
-
     if(!formref.current.checkValidity()){
       formref.current.reportValidity()
       return;
@@ -104,16 +113,14 @@ function AddProduct() {
 
   }  
 
-
-
   return (
     <div className={CSS.OuterMostContainer}>
 
-        <form ref={formref} className={CSS.OuterMostContainer__ProductUploadForm} encType="multipart/formdata" onChange={handleFormData}>
+        <form ref={formref} className={CSS.OuterMostContainer__ProductUploadForm} encType="multipart/formdata" onChange={HANDLE_FORM_DATA}>
 
             <div className={CSS.ProductUploadForm__FormHeader}>
                 <CloseButton onClick={()=>{ overlay.setShowOverlay(false)}}className={`${CSS.FormHeader__CloseBTN} mx-2`}/>
-                <Button className='mt-2' onClick={onFormSubmit} variant="primary" size='lg'>
+                <Button className='mt-2' onClick={FORM_SUBMIT} variant="primary" size='lg'>
                   {
                     RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
                       <Spinner animation="border" /> 
@@ -144,6 +151,8 @@ function AddProduct() {
                         className={CSS.ImageContainer__Delete}
                         src={`${BACKEND_BASE}/close.png`} 
                         alt='' 
+                        onClick={DELETE_PICTURE}
+                        data-key={key}
                         key={key}
                       />
 
@@ -163,7 +172,7 @@ function AddProduct() {
                 {
                   showHashTagOverlay?
                     <div className={CSS.BodyTagsPanel_InputOverlay}>
-                          <input type='text' placeholder='Add your #Tags' onKeyPress={AddHashTag}/>
+                          <input type='text' placeholder='Add your #Tags' onKeyPress={ADD_TAG}/>
                           <CloseButton onClick={()=>{setHashTagOverlay(false)}} className={`${CSS.InputOverlay__CloseBTN} mt-2`}/>
                     </div>
                     :
@@ -179,7 +188,14 @@ function AddProduct() {
                 <div className={CSS.BodyTagsPanel_Tags}>
 
                       {
-                        formData.hashtag.map((hashtag,key) => <span key={key}>#{hashtag}</span>)
+                        formData.hashtag.map((hashtag,key) => {
+                          return (
+                          <div className={CSS.Tags__Tag}  key={key}>
+                            <img src={`${BACKEND_BASE}/close.png`} onClick={DELETE_TAG} data-key={key} alt=''/>
+                            <span >#{hashtag}</span>
+                          </div>
+                          )
+                        })
                       }
 
                 </div>

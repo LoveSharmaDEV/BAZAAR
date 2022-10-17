@@ -21,11 +21,28 @@ export default function Settings(props) {
 
   const callAPI_DeactivateUser = async (e)=>{
       e.preventDefault()
+      setRequestStatus({...RequestStatus,loading:true,error:false,success:false});
+
       const response = await AUTHORIZED_REQ(USER_PERSONALIZATION_API.DEACTIVATE_USER,{},{},'POST');
-      if(response.data.errCode==='SUCCESS') auth.logout();
+
+      if(response.data.errCode==="UNAUTHORIZED"){
+        setRequestStatus({...RequestStatus,loading:false,error:true,success:false});
+        auth.logout();
+        navigate('/login');
+      }
+
+      if(response.data.errCode==='SUCCESS') {
+        setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
+        auth.logout();
+      }
+  
+      if(response.data.errCode==='FAILURE') {
+        setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
+      }
   }
 
   const callAPI_GetStore = async()=>{
+
     setRequestStatus({...RequestStatus,loading:true,error:false,success:false});
 
     const response = await AUTHORIZED_REQ(ECOMM_API.FETCH_STORE_USERID,{},{},'POST');
@@ -50,9 +67,19 @@ export default function Settings(props) {
   const UpdateControl = async (e)=>{
     e.preventDefault();
     const LocalFormData = GET_FORMDATA({...user,...store});
+    setRequestStatus({...RequestStatus,loading:true,error:false,success:false});
     const response = await AUTHORIZED_REQ(USER_PERSONALIZATION_API.UPDATE_USER,LocalFormData,{},'POST')
+    if(response.data.errCode==="UNAUTHORIZED"){
+      setRequestStatus({...RequestStatus,loading:false,error:true,success:false});
+      auth.logout();
+      navigate('/login');
+    }
     if(response.data.errCode === 'SUCCESS') {
+      setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
       navigate('../posts')
+    }
+    if(response.data.errCode==='FAILURE') {
+      setRequestStatus({...RequestStatus,loading:false,error:false,success:true});
     }
   }
 
@@ -239,8 +266,22 @@ export default function Settings(props) {
             </div> 
 
             <div className={CSS.ActionBtns}>
-              <Button className='mx-3' onClick={UpdateControl} variant="primary" size='lg'>UPDATE</Button>
-              <Button className='mx-3' onClick={callAPI_DeactivateUser} variant="primary" size='lg'>DEACTIVATE</Button>
+              <Button className='mx-3' onClick={UpdateControl} variant="primary" size='lg'>
+                {
+                  RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                    <Spinner animation="border" /> 
+                    :
+                    'UPDATE'             
+                }
+              </Button>
+              <Button className='mx-3' onClick={callAPI_DeactivateUser} variant="primary" size='lg'>
+                {
+                  RequestStatus.loading && !RequestStatus.success && !RequestStatus.error?
+                    <Spinner animation="border" /> 
+                    :
+                    'DEACTIVATE'             
+                }
+              </Button>
            </div>
 
           </div>
