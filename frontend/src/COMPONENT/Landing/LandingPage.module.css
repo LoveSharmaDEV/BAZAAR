@@ -3,11 +3,10 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
-  width: 100vw;
+  justify-content: center;
   height: 90vh;
+  width: 100%;
   background-color: rgb(246, 246, 246);
-  overflow: scroll;
 }
 
 .Outer__Content
@@ -15,18 +14,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 60%;
+  width: 35%;
   min-width: 30rem;
   background-color: white;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  aspect-ratio: 1/0.5;
 }
+
+
 
 .Content__Info{
   display: flex;
-  height: 35rem;
   flex-direction: column;
-  flex: 0.5;
-  min-width: 30rem;
+  height: 35rem;
+  width: 100%;
 }
 
 
@@ -168,31 +169,6 @@
 }
 
 
-.Content__Poster{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  display: flex;
-  flex: 0.5;
-  min-width: 30rem;
-  height: 35rem;
-}
-
-.Content__Poster img{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.Poster__Overlay{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.271);
-}
-
 .Poster__Button
 {
   position: relative;
@@ -206,6 +182,8 @@
   border-radius: 2rem;
   cursor: pointer;
   overflow: hidden;
+  border: 0.2rem solid silver;
+  margin: 1rem 2rem 0.2rem 0rem;
 }
 
 .Poster__Button_Animation{
@@ -231,4 +209,13 @@
   pointer-events: none;
 }
 
+.Info__Logo
+{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
+.Info__Logo img {
+  margin: 0.2rem 1rem 0.2rem 2rem;
+}

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('../../CONFIG/PASSPORT_STRATEGIES');
-const CLIENT_HOME_URL='http://localhost:3000/home'
-const CLIENT_LOGIN_URL='http://localhost:3000/login'
+const CLIENT_HOME_URL='/home'
+const CLIENT_LOGIN_URL='/login'
 
 router.get('/google',
 passport.authenticate("google", {
@@ -11,14 +11,14 @@ passport.authenticate("google", {
 ));
 
 router.get("/google/callback",
-    passport.authenticate("google",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}/?SocialAuth=true&SocialApp=google`})
+    passport.authenticate("google",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}?SocialAuth=true&SocialApp=google`})
 )
 
 router.get('/facebook',
 passport.authenticate("facebook"));
 
 router.get("/facebook/callback",
-    passport.authenticate("facebook",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}/?SocialAuth=true&SocialApp=facebook`})
+    passport.authenticate("facebook",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}?SocialAuth=true&SocialApp=facebook`})
 )
 
 router.get('/github',
@@ -27,7 +27,7 @@ passport.authenticate("github",{
     }));
 
 router.get("/github/callback",
-    passport.authenticate("github",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}/?SocialAuth=true&SocialApp=github`})
+    passport.authenticate("github",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}?SocialAuth=true&SocialApp=github`})
 )
 
 router.get('/amazon',
@@ -36,7 +36,7 @@ passport.authenticate("amazon",{
     }));
 
 router.get("/amazon/callback",
-    passport.authenticate("amazon",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}/?SocialAuth=true&SocialApp=amazon`})
+    passport.authenticate("amazon",{failureRedirect:CLIENT_LOGIN_URL,successRedirect:`${CLIENT_HOME_URL}?SocialAuth=true&SocialApp=amazon`})
 )
     
 router.post("/google/success",

@@ -41,14 +41,6 @@ function StoreManageGridElement(props) {
 
   return (
     <>
-
-      {/* {
-        updateForm?
-        <StoreManageGridElementUpdate setUpdateForm={setUpdateForm} product={props.product}/>
-        :
-        null
-      } */}
-
       <div className={CSS.StoreManageGridElement}>
         <div className={CSS.StoreManageGridElement_ImageCarousal}>
           <img onClick={changePicBackward} src={`${BACKEND_BASE}/right.png`} className={CSS.ProductCardBackward} alt='changePic'/>

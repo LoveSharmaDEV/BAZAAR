@@ -16,39 +16,36 @@ module.exports.LOGIN_API__CONTROLLER = async (req,res) =>
     {
 
         let user = await User.findOne({email: req.body.email,SocialAuth:false});
+
         if(!user) user = await User.findOne({username:req.body.email,SocialAuth:false});
 
-
-        if(!user) return res.status(200).json({
-            message:"USER DOESN'T EXIST",
-            errCode:"USERNOTFOUND"
-        })
+        if(!user) throw "USER DOESN'T EXIST"
 
         let match = await bcrypt.compare(req.body.password,user.password);
 
-        if(!match) return res.status(200).json({
-            message:"USERNAME OR PASSWORD IS INCORRECT",
-            errCode:"WRONGPASSWORD"
-        })
+        if(!match) throw "USERNAME OR PASSWORD IS INCORRECT"
 
         const accessToken = await jwt.sign({USER_ID:user._id}, process.env.ACCESS_KEY, {expiresIn:"1m"});
         const refreshToken = await jwt.sign({USER_ID:user._id}, process.env.REFRESH_KEY,{expiresIn:"7d"});
-        await Token.create({token:refreshToken});
+        const token  = await Token.create({token:refreshToken});
 
+        if(token){
+            return res.status(200).json({
+                message:"LOGIN SUCCESSFULL!!",
+                errCode:"TOKENSGENERATED",
+                accessToken,
+                refreshToken,
+                user
+            })
+        }
 
-        return res.status(200).json({
-            message:"LOGIN SUCCESSFULL!!",
-            errCode:"TOKENSGENERATED",
-            accessToken,
-            refreshToken,
-            user
-        })
+        throw "EXCEPTION OCCURED ON CREATING REFRESH TOKEN IN DB"
     }
     catch(e)
     {
-        return res.status(500).json({
-            message:e.message,
-            errCode:`INTERNAL SERVER ERROR ${e}`
+        return res.status(200).json({
+            message:e,
+            errCode:`${e}`
         })
     }
 }

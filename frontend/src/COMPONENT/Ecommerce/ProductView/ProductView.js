@@ -71,10 +71,10 @@ function ProductView(props) {
         Images.forEach((element)=>{
             element.classList.remove(CSS.ColorAvailable__SelectedImage);
         })
-
-        ColorContainers[e.target.dataset.index].classList.toggle(CSS.ColorAvailable__SelectedColor);
-        Images[e.target.dataset.index].classList.toggle(CSS.ColorAvailable__SelectedImage);
-
+        
+        if(ColorContainers[e.target.dataset.index]) ColorContainers[e.target.dataset.index].classList.toggle(CSS.ColorAvailable__SelectedColor);
+        if(Images[e.target.dataset.index]) Images[e.target.dataset.index].classList.toggle(CSS.ColorAvailable__SelectedImage);
+        
         return {
             image:product.ProductImage[e.target.dataset.index].path,
             color:product.ProductImage[e.target.dataset.index].color

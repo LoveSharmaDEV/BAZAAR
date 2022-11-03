@@ -16,8 +16,8 @@
 {
     display: flex;
     flex-direction: column;
-    height: 90%;
-    width: 90%;
+    height: 95%;
+    width: 95%;
     background-color: white;
     overflow: scroll;
     min-width: 30rem;
@@ -58,7 +58,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;   
-    margin: 0.2rem;
+    margin: 0.2rem 0rem 3rem 0rem;
 }
 
 .Container1__ImagePanel
@@ -300,5 +300,36 @@
     border: none;
     outline: none;
     font-size: 1.2rem;
-
 }
+
+
+/*---------> SCROLL BAR REMOVALS <------------*/
+
+.OuterMostContainer__ProductUploadForm::-webkit-scrollbar{
+    display: none;
+  }
+  
+.OuterMostContainer__ProductUploadForm{
+-ms-overflow-style: none;
+scrollbar-width:none;
+}
+
+.ImagePanel__ImageList::-webkit-scrollbar{
+display: none;
+}
+
+.ImagePanel__ImageList{
+-ms-overflow-style: none;
+scrollbar-width:none;
+}
+
+.BodyTagsPanel_Tags::-webkit-scrollbar{
+    display: none;
+}
+    
+.BodyTagsPanel_Tags{
+-ms-overflow-style: none;
+scrollbar-width:none;
+}
+  
+  /*---------> SCROLL BAR REMOVALS <------------*/

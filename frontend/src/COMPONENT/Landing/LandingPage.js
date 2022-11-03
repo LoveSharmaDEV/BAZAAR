@@ -61,7 +61,14 @@ export default function LandingPage(props) {
         <div className={CSS.Content__Info}>
 
           <div className={CSS.Info__Logo}>
+
             <img onClick={()=>{navigate('/home')}} src={`${BACKEND_BASE}/Logo.jpg`} alt=''/>
+
+            <div onClick={NavigateToFeeds} className={CSS.Poster__Button}>
+              <div className={CSS.Poster__Button_Animation}></div>
+              <span>ENTER YOUR FEEDS</span>
+            </div>
+            
           </div>
 
           <div className={CSS.Info__Details}>
@@ -102,15 +109,6 @@ export default function LandingPage(props) {
 
           </div>
 
-        </div>
-
-        <div className={CSS.Content__Poster}>
-          <img src={BACKEND_BASE+'/DesignPattern.png'} alt=''/>
-          <div className={CSS.Poster__Overlay}></div>
-          <div onClick={NavigateToFeeds} className={CSS.Poster__Button}>
-            <div className={CSS.Poster__Button_Animation}></div>
-            <span>ENTER YOUR FEEDS</span>
-          </div>
         </div>
 
       </div>

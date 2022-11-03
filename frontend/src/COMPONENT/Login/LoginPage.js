@@ -21,19 +21,22 @@ export default function LoginPage(props) {
   }
 
   const onlogin = async (e)=>{
-    e.preventDefault();
 
-    if(!formref.current.checkValidity()){
-      formref.current.reportValidity()
-      return;
-    }
-    const data = await auth.login(loginInfo);
+      e.preventDefault();
 
-    if(data.errCode!=="TOKENSGENERATED")
-    {
-      addToast(data.message, { appearance: 'error' });
-      formref.current.reset()
-    }
+      if(!formref.current.checkValidity()){
+        formref.current.reportValidity()
+        return;
+      }
+
+      const data = await auth.login(loginInfo);
+  
+      if(data.errCode!=="TOKENSGENERATED")
+      {
+        addToast(data.errCode, { appearance: 'error' });
+        formref.current.reset()
+      }
+
   }
 
   const GOOGLE_AUTH = (e)=>{
@@ -77,7 +80,7 @@ useEffect(()=>{
             <div className={CSS.inputdata}>
               <input type='text' name='email' autoComplete='off' required/>
               <div className={CSS.underline}></div> 
-              <label>Username</label>
+              <label>Username/Email</label>
             </div>
             <div className={CSS.inputdata}>
               <input type='password' name="password" autoComplete='off' required/>

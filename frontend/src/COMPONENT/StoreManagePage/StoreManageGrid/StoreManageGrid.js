@@ -40,6 +40,7 @@ function StoreManageGrid() {
 
   return (
     <div className={CSS.StoreManageGrid_OuterDiv}>
+      
       <div className={CSS.StoreManageGrid_Actions_div}>
         <Button onClick={onAddProduct} variant="primary" size='lg'>ADD PRODUCT</Button>
         <input  type='text' placeholder='Search' onChange={SearchFilter}/>

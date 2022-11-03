@@ -18,7 +18,7 @@ passport.deserializeUser((user,done)=>{
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE__CLIENTID,
     clientSecret: process.env.GOOGLE__CLIENTSECRET,
-    callbackURL: "/passport/auth/google/callback",
+    callbackURL:  `${process.env.BASEDOMAIN__URL}/passport/auth/google/callback`,
     passReqToCallback:true
 },
 async (request ,accessToken, refreshToken, profile, done) => {
@@ -30,7 +30,7 @@ async (request ,accessToken, refreshToken, profile, done) => {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK__CLIENTID,
     clientSecret: process.env.FACEBOOK__CLIENTSECRET,
-    callbackURL: "/passport/auth/facebook/callback"
+    callbackURL: `${process.env.BASEDOMAIN__URL}/passport/auth/facebook/callback`
 },
 (accessToken, refreshToken, profile, cb) => {
     return cb(null, profile);
@@ -42,7 +42,7 @@ passport.use(new FacebookStrategy({
 passport.use(new AmazonStrategy({
     clientID: process.env.AMAZON__CLIENTID,
     clientSecret: process.env.AMAZON__CLIENTSECRET,
-    callbackURL: "/passport/auth/amazon/callback"
+    callbackURL: `${process.env.BASEDOMAIN__URL}/passport/auth/amazon/callback`
 },
 (accessToken, refreshToken, profile, cb) => {
     return cb(null, profile);
@@ -55,7 +55,7 @@ passport.use(new AmazonStrategy({
 passport.use(new GithubStrategy({
     clientID: process.env.GITHUB__CLIENTID,
     clientSecret: process.env.GITHUB__CLIENTSECRET,
-    callbackURL: "/passport/auth/github/callback"
+    callbackURL: `${process.env.BASEDOMAIN__URL}/passport/auth/github/callback`
 },
 (accessToken, refreshToken, profile, cb) => {
     return cb(null, profile);

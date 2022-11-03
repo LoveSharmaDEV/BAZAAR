@@ -129,6 +129,7 @@ export default function Settings(props) {
   return (
     <div className={CSS.OuterContainer}>
       <div className={CSS.OuterContainer__ImageSection}>
+        
         <div className={CSS.ImageSection__ProfilePic}>
 
           <img className={CSS.ProfilePic__IMG} src={
@@ -180,9 +181,11 @@ export default function Settings(props) {
             null
         }
         <div className={CSS.ImageSection__RoleCheckBox}>
+
           <div className={CSS.RoleCheckBox__Header}>
             <span>USER ROLE</span>
           </div>
+          
           <div className={CSS.RoleCheckBox__CustomerCheck}>
             <span>CUSTOMER</span>
             <div className={CSS.CustomerCheck}>
@@ -196,6 +199,7 @@ export default function Settings(props) {
               />
             </div>
           </div>
+
           <div className={CSS.RoleCheckBox__SellerCheck}>
             <span>SELLER</span>
             <div className={CSS.SellerCheck}>
@@ -209,6 +213,7 @@ export default function Settings(props) {
               />
             </div>
           </div>
+
         </div>  
 
       </div>

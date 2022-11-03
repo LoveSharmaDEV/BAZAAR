@@ -1,4 +1,4 @@
-export const BACKEND_BASE = 'http://localhost:8000'
+export const BACKEND_BASE = 'http://localhost:8000';
 
 export const AUTH_API = {
     LOGIN_API:BACKEND_BASE+'/auth/login',
