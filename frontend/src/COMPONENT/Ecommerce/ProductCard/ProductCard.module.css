@@ -168,3 +168,17 @@
 .Footer__Link{
     margin: 1rem;
 }
+
+/*---------> SCROLL BAR REMOVALS <------------*/
+
+.ProductCardImage::-webkit-scrollbar{
+    display: none;
+  }
+  
+.ProductCardImage{
+    -ms-overflow-style: none;
+    scrollbar-width:none;
+  }
+  
+  /*---------> SCROLL BAR REMOVALS <------------*/
+  

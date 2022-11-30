@@ -2,7 +2,6 @@
 const socketIO = require('./API CHANGESTREAMS/socket')
 const express = require("express");
 const session = require('express-session')
-const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
 const http = require('http');
@@ -54,7 +53,7 @@ if(process.env.NODE_ENV==='development'){
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('./frontend/build'));
-    app.get(/^((?!passport).)*$/gm, function (req, res) {
+    app.get(/^((?!passport).)*$/, function (req, res) {
         res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
       });
 }

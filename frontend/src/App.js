@@ -1,28 +1,31 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { useAuth } from './CONTEXT API CUSTOM HOOKS/AUTH_CUSTOM_HOOK';
 import { useOverlayContext } from './CONTEXT API CUSTOM HOOKS/OVERLAY_CUSTOM_HOOK';
+
 import LandingPage from './COMPONENT/Landing/LandingPage';
 import NavbarPage from './COMPONENT/Navbar/NavbarPage';
-import SignUpAsPage from './COMPONENT/SignUpAs/SignUpAsPage';
-import SignupPage from './COMPONENT/Signup/SignupPage';
-import LoginPage from './COMPONENT/Login/LoginPage';
 import ReactLoading from "react-loading";
 import RightNavBar from './COMPONENT/RightNavBar/RightNavBar';
 import Cookies from 'universal-cookie';
 import LeftNavBar from './COMPONENT/LeftnavBar/LeftNavBar';
-import Posts from './COMPONENT/Posts/Posts';
-import StoreManage from './COMPONENT/StoreManagePage/StoreManage';
 import Overlay from './COMPONENT/Overlays/Overlay';
-import Store from './COMPONENT/Ecommerce/Store/Store';
 import EcomNavBar from './COMPONENT/Ecommerce/EcomNavBar/EcomNavBar';
-import ProductView from './COMPONENT/Ecommerce/ProductView/ProductView';
-import Cart from './COMPONENT/Ecommerce/Cart/Cart';
-import Following from './COMPONENT/Following/Following';
-import Settings from './COMPONENT/Settings/Settings';
-import Support from './COMPONENT/Support/Support';
+
+const LazyLoginPage = lazy(()=>{return import('./COMPONENT/Login/LoginPage')});
+const LazySignUpAsPage = lazy(()=>{ return import('./COMPONENT/SignUpAs/SignUpAsPage')});
+const LazySignupPage = lazy(()=>{return import('./COMPONENT/Signup/SignupPage')});
+const LazyPosts = lazy(()=>{return import('./COMPONENT/Posts/Posts')});
+const LazyFollowing = lazy(()=>{ return import('./COMPONENT/Following/Following')});
+const LazyStoreManage = lazy(()=>{ return import('./COMPONENT/StoreManagePage/StoreManage') });
+const LazySettings = lazy(()=>{return import('./COMPONENT/Settings/Settings')});
+const LazySupport = lazy(()=>{return import('./COMPONENT/Support/Support')});
+const LazyStore = lazy(()=>{ return import('./COMPONENT/Ecommerce/Store/Store')});
+const LazyProductView = lazy(()=>{ return import('./COMPONENT/Ecommerce/ProductView/ProductView')});
+const LazyCart = lazy(()=>{ return import('./COMPONENT/Ecommerce/Cart/Cart')});
+
 const cookies = new Cookies();
 
 export const RequireAuth = function ({ children }) {
@@ -93,18 +96,82 @@ function App() {
         <Routes>
 
           <Route exact path='' element={<Navigate to={'/home'} />} />
+
           <Route exact path='home' element={<LandingPage setBarVisibility={setBarVisibility} />} />
-          <Route exact path='login' element={<RestrictPath><ToastProvider><LoginPage setBarVisibility={setBarVisibility} /></ToastProvider></RestrictPath>} />
-          <Route exact path='signupas' element={<RestrictPath><SignUpAsPage /></RestrictPath>} />
-          <Route exact path='signup' element={<RestrictPath><ToastProvider><SignupPage /></ToastProvider></RestrictPath>} />
-          <Route exact path='posts' element={<RequireAuth><ToastProvider><Posts setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
-          <Route exact path='following' element={<RequireAuth><ToastProvider><Following setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
-          <Route exact path='store' element={<RequireAuth><ToastProvider><StoreManage setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
-          <Route exact path='settings' element={<RequireAuth><ToastProvider><Settings setBarVisibility={setBarVisibility} /></ToastProvider></RequireAuth>} />
-          <Route exact path='support' element={<RequireAuth><ToastProvider><Support /></ToastProvider></RequireAuth>} />
-          <Route exact path='store/:storeName' element={<Store setBarVisibility={setBarVisibility} />} />
-          <Route exact path='product/:storeName/:productID' element={<ProductView setBarVisibility={setBarVisibility} />} />
-          <Route exact path='cart' element={<ToastProvider><Cart setBarVisibility={setBarVisibility} /></ToastProvider>} />
+
+          <Route exact path='login' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                              <RestrictPath>
+                                                <ToastProvider>
+                                                  <LazyLoginPage setBarVisibility={setBarVisibility} />
+                                                </ToastProvider>
+                                              </RestrictPath>
+                                            </Suspense>} />
+
+          <Route exact path='signupas' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                  <RestrictPath>
+                                                    <LazySignUpAsPage />
+                                                  </RestrictPath>
+                                                </Suspense>} />
+
+          <Route exact path='signup' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                <RestrictPath>
+                                                  <ToastProvider>
+                                                    <LazySignupPage />
+                                                  </ToastProvider>
+                                                </RestrictPath>
+                                              </Suspense>} />
+
+          <Route exact path='posts' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                              <RequireAuth>
+                                                <ToastProvider>
+                                                  <LazyPosts setBarVisibility={setBarVisibility} />
+                                                </ToastProvider>
+                                              </RequireAuth>
+                                            </Suspense>} />
+
+          <Route exact path='following' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                  <RequireAuth>
+                                                    <ToastProvider>
+                                                      <LazyFollowing setBarVisibility={setBarVisibility} />
+                                                    </ToastProvider>
+                                                  </RequireAuth>
+                                                </Suspense>} />
+
+          <Route exact path='store' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                              <RequireAuth>
+                                                <ToastProvider>
+                                                  <LazyStoreManage setBarVisibility={setBarVisibility} />
+                                                </ToastProvider>
+                                              </RequireAuth>
+                                            </Suspense>} />
+
+          <Route exact path='settings' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                  <RequireAuth>
+                                                    <ToastProvider>
+                                                      <LazySettings setBarVisibility={setBarVisibility} />
+                                                    </ToastProvider>
+                                                  </RequireAuth>
+                                                </Suspense>} />
+
+          <Route exact path='support' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                  <RequireAuth>
+                                                    <ToastProvider>
+                                                      <LazySupport />
+                                                    </ToastProvider>
+                                                  </RequireAuth>
+                                                </Suspense>} />
+
+          <Route exact path='store/:storeName' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                          <LazyStore setBarVisibility={setBarVisibility} />
+                                                        </Suspense>} />
+
+          <Route exact path='product/:storeName/:productID' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                                                      <LazyProductView setBarVisibility={setBarVisibility} />
+                                                                    </Suspense>} />
+
+          <Route exact path='cart' element={<Suspense fallback={<ReactLoading type="spin" color="#0000FF" height={100} width={50} />}>
+                                              <ToastProvider><LazyCart setBarVisibility={setBarVisibility} /></ToastProvider>
+                                            </Suspense>} />
 
         </Routes>
 

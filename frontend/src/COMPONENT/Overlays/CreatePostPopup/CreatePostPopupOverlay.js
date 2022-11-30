@@ -139,7 +139,7 @@ function CreatePostPopup() {
 
               <input name="postName" placeholder='Title' type='text' autoComplete='off' required/> 
               <input name="postPrice" placeholder='Price' type='text' autoComplete='off' required/>           
-              <textarea name="postDescription" placeholder='Description' minlength="30" rows="5" cols="25">
+              <textarea name="postDescription" placeholder='Description' minlength="30" rows="1" cols="25">
               </textarea>
 
               <Button className='mt-2' onClick={postSubmit} variant="primary" size='lg'>
